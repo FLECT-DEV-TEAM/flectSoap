@@ -18,6 +18,10 @@ import javax.xml.namespace.QName;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -64,6 +68,9 @@ public class SoapClient implements Serializable {
 	private transient EventListenerList listeners = new EventListenerList();
 	private int maxResponseSize;
 	private Map<QName, Object> defaultMap;
+	
+	private transient HttpClient client;
+	private ProxyInfo proxyInfo = null;
 	
 	protected Logger log;
 	
@@ -125,6 +132,7 @@ public class SoapClient implements Serializable {
 		this.endpoint = client.endpoint;
 		this.nsMap.putAll(client.nsMap);
 		this.log = client.log;
+		this.client = null;
 	}
 	
 	/**
@@ -363,6 +371,22 @@ public class SoapClient implements Serializable {
 		return body;
 	}
 	
+	private HttpClient createHttpClient() {
+		if (this.client == null) {
+			this.client = new DefaultHttpClient();
+			if (this.proxyInfo != null) {
+				HttpHost proxy = new HttpHost(proxyInfo.getHost(), proxyInfo.getPort());
+				this.client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+				if (proxyInfo.getUserName() != null && proxyInfo.getPassword() != null) {
+					((DefaultHttpClient)this.client).getCredentialsProvider().setCredentials(
+						new AuthScope(proxyInfo.getHost(), proxyInfo.getPort()),
+						new UsernamePasswordCredentials(proxyInfo.getUserName(), proxyInfo.getPassword()));
+				}
+			}
+		}
+		return this.client;
+	}
+	
 	public SoapResponse send(String soapAction, String op, String msg, HttpResponseHandler handler) throws IOException, SoapException {
 		if (handler == null) {
 			handler = new DefaultHandler(soapAction, op);
@@ -374,7 +398,7 @@ public class SoapClient implements Serializable {
 		fireSoapInvoke(event, true);
 		msg = event.getRequest();
 		
-		HttpClient client = new DefaultHttpClient();
+		HttpClient client = createHttpClient();
 		HttpPost post = new HttpPost(this.endpoint);
 		post.addHeader("SOAPAction", "\"" + soapAction + "\"");
 		if (this.userAgent != null) {
@@ -646,5 +670,41 @@ public class SoapClient implements Serializable {
 			ex.setResponseBody(responseBody);
 			throw ex;
 		}
+	}
+	
+	public void setProxyInfo(String host, int port) {
+		setProxyInfo(host, port, null, null);
+	}
+	
+	public void setProxyInfo(String host, int port, String username, String password) {
+		this.proxyInfo = new ProxyInfo(host, port, username, password);
+		this.client = null;
+	}
+	
+	public ProxyInfo getProxyInfo() { return this.proxyInfo;}
+	
+	public static class ProxyInfo implements Serializable {
+		
+		private String host;
+		private int port;
+		private String username;
+		private String password;
+		
+		public ProxyInfo(String host, int port) {
+			this(host, port, null, null);
+		}
+		
+		public ProxyInfo(String host, int port, String username, String password) {
+			this.host = host;
+			this.port = port;
+			this.username = username;
+			this.password = password;
+		}
+		
+		public String getHost() { return this.host;}
+		public int getPort() { return this.port;}
+		public String getUserName() { return this.username;}
+		public String getPassword() { return this.password;}
+		
 	}
 }
