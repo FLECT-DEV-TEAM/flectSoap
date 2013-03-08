@@ -685,6 +685,8 @@ public class SoapClient implements Serializable {
 	
 	public static class ProxyInfo implements Serializable {
 		
+		private static final long serialVersionUID = 994208152358025738L;
+		
 		private String host;
 		private int port;
 		private String username;
