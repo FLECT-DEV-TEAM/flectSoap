@@ -3,8 +3,8 @@ package jp.co.flect.soap;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,7 +72,7 @@ public class SoapClient implements Serializable {
 	private transient HttpClient client;
 	private ProxyInfo proxyInfo = null;
 	
-	protected Logger log;
+	protected transient Logger log;
 	
 	/**
 	 * コンストラクタ
@@ -121,6 +121,8 @@ public class SoapClient implements Serializable {
 			this.nsMap.put(prefix, schema.getTargetNamespace());
 		}
 	}
+	
+	public Logger getLogger() { return this.log;}
 	
 	/**
 	 * コピーコンストラクタ<br>
@@ -509,6 +511,7 @@ public class SoapClient implements Serializable {
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
 		this.listeners = new EventListenerList();
+		this.log = LoggerFactory.getLogger(getClass());
 	}
 	
 	/**
@@ -709,4 +712,5 @@ public class SoapClient implements Serializable {
 		public String getPassword() { return this.password;}
 		
 	}
+	
 }

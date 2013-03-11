@@ -210,7 +210,9 @@ public abstract class AbstractTemplateBuilder implements TemplateBuilder, Serial
 		return null;
 	}
 	
-	private static class SchemaInfo {
+	private static class SchemaInfo implements Serializable {
+		
+		private static final long serialVersionUID = 5457724949934485230L;
 		
 		public String prefix;
 		public XMLSchema schema;
