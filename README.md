@@ -34,3 +34,6 @@ Usage
     String sessionId = (String)output.getDeep("loginResponse.result.sessionId");
     int sessionLifetime = Integer.parseInt((String)output.getDeep("loginResponse.result.userInfo.sessionSecondsValid"));
 
+License
+-------
+MIT
