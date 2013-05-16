@@ -49,6 +49,7 @@ import jp.co.flect.xmlschema.XMLSchemaException;
 import jp.co.flect.xmlschema.template.ParameterHint;
 import jp.co.flect.xmlschema.template.TemplateBuilder;
 import jp.co.flect.xmlschema.template.TemplateHint;
+import jp.co.flect.xmlschema.template.VelocityTemplateBuilder;
 
 /**
  * テンプレートベースのSOAPクライアント
@@ -73,6 +74,30 @@ public class SoapClient implements Serializable {
 	private ProxyInfo proxyInfo = null;
 	
 	protected transient Logger log;
+	
+	/**
+	 * Constructor
+	 * @param wsdlFile WSDL file
+	 */
+	public SoapClient(File wsdlFile) throws IOException, SAXException, InvalidWSDLException, XMLSchemaException {
+		this(wsdlFile, new VelocityTemplateBuilder());
+	}
+	
+	/**
+	 * Constructor
+	 * @param doc document of WSDL
+	 */
+	public SoapClient(Document doc) throws InvalidWSDLException, XMLSchemaException {
+		this(doc, new VelocityTemplateBuilder());
+	}
+	
+	/**
+	 * Constructor
+	 * @param wsdl WSDL
+	 */
+	public SoapClient(WSDL wsdl) {
+		this(wsdl, new VelocityTemplateBuilder());
+	}
 	
 	/**
 	 * コンストラクタ
