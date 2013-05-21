@@ -7,6 +7,7 @@ import jp.co.flect.xmlschema.type.BooleanType;
 import jp.co.flect.xmlschema.type.DatetimeType;
 import jp.co.flect.xmlschema.type.DateType;
 import jp.co.flect.xmlschema.type.TimeType;
+import jp.co.flect.xmlschema.type.DecimalType;
 import jp.co.flect.xmlschema.type.Base64BinaryType;
 import jp.co.flect.xmlschema.type.QNameType;
 import jp.co.flect.xmlschema.type.AnyType;
@@ -20,6 +21,7 @@ public class SimpleType extends TypeDef {
 	static {
 		XSD.addType(new StringType(XSD, "string"));
 		XSD.addType(new DoubleType(XSD, "double"));
+		XSD.addType(new DecimalType(XSD, "decimal"));
 		XSD.addType(new IntType(XSD, "int"));
 		XSD.addType(new BooleanType(XSD, "boolean"));
 		XSD.addType(new DatetimeType(XSD, "dateTime"));
