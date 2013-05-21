@@ -137,8 +137,7 @@ public class SoapClient implements Serializable {
 		this.endpoint = wsdl.getEndpoint();
 		
 		String soapUri = wsdl.isSoap12() ? XMLUtils.XMLNS_SOAP12_ENVELOPE : XMLUtils.XMLNS_SOAP_ENVELOPE;
-System.out.println("test: " + wsdl.isSoap12() + ", " + soapUri);
-			
+		
 		this.nsMap.put(SOAP_PREFIX, soapUri);
 		this.nsMap.put(XSD_PREFIX, XMLUtils.XMLNS_XSD);
 		this.nsMap.put(XSI_PREFIX, XMLUtils.XMLNS_XSI);
