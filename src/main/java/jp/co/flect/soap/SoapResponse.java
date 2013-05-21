@@ -24,6 +24,7 @@ public class SoapResponse implements Serializable {
 	private String body;
 	private transient ExtendedMap map;
 	private transient Document doc;
+	private boolean bSoap12 = false;
 	
 	public SoapResponse(int responseCode, String body) {
 		this.responseCode = responseCode;
@@ -57,9 +58,13 @@ public class SoapResponse implements Serializable {
 		return this.doc;
 	}
 	
+	public boolean isSoap12() { return bSoap12;}
+	public boolean isSoap11() { return !bSoap12;}
+	
 	private void buildMap() throws SoapException {
 		boolean startData = false;
 		boolean hasAttr = false;
+		String soapUri = null;
 		ParseContext context = new ParseContext(this.map);
 		
 		XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -70,6 +75,14 @@ public class SoapResponse implements Serializable {
 				int event = reader.next();
 				switch (event) {
 					case XMLStreamReader.START_ELEMENT:
+						if (soapUri == null) {
+							soapUri = reader.getNamespaceURI();
+							if (XMLUtils.XMLNS_SOAP12_ENVELOPE.equals(soapUri)) {
+								this.bSoap12 = true;
+							} else if (!XMLUtils.XMLNS_SOAP_ENVELOPE.equals(soapUri)) {
+								throw new SoapException("Invalid soap namespace: " + soapUri);
+							}
+						}
 						String name = reader.getLocalName();
 						hasAttr = reader.getAttributeCount() > 0;
 						if (startData) {
@@ -83,7 +96,7 @@ public class SoapResponse implements Serializable {
 							}
 						} else {
 							String nsuri = reader.getNamespaceURI();
-							if (XMLUtils.XMLNS_SOAP_ENVELOPE.equals(nsuri) && ("Body".equals(name) || "Header".equals(name))) {
+							if (soapUri.equals(nsuri) && ("Body".equals(name) || "Header".equals(name))) {
 								startData = true;
 							}
 						}

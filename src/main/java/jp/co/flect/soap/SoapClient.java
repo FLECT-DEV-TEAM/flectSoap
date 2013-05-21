@@ -56,6 +56,10 @@ import jp.co.flect.xmlschema.template.VelocityTemplateBuilder;
  */
 public class SoapClient implements Serializable {
 	
+	private static final String SOAP_PREFIX = "soap";
+	private static final String XSD_PREFIX  = "xsd";
+	private static final String XSI_PREFIX  = "xsi";
+	
 	private static final long serialVersionUID = -8821305948326815033L;
 	
 	private WSDL wsdl;
@@ -131,10 +135,13 @@ public class SoapClient implements Serializable {
 		this.wsdl = wsdl;
 		this.builder = builder;
 		this.endpoint = wsdl.getEndpoint();
+		
+		String soapUri = wsdl.isSoap12() ? XMLUtils.XMLNS_SOAP12_ENVELOPE : XMLUtils.XMLNS_SOAP_ENVELOPE;
+System.out.println("test: " + wsdl.isSoap12() + ", " + soapUri);
 			
-		this.nsMap.put(XMLWriter.SOAP_PREFIX, XMLUtils.XMLNS_SOAP_ENVELOPE);
-		this.nsMap.put(XMLWriter.XSD_PREFIX, XMLUtils.XMLNS_XSD);
-		this.nsMap.put(XMLWriter.XSI_PREFIX, XMLUtils.XMLNS_XSI);
+		this.nsMap.put(SOAP_PREFIX, soapUri);
+		this.nsMap.put(XSD_PREFIX, XMLUtils.XMLNS_XSD);
+		this.nsMap.put(XSI_PREFIX, XMLUtils.XMLNS_XSI);
 		
 		for (XMLSchema schema : wsdl.getSchemaList()) {
 			String prefix = doc == null ? null : doc.getDocumentElement().lookupPrefix(schema.getTargetNamespace());
@@ -309,15 +316,19 @@ public class SoapClient implements Serializable {
 			writer.xmlDecl();
 			writer.indent(false);
 			
-			Map<String, String> envelopeAttrs = null;
+			writer.openElement(SOAP_PREFIX + ":Envelope");
+			writer.attr("xmlns:" + SOAP_PREFIX, this.nsMap.get(SOAP_PREFIX));
+			writer.attr("xmlns:" + XSD_PREFIX, this.nsMap.get(XSD_PREFIX));
+			writer.attr("xmlns:" + XSI_PREFIX, this.nsMap.get(XSI_PREFIX));
 			if (isDebug()) {
-				envelopeAttrs = new HashMap<String, String>();
-				envelopeAttrs.put("xmlns:" + TemplateBuilder.FSI_PREFIX, TemplateBuilder.FSI_NAMESPACE);
+				writer.attr("xmlns:" + TemplateBuilder.FSI_PREFIX, TemplateBuilder.FSI_NAMESPACE);
 			}
-			writer.startSoapEnvelope(envelopeAttrs);
+			writer.endTag();
 			writer.indent(true);
 			if (msg.getHeaderCount() > 0) {
-				writer.startSoapHeader();
+				writer.openElement(SOAP_PREFIX+ ":Header");
+				writer.endTag();
+				
 				writer.flush();
 				Iterator<QName> it = msg.getHeaders();
 				while (it.hasNext()) {
@@ -326,10 +337,11 @@ public class SoapClient implements Serializable {
 					this.builder.writeTo(qname.getNamespaceURI(), qname.getLocalPart(), hints, os);
 				}
 				writer.indent(false);
-				writer.endSoapHeader();
+				writer.endElement(SOAP_PREFIX + ":Header");
 				writer.indent(false);
 			}
-			writer.startSoapBody();
+			writer.openElement(SOAP_PREFIX + ":Body");
+			writer.endTag();
 			writer.flush();
 			
 			Iterator<QName> it = msg.getBodies();
@@ -339,9 +351,9 @@ public class SoapClient implements Serializable {
 				this.builder.writeTo(qname.getNamespaceURI(), qname.getLocalPart(), hints, os);
 			}
 			writer.indent(false);
-			writer.endSoapBody();
+			writer.endElement(SOAP_PREFIX + ":Body");
 			writer.unindent();
-			writer.endSoapEnvelope();
+			writer.endElement(SOAP_PREFIX + ":Envelope");
 			writer.flush();
 		} finally {
 			os.close();
@@ -432,7 +444,8 @@ public class SoapClient implements Serializable {
 			post.addHeader("User-Agent", this.userAgent);
 		}
 		log.trace("send request:\n{0}", msg);
-		HttpEntity entity = new StringEntity(msg, "text/xml", "utf-8");
+		String contentType = this.wsdl.isSoap12() ? "application/soap+xml" : "text/xml";
+		HttpEntity entity = new StringEntity(msg, contentType, "utf-8");
 		post.setEntity(entity);
 		long ct = System.currentTimeMillis();
 		HttpResponse res = null;

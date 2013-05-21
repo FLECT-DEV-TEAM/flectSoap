@@ -22,6 +22,7 @@ public class WSDL implements Serializable {
 	private static final long serialVersionUID = 1068022955806966947L;
 	
 	private String endpoint;
+	private boolean bSoap12;
 	private Map<String, OperationDef> opMap = new HashMap<String, OperationDef>();
 	private Map<String, XMLSchema> schemaMap = new HashMap<String, XMLSchema>();
 	
@@ -32,6 +33,7 @@ public class WSDL implements Serializable {
 	public WSDL(Document doc) throws InvalidWSDLException, XMLSchemaException {
 		WSDLWrapper wsdl = new WSDLWrapper(doc);
 		this.endpoint = wsdl.getEndpoint();
+		this.bSoap12 = wsdl.isSoap12();
 		for (OperationDef op : wsdl.getOperations()) {
 			this.opMap.put(op.getName(), op);
 		}
@@ -42,6 +44,9 @@ public class WSDL implements Serializable {
 			this.schemaMap.put(schema.getTargetNamespace(), schema);
 		}
 	}
+	
+	public boolean isSoap12() { return bSoap12;}
+	public boolean isSoap11() { return !bSoap12;}
 	
 	public List<XMLSchema> getSchemaList() {
 		return new ArrayList<XMLSchema>(schemaMap.values());

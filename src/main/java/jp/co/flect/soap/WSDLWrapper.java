@@ -6,6 +6,8 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Attr;
 import jp.co.flect.xml.XMLUtils;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class WSDLWrapper {
 	private String XMLNS_SOAP = XMLUtils.XMLNS_WSDL_SOAP;
 	private String XMLNS_WSDL = XMLUtils.XMLNS_WSDL;
 	private String XMLNS_XSD  = XMLUtils.XMLNS_XSD;
+	private boolean bSoap12 = false;
 	
 	private Document doc;
 	//Cached value
@@ -56,6 +59,9 @@ public class WSDLWrapper {
 	}
 	
 	public Document getDocument() { return this.doc;}
+	
+	public boolean isSoap12() { return bSoap12;}
+	public boolean isSoap11() { return !bSoap12;}
 	
 	public String getTargetNamespace() {
 		return this.doc.getDocumentElement().getAttribute(TARGETNAMESPACE);
@@ -208,6 +214,26 @@ public class WSDLWrapper {
 		Element portType = null;
 		Element binding = null;
 		
+		//Check SOAP version
+		NamedNodeMap attrs = root.getAttributes();
+		String soapUri = null;
+		for (int i=0; i<attrs.getLength(); i++) {
+			Attr attr = (Attr)attrs.item(i);
+			if ("xmlns".equals(attr.getPrefix())) {
+				String value = attr.getNodeValue();
+				if (XMLUtils.XMLNS_SOAP.equals(value)) {
+					soapUri = value;
+					break;
+				} else if (XMLUtils.XMLNS_SOAP12.equals(value)) {
+					soapUri = value;
+					this.bSoap12 = true;
+					break;
+				}
+			}
+		}
+		if (soapUri != null) {
+			this.XMLNS_SOAP = soapUri;
+		}
 		//message
 		Node node = root.getFirstChild();
 		while (node != null) {
