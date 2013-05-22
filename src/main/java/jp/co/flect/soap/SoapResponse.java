@@ -58,8 +58,18 @@ public class SoapResponse implements Serializable {
 		return this.doc;
 	}
 	
-	public boolean isSoap12() { return bSoap12;}
-	public boolean isSoap11() { return !bSoap12;}
+	public boolean isSoap12() { 
+		if (this.map == null) {
+			try {
+				getAsMap();
+			} catch (SoapException e) {
+				e.printStackTrace();
+			}
+		}
+		return bSoap12;
+	}
+	
+	public boolean isSoap11() { return !isSoap12();}
 	
 	private void buildMap() throws SoapException {
 		boolean startData = false;
@@ -84,15 +94,18 @@ public class SoapResponse implements Serializable {
 							}
 						}
 						String name = reader.getLocalName();
-						hasAttr = reader.getAttributeCount() > 0;
+						hasAttr = false;
 						if (startData) {
 							context.startElement(name);
-							if (hasAttr) {
-								for (int i=0; i<reader.getAttributeCount(); i++) {
-									String aname = reader.getAttributeLocalName(i);
-									String avalue = reader.getAttributeValue(i);
-									context.attr(aname, avalue);
+							for (int i=0; i<reader.getAttributeCount(); i++) {
+								String auri = reader.getAttributeNamespace(i);
+								String aname = reader.getAttributeLocalName(i);
+								String avalue = reader.getAttributeValue(i);
+								if (XMLUtils.XMLNS_XSI.equals(auri) && "nil".equals(aname)) {
+									continue;
 								}
+								context.attr(aname, avalue);
+								hasAttr = true;
 							}
 						} else {
 							String nsuri = reader.getNamespaceURI();

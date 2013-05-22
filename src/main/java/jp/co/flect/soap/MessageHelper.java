@@ -196,7 +196,7 @@ public class MessageHelper {
 				}
 			}
 			if (nil) {
-				writer.attr(XMLWriter.XSI_PREFIX + ":nil", "true");
+				writer.attr(SoapClient.XSI_PREFIX + ":nil", "true");
 			}
 			if (empty) {
 				writer.emptyTag();

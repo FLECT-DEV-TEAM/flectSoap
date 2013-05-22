@@ -56,9 +56,9 @@ import jp.co.flect.xmlschema.template.VelocityTemplateBuilder;
  */
 public class SoapClient implements Serializable {
 	
-	private static final String SOAP_PREFIX = "soap";
-	private static final String XSD_PREFIX  = "xsd";
-	private static final String XSI_PREFIX  = "xsi";
+	public static final String SOAP_PREFIX = "soap";
+	public static final String XSD_PREFIX  = "xsd";
+	public static final String XSI_PREFIX  = "xsi";
 	
 	private static final long serialVersionUID = -8821305948326815033L;
 	
