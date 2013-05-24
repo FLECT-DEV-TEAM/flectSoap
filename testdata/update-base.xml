@@ -1,0 +1,1546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fsi="http://www.flect.co.jp/application/xmlschema">
+    <soap:Header>
+        <tns:SessionHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:sessionId fsi:occurs="1">${SessionHeader.sessionId}</tns:sessionId>
+        </tns:SessionHeader>
+        <tns:AssignmentRuleHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:assignmentRuleId fsi:occurs="1" fsi:nillable="true">${AssignmentRuleHeader.assignmentRuleId}</tns:assignmentRuleId>
+            <tns:useDefaultRule fsi:occurs="1" fsi:nillable="true">${AssignmentRuleHeader.useDefaultRule}</tns:useDefaultRule>
+        </tns:AssignmentRuleHeader>
+        <tns:MruHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:updateMru fsi:occurs="1">${MruHeader.updateMru}</tns:updateMru>
+        </tns:MruHeader>
+        <tns:AllowFieldTruncationHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:allowFieldTruncation fsi:occurs="1">${AllowFieldTruncationHeader.allowFieldTruncation}</tns:allowFieldTruncation>
+        </tns:AllowFieldTruncationHeader>
+        <tns:DisableFeedTrackingHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:disableFeedTracking fsi:occurs="1">${DisableFeedTrackingHeader.disableFeedTracking}</tns:disableFeedTracking>
+        </tns:DisableFeedTrackingHeader>
+        <tns:StreamingEnabledHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:streamingEnabled fsi:occurs="1">${StreamingEnabledHeader.streamingEnabled}</tns:streamingEnabled>
+        </tns:StreamingEnabledHeader>
+        <tns:AllOrNoneHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:allOrNone fsi:occurs="1">${AllOrNoneHeader.allOrNone}</tns:allOrNone>
+        </tns:AllOrNoneHeader>
+        <tns:DebuggingHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:debugLevel fsi:occurs="1">${DebuggingHeader.debugLevel}</tns:debugLevel>
+        </tns:DebuggingHeader>
+        <tns:PackageVersionHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+#foreach($packageVersions in $PackageVersionHeader.packageVersions)
+            <tns:packageVersions fsi:occurs="0..n">
+                <tns:majorNumber fsi:occurs="1">${packageVersions.majorNumber}</tns:majorNumber>
+                <tns:minorNumber fsi:occurs="1">${packageVersions.minorNumber}</tns:minorNumber>
+                <tns:namespace fsi:occurs="1">${packageVersions.namespace}</tns:namespace>
+            </tns:packageVersions>
+#end
+        </tns:PackageVersionHeader>
+        <tns:EmailHeader xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+            <tns:triggerAutoResponseEmail fsi:occurs="1">${EmailHeader.triggerAutoResponseEmail}</tns:triggerAutoResponseEmail>
+            <tns:triggerOtherEmail fsi:occurs="1">${EmailHeader.triggerOtherEmail}</tns:triggerOtherEmail>
+            <tns:triggerUserEmail fsi:occurs="1">${EmailHeader.triggerUserEmail}</tns:triggerUserEmail>
+        </tns:EmailHeader>
+    </soap:Header>
+    <soap:Body>
+        <tns:update xmlns:tns="urn:enterprise.soap.sforce.com" fsi:occurs="1">
+#foreach($sObjects in $update.sObjects)
+            <tns:sObjects xmlns:ens="urn:sobject.enterprise.soap.sforce.com" xsi:type="ens:Account" fsi:occurs="0..n">
+#foreach($fieldsToNull in $sObjects.fieldsToNull)
+                <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Id}</ens:Id>
+                <ens:AccountContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.AccountContactRoles.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.AccountContactRoles.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.AccountContactRoles.size}</tns:size>
+                </ens:AccountContactRoles>
+                <ens:AccountNumber fsi:occurs="0..1" fsi:nillable="true">${sObjects.AccountNumber}</ens:AccountNumber>
+                <ens:AccountPartnersFrom fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.AccountPartnersFrom.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.AccountPartnersFrom.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.AccountPartnersFrom.size}</tns:size>
+                </ens:AccountPartnersFrom>
+                <ens:AccountPartnersTo fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.AccountPartnersTo.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.AccountPartnersTo.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.AccountPartnersTo.size}</tns:size>
+                </ens:AccountPartnersTo>
+                <ens:AccountSource fsi:occurs="0..1" fsi:nillable="true">${sObjects.AccountSource}</ens:AccountSource>
+                <ens:Active__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.Active__c}</ens:Active__c>
+                <ens:ActivityHistories fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.ActivityHistories.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.ActivityHistories.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.ActivityHistories.size}</tns:size>
+                </ens:ActivityHistories>
+                <ens:AnnualRevenue fsi:occurs="0..1" fsi:nillable="true">${sObjects.AnnualRevenue}</ens:AnnualRevenue>
+                <ens:Assets fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Assets.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Assets.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Assets.size}</tns:size>
+                </ens:Assets>
+                <ens:Attachments fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Attachments.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Attachments.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Attachments.size}</tns:size>
+                </ens:Attachments>
+                <ens:BillingCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.BillingCity}</ens:BillingCity>
+                <ens:BillingCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.BillingCountry}</ens:BillingCountry>
+                <ens:BillingPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.BillingPostalCode}</ens:BillingPostalCode>
+                <ens:BillingState fsi:occurs="0..1" fsi:nillable="true">${sObjects.BillingState}</ens:BillingState>
+                <ens:BillingStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.BillingStreet}</ens:BillingStreet>
+                <ens:Cases fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Cases.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Cases.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Cases.size}</tns:size>
+                </ens:Cases>
+                <ens:Contacts fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Contacts.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Contacts.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Contacts.size}</tns:size>
+                </ens:Contacts>
+                <ens:Contracts fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Contracts.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Contracts.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Contracts.size}</tns:size>
+                </ens:Contracts>
+                <ens:CreatedBy fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.CreatedBy.fieldsToNull)
+                    <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                    <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Id}</ens:Id>
+                    <ens:AboutMe fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.AboutMe}</ens:AboutMe>
+                    <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.AccountId}</ens:AccountId>
+                    <ens:Alias fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Alias}</ens:Alias>
+                    <ens:BussinesBackupPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.BussinesBackupPerson__r.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.BussinesBackupPerson__r.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.BussinesBackupPerson__r.size}</tns:size>
+                    </ens:BussinesBackupPerson__r>
+                    <ens:CallCenterId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CallCenterId}</ens:CallCenterId>
+                    <ens:City fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.City}</ens:City>
+                    <ens:CommunityNickname fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CommunityNickname}</ens:CommunityNickname>
+                    <ens:CompanyName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CompanyName}</ens:CompanyName>
+                    <ens:Contact fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.CreatedBy.Contact.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Id}</ens:Id>
+                        <ens:AccountContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.AccountContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.AccountContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.AccountContactRoles.size}</tns:size>
+                        </ens:AccountContactRoles>
+                        <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.AccountId}</ens:AccountId>
+                        <ens:ActivityHistories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.ActivityHistories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ActivityHistories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.ActivityHistories.size}</tns:size>
+                        </ens:ActivityHistories>
+                        <ens:Assets fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Assets.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Assets.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Assets.size}</tns:size>
+                        </ens:Assets>
+                        <ens:AssistantName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.AssistantName}</ens:AssistantName>
+                        <ens:AssistantPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.AssistantPhone}</ens:AssistantPhone>
+                        <ens:Attachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Attachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Attachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Attachments.size}</tns:size>
+                        </ens:Attachments>
+                        <ens:Birthdate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Birthdate}</ens:Birthdate>
+                        <ens:CampaignMembers fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.CampaignMembers.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.CampaignMembers.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.CampaignMembers.size}</tns:size>
+                        </ens:CampaignMembers>
+                        <ens:CaseContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.CaseContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.CaseContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.CaseContactRoles.size}</tns:size>
+                        </ens:CaseContactRoles>
+                        <ens:Cases fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Cases.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Cases.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Cases.size}</tns:size>
+                        </ens:Cases>
+                        <ens:ContractContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.ContractContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ContractContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.ContractContactRoles.size}</tns:size>
+                        </ens:ContractContactRoles>
+                        <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.ContractsSigned.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ContractsSigned.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.ContractsSigned.size}</tns:size>
+                        </ens:ContractsSigned>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.CreatedDate}</ens:CreatedDate>
+                        <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Department}</ens:Department>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Description}</ens:Description>
+                        <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Email}</ens:Email>
+                        <ens:EmailBouncedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.EmailBouncedDate}</ens:EmailBouncedDate>
+                        <ens:EmailBouncedReason fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.EmailBouncedReason}</ens:EmailBouncedReason>
+                        <ens:EmailStatuses fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.EmailStatuses.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.EmailStatuses.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.EmailStatuses.size}</tns:size>
+                        </ens:EmailStatuses>
+                        <ens:Events fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Events.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Events.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Events.size}</tns:size>
+                        </ens:Events>
+                        <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Fax}</ens:Fax>
+                        <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.FeedSubscriptionsForEntity.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.FeedSubscriptionsForEntity.size}</tns:size>
+                        </ens:FeedSubscriptionsForEntity>
+                        <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Feeds.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Feeds.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Feeds.size}</tns:size>
+                        </ens:Feeds>
+                        <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.FirstName}</ens:FirstName>
+                        <ens:Histories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Histories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Histories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Histories.size}</tns:size>
+                        </ens:Histories>
+                        <ens:HomePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.HomePhone}</ens:HomePhone>
+                        <ens:IsDeleted fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.IsDeleted}</ens:IsDeleted>
+                        <ens:Jigsaw fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Jigsaw}</ens:Jigsaw>
+                        <ens:JigsawContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.JigsawContactId}</ens:JigsawContactId>
+                        <ens:Languages__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Languages__c}</ens:Languages__c>
+                        <ens:LastActivityDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastActivityDate}</ens:LastActivityDate>
+                        <ens:LastCURequestDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastCURequestDate}</ens:LastCURequestDate>
+                        <ens:LastCUUpdateDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastCUUpdateDate}</ens:LastCUUpdateDate>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LastName}</ens:LastName>
+                        <ens:LeadSource fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.LeadSource}</ens:LeadSource>
+                        <ens:Level__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Level__c}</ens:Level__c>
+                        <ens:MailingCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MailingCity}</ens:MailingCity>
+                        <ens:MailingCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MailingCountry}</ens:MailingCountry>
+                        <ens:MailingPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MailingPostalCode}</ens:MailingPostalCode>
+                        <ens:MailingState fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MailingState}</ens:MailingState>
+                        <ens:MailingStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MailingStreet}</ens:MailingStreet>
+                        <ens:MasterRecordId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MasterRecordId}</ens:MasterRecordId>
+                        <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.MobilePhone}</ens:MobilePhone>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Name}</ens:Name>
+                        <ens:Notes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Notes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Notes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Notes.size}</tns:size>
+                        </ens:Notes>
+                        <ens:NotesAndAttachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.NotesAndAttachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.NotesAndAttachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.NotesAndAttachments.size}</tns:size>
+                        </ens:NotesAndAttachments>
+                        <ens:OpenActivities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.OpenActivities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OpenActivities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.OpenActivities.size}</tns:size>
+                        </ens:OpenActivities>
+                        <ens:Opportunities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Opportunities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Opportunities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Opportunities.size}</tns:size>
+                        </ens:Opportunities>
+                        <ens:OpportunityContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.OpportunityContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OpportunityContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.OpportunityContactRoles.size}</tns:size>
+                        </ens:OpportunityContactRoles>
+                        <ens:OtherCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherCity}</ens:OtherCity>
+                        <ens:OtherCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherCountry}</ens:OtherCountry>
+                        <ens:OtherPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherPhone}</ens:OtherPhone>
+                        <ens:OtherPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherPostalCode}</ens:OtherPostalCode>
+                        <ens:OtherState fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherState}</ens:OtherState>
+                        <ens:OtherStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OtherStreet}</ens:OtherStreet>
+                        <ens:OwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.OwnerId}</ens:OwnerId>
+                        <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Phone}</ens:Phone>
+                        <ens:ProcessInstances fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.ProcessInstances.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ProcessInstances.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.ProcessInstances.size}</tns:size>
+                        </ens:ProcessInstances>
+                        <ens:ProcessSteps fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.ProcessSteps.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ProcessSteps.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.ProcessSteps.size}</tns:size>
+                        </ens:ProcessSteps>
+                        <ens:Quotes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Quotes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Quotes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Quotes.size}</tns:size>
+                        </ens:Quotes>
+                        <ens:ReportsToId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.ReportsToId}</ens:ReportsToId>
+                        <ens:Salutation fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Salutation}</ens:Salutation>
+                        <ens:Shares fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Shares.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Shares.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Shares.size}</tns:size>
+                        </ens:Shares>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.SystemModstamp}</ens:SystemModstamp>
+                        <ens:TargetPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.TargetPerson__r.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.TargetPerson__r.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.TargetPerson__r.size}</tns:size>
+                        </ens:TargetPerson__r>
+                        <ens:Tasks fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Contact.Tasks.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Tasks.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Contact.Tasks.size}</tns:size>
+                        </ens:Tasks>
+                        <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Contact.Title}</ens:Title>
+                    </ens:Contact>
+                    <ens:ContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ContactId}</ens:ContactId>
+                    <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.ContractsSigned.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.ContractsSigned.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.ContractsSigned.size}</tns:size>
+                    </ens:ContractsSigned>
+                    <ens:Country fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Country}</ens:Country>
+                    <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CreatedById}</ens:CreatedById>
+                    <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CreatedDate}</ens:CreatedDate>
+                    <ens:CurrentStatus fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.CurrentStatus}</ens:CurrentStatus>
+                    <ens:DefaultGroupNotificationFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.DefaultGroupNotificationFrequency}</ens:DefaultGroupNotificationFrequency>
+                    <ens:DelegatedApproverId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.DelegatedApproverId}</ens:DelegatedApproverId>
+                    <ens:DelegatedUsers fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.DelegatedUsers.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.DelegatedUsers.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.DelegatedUsers.size}</tns:size>
+                    </ens:DelegatedUsers>
+                    <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Department}</ens:Department>
+                    <ens:DigestFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.DigestFrequency}</ens:DigestFrequency>
+                    <ens:Division fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Division}</ens:Division>
+                    <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Email}</ens:Email>
+                    <ens:EmailEncodingKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.EmailEncodingKey}</ens:EmailEncodingKey>
+                    <ens:EmployeeNumber fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.EmployeeNumber}</ens:EmployeeNumber>
+                    <ens:Extension fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Extension}</ens:Extension>
+                    <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Fax}</ens:Fax>
+                    <ens:FederationIdentifier fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.FederationIdentifier}</ens:FederationIdentifier>
+                    <ens:FeedSubscriptions fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.FeedSubscriptions.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.FeedSubscriptions.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.FeedSubscriptions.size}</tns:size>
+                    </ens:FeedSubscriptions>
+                    <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.FeedSubscriptionsForEntity.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.FeedSubscriptionsForEntity.size}</tns:size>
+                    </ens:FeedSubscriptionsForEntity>
+                    <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.Feeds.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Feeds.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.Feeds.size}</tns:size>
+                    </ens:Feeds>
+                    <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.FirstName}</ens:FirstName>
+                    <ens:ForecastEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ForecastEnabled}</ens:ForecastEnabled>
+                    <ens:FullPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.FullPhotoUrl}</ens:FullPhotoUrl>
+                    <ens:IsActive fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.IsActive}</ens:IsActive>
+                    <ens:LanguageLocaleKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LanguageLocaleKey}</ens:LanguageLocaleKey>
+                    <ens:LastLoginDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LastLoginDate}</ens:LastLoginDate>
+                    <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LastModifiedById}</ens:LastModifiedById>
+                    <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LastModifiedDate}</ens:LastModifiedDate>
+                    <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LastName}</ens:LastName>
+                    <ens:LastPasswordChangeDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LastPasswordChangeDate}</ens:LastPasswordChangeDate>
+                    <ens:LocaleSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.LocaleSidKey}</ens:LocaleSidKey>
+                    <ens:ManagerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ManagerId}</ens:ManagerId>
+                    <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.MobilePhone}</ens:MobilePhone>
+                    <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Name}</ens:Name>
+                    <ens:OfflinePdaTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.OfflinePdaTrialExpirationDate}</ens:OfflinePdaTrialExpirationDate>
+                    <ens:OfflineTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.OfflineTrialExpirationDate}</ens:OfflineTrialExpirationDate>
+                    <ens:OpportunityTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.OpportunityTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.OpportunityTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.OpportunityTeams.size}</tns:size>
+                    </ens:OpportunityTeams>
+                    <ens:PermissionSetAssignments fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.PermissionSetAssignments.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.PermissionSetAssignments.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.PermissionSetAssignments.size}</tns:size>
+                    </ens:PermissionSetAssignments>
+                    <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Phone}</ens:Phone>
+                    <ens:PostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.PostalCode}</ens:PostalCode>
+                    <ens:Profile fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.CreatedBy.Profile.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Profile.Id}</ens:Id>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.CreatedDate}</ens:CreatedDate>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.Description}</ens:Description>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.Name}</ens:Name>
+                        <ens:PermissionsApiEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsApiEnabled}</ens:PermissionsApiEnabled>
+                        <ens:PermissionsAuthorApex fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsAuthorApex}</ens:PermissionsAuthorApex>
+                        <ens:PermissionsBulkApiHardDelete fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsBulkApiHardDelete}</ens:PermissionsBulkApiHardDelete>
+                        <ens:PermissionsCanInsertFeedSystemFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsCanInsertFeedSystemFields}</ens:PermissionsCanInsertFeedSystemFields>
+                        <ens:PermissionsCanUseNewDashboardBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsCanUseNewDashboardBuilder}</ens:PermissionsCanUseNewDashboardBuilder>
+                        <ens:PermissionsChatterFileLink fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsChatterFileLink}</ens:PermissionsChatterFileLink>
+                        <ens:PermissionsConvertLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsConvertLeads}</ens:PermissionsConvertLeads>
+                        <ens:PermissionsCreateMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsCreateMultiforce}</ens:PermissionsCreateMultiforce>
+                        <ens:PermissionsCustomSidebarOnAllPages fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsCustomSidebarOnAllPages}</ens:PermissionsCustomSidebarOnAllPages>
+                        <ens:PermissionsCustomizeApplication fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsCustomizeApplication}</ens:PermissionsCustomizeApplication>
+                        <ens:PermissionsDistributeFromPersWksp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsDistributeFromPersWksp}</ens:PermissionsDistributeFromPersWksp>
+                        <ens:PermissionsEditCaseComments fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditCaseComments}</ens:PermissionsEditCaseComments>
+                        <ens:PermissionsEditEvent fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditEvent}</ens:PermissionsEditEvent>
+                        <ens:PermissionsEditKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditKnowledge}</ens:PermissionsEditKnowledge>
+                        <ens:PermissionsEditOppLineItemUnitPrice fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditOppLineItemUnitPrice}</ens:PermissionsEditOppLineItemUnitPrice>
+                        <ens:PermissionsEditPublicDocuments fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditPublicDocuments}</ens:PermissionsEditPublicDocuments>
+                        <ens:PermissionsEditReadonlyFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditReadonlyFields}</ens:PermissionsEditReadonlyFields>
+                        <ens:PermissionsEditReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditReports}</ens:PermissionsEditReports>
+                        <ens:PermissionsEditTask fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEditTask}</ens:PermissionsEditTask>
+                        <ens:PermissionsEmailAdministration fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEmailAdministration}</ens:PermissionsEmailAdministration>
+                        <ens:PermissionsEmailTemplateManagement fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEmailTemplateManagement}</ens:PermissionsEmailTemplateManagement>
+                        <ens:PermissionsEnableNotifications fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsEnableNotifications}</ens:PermissionsEnableNotifications>
+                        <ens:PermissionsFlowUFLRequired fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsFlowUFLRequired}</ens:PermissionsFlowUFLRequired>
+                        <ens:PermissionsImportLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsImportLeads}</ens:PermissionsImportLeads>
+                        <ens:PermissionsInstallMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsInstallMultiforce}</ens:PermissionsInstallMultiforce>
+                        <ens:PermissionsManageAnalyticSnapshots fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageAnalyticSnapshots}</ens:PermissionsManageAnalyticSnapshots>
+                        <ens:PermissionsManageAuthProviders fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageAuthProviders}</ens:PermissionsManageAuthProviders>
+                        <ens:PermissionsManageBusinessHourHolidays fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageBusinessHourHolidays}</ens:PermissionsManageBusinessHourHolidays>
+                        <ens:PermissionsManageCallCenters fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageCallCenters}</ens:PermissionsManageCallCenters>
+                        <ens:PermissionsManageCases fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageCases}</ens:PermissionsManageCases>
+                        <ens:PermissionsManageCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageCategories}</ens:PermissionsManageCategories>
+                        <ens:PermissionsManageChatterMessages fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageChatterMessages}</ens:PermissionsManageChatterMessages>
+                        <ens:PermissionsManageCssUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageCssUsers}</ens:PermissionsManageCssUsers>
+                        <ens:PermissionsManageCustomReportTypes fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageCustomReportTypes}</ens:PermissionsManageCustomReportTypes>
+                        <ens:PermissionsManageDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageDashboards}</ens:PermissionsManageDashboards>
+                        <ens:PermissionsManageDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageDataCategories}</ens:PermissionsManageDataCategories>
+                        <ens:PermissionsManageDataIntegrations fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageDataIntegrations}</ens:PermissionsManageDataIntegrations>
+                        <ens:PermissionsManageDynamicDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageDynamicDashboards}</ens:PermissionsManageDynamicDashboards>
+                        <ens:PermissionsManageEmailClientConfig fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageEmailClientConfig}</ens:PermissionsManageEmailClientConfig>
+                        <ens:PermissionsManageInteraction fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageInteraction}</ens:PermissionsManageInteraction>
+                        <ens:PermissionsManageKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageKnowledge}</ens:PermissionsManageKnowledge>
+                        <ens:PermissionsManageKnowledgeImportExport fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageKnowledgeImportExport}</ens:PermissionsManageKnowledgeImportExport>
+                        <ens:PermissionsManageLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageLeads}</ens:PermissionsManageLeads>
+                        <ens:PermissionsManageMobile fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageMobile}</ens:PermissionsManageMobile>
+                        <ens:PermissionsManageRemoteAccess fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageRemoteAccess}</ens:PermissionsManageRemoteAccess>
+                        <ens:PermissionsManageSelfService fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageSelfService}</ens:PermissionsManageSelfService>
+                        <ens:PermissionsManageSolutions fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageSolutions}</ens:PermissionsManageSolutions>
+                        <ens:PermissionsManageSynonyms fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageSynonyms}</ens:PermissionsManageSynonyms>
+                        <ens:PermissionsManageUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsManageUsers}</ens:PermissionsManageUsers>
+                        <ens:PermissionsMassInlineEdit fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsMassInlineEdit}</ens:PermissionsMassInlineEdit>
+                        <ens:PermissionsModifyAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsModifyAllData}</ens:PermissionsModifyAllData>
+                        <ens:PermissionsNewReportBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsNewReportBuilder}</ens:PermissionsNewReportBuilder>
+                        <ens:PermissionsPasswordNeverExpires fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsPasswordNeverExpires}</ens:PermissionsPasswordNeverExpires>
+                        <ens:PermissionsPublishMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsPublishMultiforce}</ens:PermissionsPublishMultiforce>
+                        <ens:PermissionsResetPasswords fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsResetPasswords}</ens:PermissionsResetPasswords>
+                        <ens:PermissionsRunReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsRunReports}</ens:PermissionsRunReports>
+                        <ens:PermissionsScheduleReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsScheduleReports}</ens:PermissionsScheduleReports>
+                        <ens:PermissionsSendSitRequests fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsSendSitRequests}</ens:PermissionsSendSitRequests>
+                        <ens:PermissionsSolutionImport fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsSolutionImport}</ens:PermissionsSolutionImport>
+                        <ens:PermissionsTransferAnyCase fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsTransferAnyCase}</ens:PermissionsTransferAnyCase>
+                        <ens:PermissionsTransferAnyEntity fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsTransferAnyEntity}</ens:PermissionsTransferAnyEntity>
+                        <ens:PermissionsTransferAnyLead fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsTransferAnyLead}</ens:PermissionsTransferAnyLead>
+                        <ens:PermissionsUseTeamReassignWizards fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsUseTeamReassignWizards}</ens:PermissionsUseTeamReassignWizards>
+                        <ens:PermissionsViewAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsViewAllData}</ens:PermissionsViewAllData>
+                        <ens:PermissionsViewDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsViewDataCategories}</ens:PermissionsViewDataCategories>
+                        <ens:PermissionsViewMyTeamsDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsViewMyTeamsDashboards}</ens:PermissionsViewMyTeamsDashboards>
+                        <ens:PermissionsViewSetup fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.PermissionsViewSetup}</ens:PermissionsViewSetup>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.SystemModstamp}</ens:SystemModstamp>
+                        <ens:UserLicense fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.CreatedBy.Profile.UserLicense.fieldsToNull)
+                            <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                            <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.Id}</ens:Id>
+                            <ens:LicenseDefinitionKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.LicenseDefinitionKey}</ens:LicenseDefinitionKey>
+                            <ens:MonthlyLoginsEntitlement fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.MonthlyLoginsEntitlement}</ens:MonthlyLoginsEntitlement>
+                            <ens:MonthlyLoginsUsed fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.MonthlyLoginsUsed}</ens:MonthlyLoginsUsed>
+                            <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.Name}</ens:Name>
+                            <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicense.SystemModstamp}</ens:SystemModstamp>
+                        </ens:UserLicense>
+                        <ens:UserLicenseId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserLicenseId}</ens:UserLicenseId>
+                        <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Profile.UserType}</ens:UserType>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.Profile.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.Profile.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.Profile.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:Profile>
+                    <ens:ProfileId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ProfileId}</ens:ProfileId>
+                    <ens:ReceivesAdminInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ReceivesAdminInfoEmails}</ens:ReceivesAdminInfoEmails>
+                    <ens:ReceivesInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.ReceivesInfoEmails}</ens:ReceivesInfoEmails>
+                    <ens:SmallPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.SmallPhotoUrl}</ens:SmallPhotoUrl>
+                    <ens:State fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.State}</ens:State>
+                    <ens:Street fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Street}</ens:Street>
+                    <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.SystemModstamp}</ens:SystemModstamp>
+                    <ens:TimeZoneSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.TimeZoneSidKey}</ens:TimeZoneSidKey>
+                    <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Title}</ens:Title>
+                    <ens:UserPermissionsCallCenterAutoLogin fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsCallCenterAutoLogin}</ens:UserPermissionsCallCenterAutoLogin>
+                    <ens:UserPermissionsInteractionUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsInteractionUser}</ens:UserPermissionsInteractionUser>
+                    <ens:UserPermissionsKnowledgeUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsKnowledgeUser}</ens:UserPermissionsKnowledgeUser>
+                    <ens:UserPermissionsMarketingUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsMarketingUser}</ens:UserPermissionsMarketingUser>
+                    <ens:UserPermissionsMobileUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsMobileUser}</ens:UserPermissionsMobileUser>
+                    <ens:UserPermissionsOfflineUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsOfflineUser}</ens:UserPermissionsOfflineUser>
+                    <ens:UserPermissionsSFContentUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsSFContentUser}</ens:UserPermissionsSFContentUser>
+                    <ens:UserPermissionsSiteforceContributorUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsSiteforceContributorUser}</ens:UserPermissionsSiteforceContributorUser>
+                    <ens:UserPermissionsSiteforcePublisherUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsSiteforcePublisherUser}</ens:UserPermissionsSiteforcePublisherUser>
+                    <ens:UserPermissionsSupportUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPermissionsSupportUser}</ens:UserPermissionsSupportUser>
+                    <ens:UserPreferences fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.UserPreferences.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferences.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.UserPreferences.size}</tns:size>
+                    </ens:UserPreferences>
+                    <ens:UserPreferencesActivityRemindersPopup fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesActivityRemindersPopup}</ens:UserPreferencesActivityRemindersPopup>
+                    <ens:UserPreferencesApexPagesDeveloperMode fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesApexPagesDeveloperMode}</ens:UserPreferencesApexPagesDeveloperMode>
+                    <ens:UserPreferencesDisCommentAfterLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisCommentAfterLikeEmail}</ens:UserPreferencesDisCommentAfterLikeEmail>
+                    <ens:UserPreferencesDisMentionsCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisMentionsCommentEmail}</ens:UserPreferencesDisMentionsCommentEmail>
+                    <ens:UserPreferencesDisProfPostCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisProfPostCommentEmail}</ens:UserPreferencesDisProfPostCommentEmail>
+                    <ens:UserPreferencesDisableAllFeedsEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableAllFeedsEmail}</ens:UserPreferencesDisableAllFeedsEmail>
+                    <ens:UserPreferencesDisableAutoSubForFeeds fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableAutoSubForFeeds}</ens:UserPreferencesDisableAutoSubForFeeds>
+                    <ens:UserPreferencesDisableBookmarkEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableBookmarkEmail}</ens:UserPreferencesDisableBookmarkEmail>
+                    <ens:UserPreferencesDisableChangeCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableChangeCommentEmail}</ens:UserPreferencesDisableChangeCommentEmail>
+                    <ens:UserPreferencesDisableFollowersEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableFollowersEmail}</ens:UserPreferencesDisableFollowersEmail>
+                    <ens:UserPreferencesDisableLaterCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableLaterCommentEmail}</ens:UserPreferencesDisableLaterCommentEmail>
+                    <ens:UserPreferencesDisableLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableLikeEmail}</ens:UserPreferencesDisableLikeEmail>
+                    <ens:UserPreferencesDisableMentionsPostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableMentionsPostEmail}</ens:UserPreferencesDisableMentionsPostEmail>
+                    <ens:UserPreferencesDisableMessageEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableMessageEmail}</ens:UserPreferencesDisableMessageEmail>
+                    <ens:UserPreferencesDisableProfilePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableProfilePostEmail}</ens:UserPreferencesDisableProfilePostEmail>
+                    <ens:UserPreferencesDisableSharePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesDisableSharePostEmail}</ens:UserPreferencesDisableSharePostEmail>
+                    <ens:UserPreferencesEventRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesEventRemindersCheckboxDefault}</ens:UserPreferencesEventRemindersCheckboxDefault>
+                    <ens:UserPreferencesReminderSoundOff fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesReminderSoundOff}</ens:UserPreferencesReminderSoundOff>
+                    <ens:UserPreferencesTaskRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserPreferencesTaskRemindersCheckboxDefault}</ens:UserPreferencesTaskRemindersCheckboxDefault>
+                    <ens:UserRole fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.CreatedBy.UserRole.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.Id}</ens:Id>
+                        <ens:CaseAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.CaseAccessForAccountOwner}</ens:CaseAccessForAccountOwner>
+                        <ens:ContactAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.ContactAccessForAccountOwner}</ens:ContactAccessForAccountOwner>
+                        <ens:DeveloperName fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.DeveloperName}</ens:DeveloperName>
+                        <ens:ForecastUserId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.ForecastUserId}</ens:ForecastUserId>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:MayForecastManagerShare fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.MayForecastManagerShare}</ens:MayForecastManagerShare>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.Name}</ens:Name>
+                        <ens:OpportunityAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.OpportunityAccessForAccountOwner}</ens:OpportunityAccessForAccountOwner>
+                        <ens:ParentRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.ParentRoleId}</ens:ParentRoleId>
+                        <ens:PortalAccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.PortalAccountId}</ens:PortalAccountId>
+                        <ens:PortalAccountOwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.PortalAccountOwnerId}</ens:PortalAccountOwnerId>
+                        <ens:PortalType fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.PortalType}</ens:PortalType>
+                        <ens:RollupDescription fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.RollupDescription}</ens:RollupDescription>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.SystemModstamp}</ens:SystemModstamp>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.CreatedBy.UserRole.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.UserRole.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.CreatedBy.UserRole.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:UserRole>
+                    <ens:UserRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserRoleId}</ens:UserRoleId>
+                    <ens:UserTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.CreatedBy.UserTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.CreatedBy.UserTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.CreatedBy.UserTeams.size}</tns:size>
+                    </ens:UserTeams>
+                    <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.UserType}</ens:UserType>
+                    <ens:Username fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedBy.Username}</ens:Username>
+                </ens:CreatedBy>
+                <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedById}</ens:CreatedById>
+                <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.CreatedDate}</ens:CreatedDate>
+                <ens:CustomerPriority__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.CustomerPriority__c}</ens:CustomerPriority__c>
+                <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.Description}</ens:Description>
+                <ens:Events fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Events.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Events.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Events.size}</tns:size>
+                </ens:Events>
+                <ens:ExAccount2__r fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.ExAccount2__r.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.ExAccount2__r.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.ExAccount2__r.size}</tns:size>
+                </ens:ExAccount2__r>
+                <ens:ExID__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.ExID__c}</ens:ExID__c>
+                <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.Fax}</ens:Fax>
+                <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.FeedSubscriptionsForEntity.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.FeedSubscriptionsForEntity.size}</tns:size>
+                </ens:FeedSubscriptionsForEntity>
+                <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Feeds.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Feeds.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Feeds.size}</tns:size>
+                </ens:Feeds>
+                <ens:Histories fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Histories.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Histories.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Histories.size}</tns:size>
+                </ens:Histories>
+                <ens:Industry fsi:occurs="0..1" fsi:nillable="true">${sObjects.Industry}</ens:Industry>
+                <ens:IsDeleted fsi:occurs="0..1" fsi:nillable="true">${sObjects.IsDeleted}</ens:IsDeleted>
+                <ens:Jigsaw fsi:occurs="0..1" fsi:nillable="true">${sObjects.Jigsaw}</ens:Jigsaw>
+                <ens:JigsawCompanyId fsi:occurs="0..1" fsi:nillable="true">${sObjects.JigsawCompanyId}</ens:JigsawCompanyId>
+                <ens:LastActivityDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastActivityDate}</ens:LastActivityDate>
+                <ens:LastModifiedBy fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.LastModifiedBy.fieldsToNull)
+                    <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                    <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Id}</ens:Id>
+                    <ens:AboutMe fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.AboutMe}</ens:AboutMe>
+                    <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.AccountId}</ens:AccountId>
+                    <ens:Alias fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Alias}</ens:Alias>
+                    <ens:BussinesBackupPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.BussinesBackupPerson__r.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.BussinesBackupPerson__r.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.BussinesBackupPerson__r.size}</tns:size>
+                    </ens:BussinesBackupPerson__r>
+                    <ens:CallCenterId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CallCenterId}</ens:CallCenterId>
+                    <ens:City fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.City}</ens:City>
+                    <ens:CommunityNickname fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CommunityNickname}</ens:CommunityNickname>
+                    <ens:CompanyName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CompanyName}</ens:CompanyName>
+                    <ens:Contact fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.LastModifiedBy.Contact.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Id}</ens:Id>
+                        <ens:AccountContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.AccountContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.AccountContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.AccountContactRoles.size}</tns:size>
+                        </ens:AccountContactRoles>
+                        <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.AccountId}</ens:AccountId>
+                        <ens:ActivityHistories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ActivityHistories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ActivityHistories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ActivityHistories.size}</tns:size>
+                        </ens:ActivityHistories>
+                        <ens:Assets fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Assets.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Assets.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Assets.size}</tns:size>
+                        </ens:Assets>
+                        <ens:AssistantName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.AssistantName}</ens:AssistantName>
+                        <ens:AssistantPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.AssistantPhone}</ens:AssistantPhone>
+                        <ens:Attachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Attachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Attachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Attachments.size}</tns:size>
+                        </ens:Attachments>
+                        <ens:Birthdate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Birthdate}</ens:Birthdate>
+                        <ens:CampaignMembers fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.CampaignMembers.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.CampaignMembers.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.CampaignMembers.size}</tns:size>
+                        </ens:CampaignMembers>
+                        <ens:CaseContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.CaseContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.CaseContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.CaseContactRoles.size}</tns:size>
+                        </ens:CaseContactRoles>
+                        <ens:Cases fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Cases.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Cases.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Cases.size}</tns:size>
+                        </ens:Cases>
+                        <ens:ContractContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ContractContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ContractContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ContractContactRoles.size}</tns:size>
+                        </ens:ContractContactRoles>
+                        <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ContractsSigned.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ContractsSigned.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ContractsSigned.size}</tns:size>
+                        </ens:ContractsSigned>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.CreatedDate}</ens:CreatedDate>
+                        <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Department}</ens:Department>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Description}</ens:Description>
+                        <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Email}</ens:Email>
+                        <ens:EmailBouncedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.EmailBouncedDate}</ens:EmailBouncedDate>
+                        <ens:EmailBouncedReason fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.EmailBouncedReason}</ens:EmailBouncedReason>
+                        <ens:EmailStatuses fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.EmailStatuses.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.EmailStatuses.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.EmailStatuses.size}</tns:size>
+                        </ens:EmailStatuses>
+                        <ens:Events fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Events.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Events.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Events.size}</tns:size>
+                        </ens:Events>
+                        <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Fax}</ens:Fax>
+                        <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.FeedSubscriptionsForEntity.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.FeedSubscriptionsForEntity.size}</tns:size>
+                        </ens:FeedSubscriptionsForEntity>
+                        <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Feeds.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Feeds.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Feeds.size}</tns:size>
+                        </ens:Feeds>
+                        <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.FirstName}</ens:FirstName>
+                        <ens:Histories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Histories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Histories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Histories.size}</tns:size>
+                        </ens:Histories>
+                        <ens:HomePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.HomePhone}</ens:HomePhone>
+                        <ens:IsDeleted fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.IsDeleted}</ens:IsDeleted>
+                        <ens:Jigsaw fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Jigsaw}</ens:Jigsaw>
+                        <ens:JigsawContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.JigsawContactId}</ens:JigsawContactId>
+                        <ens:Languages__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Languages__c}</ens:Languages__c>
+                        <ens:LastActivityDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastActivityDate}</ens:LastActivityDate>
+                        <ens:LastCURequestDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastCURequestDate}</ens:LastCURequestDate>
+                        <ens:LastCUUpdateDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastCUUpdateDate}</ens:LastCUUpdateDate>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LastName}</ens:LastName>
+                        <ens:LeadSource fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.LeadSource}</ens:LeadSource>
+                        <ens:Level__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Level__c}</ens:Level__c>
+                        <ens:MailingCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MailingCity}</ens:MailingCity>
+                        <ens:MailingCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MailingCountry}</ens:MailingCountry>
+                        <ens:MailingPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MailingPostalCode}</ens:MailingPostalCode>
+                        <ens:MailingState fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MailingState}</ens:MailingState>
+                        <ens:MailingStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MailingStreet}</ens:MailingStreet>
+                        <ens:MasterRecordId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MasterRecordId}</ens:MasterRecordId>
+                        <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.MobilePhone}</ens:MobilePhone>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Name}</ens:Name>
+                        <ens:Notes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Notes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Notes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Notes.size}</tns:size>
+                        </ens:Notes>
+                        <ens:NotesAndAttachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.NotesAndAttachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.NotesAndAttachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.NotesAndAttachments.size}</tns:size>
+                        </ens:NotesAndAttachments>
+                        <ens:OpenActivities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.OpenActivities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OpenActivities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.OpenActivities.size}</tns:size>
+                        </ens:OpenActivities>
+                        <ens:Opportunities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Opportunities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Opportunities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Opportunities.size}</tns:size>
+                        </ens:Opportunities>
+                        <ens:OpportunityContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.OpportunityContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OpportunityContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.OpportunityContactRoles.size}</tns:size>
+                        </ens:OpportunityContactRoles>
+                        <ens:OtherCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherCity}</ens:OtherCity>
+                        <ens:OtherCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherCountry}</ens:OtherCountry>
+                        <ens:OtherPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherPhone}</ens:OtherPhone>
+                        <ens:OtherPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherPostalCode}</ens:OtherPostalCode>
+                        <ens:OtherState fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherState}</ens:OtherState>
+                        <ens:OtherStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OtherStreet}</ens:OtherStreet>
+                        <ens:OwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.OwnerId}</ens:OwnerId>
+                        <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Phone}</ens:Phone>
+                        <ens:ProcessInstances fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ProcessInstances.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ProcessInstances.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ProcessInstances.size}</tns:size>
+                        </ens:ProcessInstances>
+                        <ens:ProcessSteps fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ProcessSteps.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ProcessSteps.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.ProcessSteps.size}</tns:size>
+                        </ens:ProcessSteps>
+                        <ens:Quotes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Quotes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Quotes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Quotes.size}</tns:size>
+                        </ens:Quotes>
+                        <ens:ReportsToId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.ReportsToId}</ens:ReportsToId>
+                        <ens:Salutation fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Salutation}</ens:Salutation>
+                        <ens:Shares fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Shares.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Shares.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Shares.size}</tns:size>
+                        </ens:Shares>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.SystemModstamp}</ens:SystemModstamp>
+                        <ens:TargetPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.TargetPerson__r.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.TargetPerson__r.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.TargetPerson__r.size}</tns:size>
+                        </ens:TargetPerson__r>
+                        <ens:Tasks fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Tasks.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Tasks.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Contact.Tasks.size}</tns:size>
+                        </ens:Tasks>
+                        <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Contact.Title}</ens:Title>
+                    </ens:Contact>
+                    <ens:ContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ContactId}</ens:ContactId>
+                    <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.ContractsSigned.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.ContractsSigned.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.ContractsSigned.size}</tns:size>
+                    </ens:ContractsSigned>
+                    <ens:Country fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Country}</ens:Country>
+                    <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CreatedById}</ens:CreatedById>
+                    <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CreatedDate}</ens:CreatedDate>
+                    <ens:CurrentStatus fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.CurrentStatus}</ens:CurrentStatus>
+                    <ens:DefaultGroupNotificationFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.DefaultGroupNotificationFrequency}</ens:DefaultGroupNotificationFrequency>
+                    <ens:DelegatedApproverId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.DelegatedApproverId}</ens:DelegatedApproverId>
+                    <ens:DelegatedUsers fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.DelegatedUsers.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.DelegatedUsers.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.DelegatedUsers.size}</tns:size>
+                    </ens:DelegatedUsers>
+                    <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Department}</ens:Department>
+                    <ens:DigestFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.DigestFrequency}</ens:DigestFrequency>
+                    <ens:Division fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Division}</ens:Division>
+                    <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Email}</ens:Email>
+                    <ens:EmailEncodingKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.EmailEncodingKey}</ens:EmailEncodingKey>
+                    <ens:EmployeeNumber fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.EmployeeNumber}</ens:EmployeeNumber>
+                    <ens:Extension fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Extension}</ens:Extension>
+                    <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Fax}</ens:Fax>
+                    <ens:FederationIdentifier fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.FederationIdentifier}</ens:FederationIdentifier>
+                    <ens:FeedSubscriptions fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.FeedSubscriptions.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.FeedSubscriptions.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.FeedSubscriptions.size}</tns:size>
+                    </ens:FeedSubscriptions>
+                    <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.FeedSubscriptionsForEntity.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.FeedSubscriptionsForEntity.size}</tns:size>
+                    </ens:FeedSubscriptionsForEntity>
+                    <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Feeds.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Feeds.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Feeds.size}</tns:size>
+                    </ens:Feeds>
+                    <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.FirstName}</ens:FirstName>
+                    <ens:ForecastEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ForecastEnabled}</ens:ForecastEnabled>
+                    <ens:FullPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.FullPhotoUrl}</ens:FullPhotoUrl>
+                    <ens:IsActive fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.IsActive}</ens:IsActive>
+                    <ens:LanguageLocaleKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LanguageLocaleKey}</ens:LanguageLocaleKey>
+                    <ens:LastLoginDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LastLoginDate}</ens:LastLoginDate>
+                    <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LastModifiedById}</ens:LastModifiedById>
+                    <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LastModifiedDate}</ens:LastModifiedDate>
+                    <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LastName}</ens:LastName>
+                    <ens:LastPasswordChangeDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LastPasswordChangeDate}</ens:LastPasswordChangeDate>
+                    <ens:LocaleSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.LocaleSidKey}</ens:LocaleSidKey>
+                    <ens:ManagerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ManagerId}</ens:ManagerId>
+                    <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.MobilePhone}</ens:MobilePhone>
+                    <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Name}</ens:Name>
+                    <ens:OfflinePdaTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.OfflinePdaTrialExpirationDate}</ens:OfflinePdaTrialExpirationDate>
+                    <ens:OfflineTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.OfflineTrialExpirationDate}</ens:OfflineTrialExpirationDate>
+                    <ens:OpportunityTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.OpportunityTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.OpportunityTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.OpportunityTeams.size}</tns:size>
+                    </ens:OpportunityTeams>
+                    <ens:PermissionSetAssignments fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.PermissionSetAssignments.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.PermissionSetAssignments.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.PermissionSetAssignments.size}</tns:size>
+                    </ens:PermissionSetAssignments>
+                    <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Phone}</ens:Phone>
+                    <ens:PostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.PostalCode}</ens:PostalCode>
+                    <ens:Profile fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.LastModifiedBy.Profile.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.Id}</ens:Id>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.CreatedDate}</ens:CreatedDate>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.Description}</ens:Description>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.Name}</ens:Name>
+                        <ens:PermissionsApiEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsApiEnabled}</ens:PermissionsApiEnabled>
+                        <ens:PermissionsAuthorApex fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsAuthorApex}</ens:PermissionsAuthorApex>
+                        <ens:PermissionsBulkApiHardDelete fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsBulkApiHardDelete}</ens:PermissionsBulkApiHardDelete>
+                        <ens:PermissionsCanInsertFeedSystemFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsCanInsertFeedSystemFields}</ens:PermissionsCanInsertFeedSystemFields>
+                        <ens:PermissionsCanUseNewDashboardBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsCanUseNewDashboardBuilder}</ens:PermissionsCanUseNewDashboardBuilder>
+                        <ens:PermissionsChatterFileLink fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsChatterFileLink}</ens:PermissionsChatterFileLink>
+                        <ens:PermissionsConvertLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsConvertLeads}</ens:PermissionsConvertLeads>
+                        <ens:PermissionsCreateMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsCreateMultiforce}</ens:PermissionsCreateMultiforce>
+                        <ens:PermissionsCustomSidebarOnAllPages fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsCustomSidebarOnAllPages}</ens:PermissionsCustomSidebarOnAllPages>
+                        <ens:PermissionsCustomizeApplication fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsCustomizeApplication}</ens:PermissionsCustomizeApplication>
+                        <ens:PermissionsDistributeFromPersWksp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsDistributeFromPersWksp}</ens:PermissionsDistributeFromPersWksp>
+                        <ens:PermissionsEditCaseComments fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditCaseComments}</ens:PermissionsEditCaseComments>
+                        <ens:PermissionsEditEvent fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditEvent}</ens:PermissionsEditEvent>
+                        <ens:PermissionsEditKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditKnowledge}</ens:PermissionsEditKnowledge>
+                        <ens:PermissionsEditOppLineItemUnitPrice fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditOppLineItemUnitPrice}</ens:PermissionsEditOppLineItemUnitPrice>
+                        <ens:PermissionsEditPublicDocuments fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditPublicDocuments}</ens:PermissionsEditPublicDocuments>
+                        <ens:PermissionsEditReadonlyFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditReadonlyFields}</ens:PermissionsEditReadonlyFields>
+                        <ens:PermissionsEditReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditReports}</ens:PermissionsEditReports>
+                        <ens:PermissionsEditTask fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEditTask}</ens:PermissionsEditTask>
+                        <ens:PermissionsEmailAdministration fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEmailAdministration}</ens:PermissionsEmailAdministration>
+                        <ens:PermissionsEmailTemplateManagement fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEmailTemplateManagement}</ens:PermissionsEmailTemplateManagement>
+                        <ens:PermissionsEnableNotifications fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsEnableNotifications}</ens:PermissionsEnableNotifications>
+                        <ens:PermissionsFlowUFLRequired fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsFlowUFLRequired}</ens:PermissionsFlowUFLRequired>
+                        <ens:PermissionsImportLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsImportLeads}</ens:PermissionsImportLeads>
+                        <ens:PermissionsInstallMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsInstallMultiforce}</ens:PermissionsInstallMultiforce>
+                        <ens:PermissionsManageAnalyticSnapshots fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageAnalyticSnapshots}</ens:PermissionsManageAnalyticSnapshots>
+                        <ens:PermissionsManageAuthProviders fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageAuthProviders}</ens:PermissionsManageAuthProviders>
+                        <ens:PermissionsManageBusinessHourHolidays fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageBusinessHourHolidays}</ens:PermissionsManageBusinessHourHolidays>
+                        <ens:PermissionsManageCallCenters fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageCallCenters}</ens:PermissionsManageCallCenters>
+                        <ens:PermissionsManageCases fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageCases}</ens:PermissionsManageCases>
+                        <ens:PermissionsManageCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageCategories}</ens:PermissionsManageCategories>
+                        <ens:PermissionsManageChatterMessages fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageChatterMessages}</ens:PermissionsManageChatterMessages>
+                        <ens:PermissionsManageCssUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageCssUsers}</ens:PermissionsManageCssUsers>
+                        <ens:PermissionsManageCustomReportTypes fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageCustomReportTypes}</ens:PermissionsManageCustomReportTypes>
+                        <ens:PermissionsManageDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageDashboards}</ens:PermissionsManageDashboards>
+                        <ens:PermissionsManageDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageDataCategories}</ens:PermissionsManageDataCategories>
+                        <ens:PermissionsManageDataIntegrations fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageDataIntegrations}</ens:PermissionsManageDataIntegrations>
+                        <ens:PermissionsManageDynamicDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageDynamicDashboards}</ens:PermissionsManageDynamicDashboards>
+                        <ens:PermissionsManageEmailClientConfig fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageEmailClientConfig}</ens:PermissionsManageEmailClientConfig>
+                        <ens:PermissionsManageInteraction fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageInteraction}</ens:PermissionsManageInteraction>
+                        <ens:PermissionsManageKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageKnowledge}</ens:PermissionsManageKnowledge>
+                        <ens:PermissionsManageKnowledgeImportExport fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageKnowledgeImportExport}</ens:PermissionsManageKnowledgeImportExport>
+                        <ens:PermissionsManageLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageLeads}</ens:PermissionsManageLeads>
+                        <ens:PermissionsManageMobile fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageMobile}</ens:PermissionsManageMobile>
+                        <ens:PermissionsManageRemoteAccess fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageRemoteAccess}</ens:PermissionsManageRemoteAccess>
+                        <ens:PermissionsManageSelfService fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageSelfService}</ens:PermissionsManageSelfService>
+                        <ens:PermissionsManageSolutions fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageSolutions}</ens:PermissionsManageSolutions>
+                        <ens:PermissionsManageSynonyms fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageSynonyms}</ens:PermissionsManageSynonyms>
+                        <ens:PermissionsManageUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsManageUsers}</ens:PermissionsManageUsers>
+                        <ens:PermissionsMassInlineEdit fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsMassInlineEdit}</ens:PermissionsMassInlineEdit>
+                        <ens:PermissionsModifyAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsModifyAllData}</ens:PermissionsModifyAllData>
+                        <ens:PermissionsNewReportBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsNewReportBuilder}</ens:PermissionsNewReportBuilder>
+                        <ens:PermissionsPasswordNeverExpires fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsPasswordNeverExpires}</ens:PermissionsPasswordNeverExpires>
+                        <ens:PermissionsPublishMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsPublishMultiforce}</ens:PermissionsPublishMultiforce>
+                        <ens:PermissionsResetPasswords fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsResetPasswords}</ens:PermissionsResetPasswords>
+                        <ens:PermissionsRunReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsRunReports}</ens:PermissionsRunReports>
+                        <ens:PermissionsScheduleReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsScheduleReports}</ens:PermissionsScheduleReports>
+                        <ens:PermissionsSendSitRequests fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsSendSitRequests}</ens:PermissionsSendSitRequests>
+                        <ens:PermissionsSolutionImport fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsSolutionImport}</ens:PermissionsSolutionImport>
+                        <ens:PermissionsTransferAnyCase fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsTransferAnyCase}</ens:PermissionsTransferAnyCase>
+                        <ens:PermissionsTransferAnyEntity fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsTransferAnyEntity}</ens:PermissionsTransferAnyEntity>
+                        <ens:PermissionsTransferAnyLead fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsTransferAnyLead}</ens:PermissionsTransferAnyLead>
+                        <ens:PermissionsUseTeamReassignWizards fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsUseTeamReassignWizards}</ens:PermissionsUseTeamReassignWizards>
+                        <ens:PermissionsViewAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsViewAllData}</ens:PermissionsViewAllData>
+                        <ens:PermissionsViewDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsViewDataCategories}</ens:PermissionsViewDataCategories>
+                        <ens:PermissionsViewMyTeamsDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsViewMyTeamsDashboards}</ens:PermissionsViewMyTeamsDashboards>
+                        <ens:PermissionsViewSetup fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.PermissionsViewSetup}</ens:PermissionsViewSetup>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.SystemModstamp}</ens:SystemModstamp>
+                        <ens:UserLicense fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.LastModifiedBy.Profile.UserLicense.fieldsToNull)
+                            <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                            <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.Id}</ens:Id>
+                            <ens:LicenseDefinitionKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.LicenseDefinitionKey}</ens:LicenseDefinitionKey>
+                            <ens:MonthlyLoginsEntitlement fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.MonthlyLoginsEntitlement}</ens:MonthlyLoginsEntitlement>
+                            <ens:MonthlyLoginsUsed fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.MonthlyLoginsUsed}</ens:MonthlyLoginsUsed>
+                            <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.Name}</ens:Name>
+                            <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicense.SystemModstamp}</ens:SystemModstamp>
+                        </ens:UserLicense>
+                        <ens:UserLicenseId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserLicenseId}</ens:UserLicenseId>
+                        <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.UserType}</ens:UserType>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.Profile.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.Profile.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.Profile.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:Profile>
+                    <ens:ProfileId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ProfileId}</ens:ProfileId>
+                    <ens:ReceivesAdminInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ReceivesAdminInfoEmails}</ens:ReceivesAdminInfoEmails>
+                    <ens:ReceivesInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.ReceivesInfoEmails}</ens:ReceivesInfoEmails>
+                    <ens:SmallPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.SmallPhotoUrl}</ens:SmallPhotoUrl>
+                    <ens:State fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.State}</ens:State>
+                    <ens:Street fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Street}</ens:Street>
+                    <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.SystemModstamp}</ens:SystemModstamp>
+                    <ens:TimeZoneSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.TimeZoneSidKey}</ens:TimeZoneSidKey>
+                    <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Title}</ens:Title>
+                    <ens:UserPermissionsCallCenterAutoLogin fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsCallCenterAutoLogin}</ens:UserPermissionsCallCenterAutoLogin>
+                    <ens:UserPermissionsInteractionUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsInteractionUser}</ens:UserPermissionsInteractionUser>
+                    <ens:UserPermissionsKnowledgeUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsKnowledgeUser}</ens:UserPermissionsKnowledgeUser>
+                    <ens:UserPermissionsMarketingUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsMarketingUser}</ens:UserPermissionsMarketingUser>
+                    <ens:UserPermissionsMobileUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsMobileUser}</ens:UserPermissionsMobileUser>
+                    <ens:UserPermissionsOfflineUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsOfflineUser}</ens:UserPermissionsOfflineUser>
+                    <ens:UserPermissionsSFContentUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsSFContentUser}</ens:UserPermissionsSFContentUser>
+                    <ens:UserPermissionsSiteforceContributorUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsSiteforceContributorUser}</ens:UserPermissionsSiteforceContributorUser>
+                    <ens:UserPermissionsSiteforcePublisherUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsSiteforcePublisherUser}</ens:UserPermissionsSiteforcePublisherUser>
+                    <ens:UserPermissionsSupportUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPermissionsSupportUser}</ens:UserPermissionsSupportUser>
+                    <ens:UserPreferences fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.UserPreferences.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferences.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.UserPreferences.size}</tns:size>
+                    </ens:UserPreferences>
+                    <ens:UserPreferencesActivityRemindersPopup fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesActivityRemindersPopup}</ens:UserPreferencesActivityRemindersPopup>
+                    <ens:UserPreferencesApexPagesDeveloperMode fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesApexPagesDeveloperMode}</ens:UserPreferencesApexPagesDeveloperMode>
+                    <ens:UserPreferencesDisCommentAfterLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisCommentAfterLikeEmail}</ens:UserPreferencesDisCommentAfterLikeEmail>
+                    <ens:UserPreferencesDisMentionsCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisMentionsCommentEmail}</ens:UserPreferencesDisMentionsCommentEmail>
+                    <ens:UserPreferencesDisProfPostCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisProfPostCommentEmail}</ens:UserPreferencesDisProfPostCommentEmail>
+                    <ens:UserPreferencesDisableAllFeedsEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableAllFeedsEmail}</ens:UserPreferencesDisableAllFeedsEmail>
+                    <ens:UserPreferencesDisableAutoSubForFeeds fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableAutoSubForFeeds}</ens:UserPreferencesDisableAutoSubForFeeds>
+                    <ens:UserPreferencesDisableBookmarkEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableBookmarkEmail}</ens:UserPreferencesDisableBookmarkEmail>
+                    <ens:UserPreferencesDisableChangeCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableChangeCommentEmail}</ens:UserPreferencesDisableChangeCommentEmail>
+                    <ens:UserPreferencesDisableFollowersEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableFollowersEmail}</ens:UserPreferencesDisableFollowersEmail>
+                    <ens:UserPreferencesDisableLaterCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableLaterCommentEmail}</ens:UserPreferencesDisableLaterCommentEmail>
+                    <ens:UserPreferencesDisableLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableLikeEmail}</ens:UserPreferencesDisableLikeEmail>
+                    <ens:UserPreferencesDisableMentionsPostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableMentionsPostEmail}</ens:UserPreferencesDisableMentionsPostEmail>
+                    <ens:UserPreferencesDisableMessageEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableMessageEmail}</ens:UserPreferencesDisableMessageEmail>
+                    <ens:UserPreferencesDisableProfilePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableProfilePostEmail}</ens:UserPreferencesDisableProfilePostEmail>
+                    <ens:UserPreferencesDisableSharePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesDisableSharePostEmail}</ens:UserPreferencesDisableSharePostEmail>
+                    <ens:UserPreferencesEventRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesEventRemindersCheckboxDefault}</ens:UserPreferencesEventRemindersCheckboxDefault>
+                    <ens:UserPreferencesReminderSoundOff fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesReminderSoundOff}</ens:UserPreferencesReminderSoundOff>
+                    <ens:UserPreferencesTaskRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserPreferencesTaskRemindersCheckboxDefault}</ens:UserPreferencesTaskRemindersCheckboxDefault>
+                    <ens:UserRole fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.LastModifiedBy.UserRole.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.Id}</ens:Id>
+                        <ens:CaseAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.CaseAccessForAccountOwner}</ens:CaseAccessForAccountOwner>
+                        <ens:ContactAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.ContactAccessForAccountOwner}</ens:ContactAccessForAccountOwner>
+                        <ens:DeveloperName fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.DeveloperName}</ens:DeveloperName>
+                        <ens:ForecastUserId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.ForecastUserId}</ens:ForecastUserId>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:MayForecastManagerShare fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.MayForecastManagerShare}</ens:MayForecastManagerShare>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.Name}</ens:Name>
+                        <ens:OpportunityAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.OpportunityAccessForAccountOwner}</ens:OpportunityAccessForAccountOwner>
+                        <ens:ParentRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.ParentRoleId}</ens:ParentRoleId>
+                        <ens:PortalAccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.PortalAccountId}</ens:PortalAccountId>
+                        <ens:PortalAccountOwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.PortalAccountOwnerId}</ens:PortalAccountOwnerId>
+                        <ens:PortalType fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.PortalType}</ens:PortalType>
+                        <ens:RollupDescription fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.RollupDescription}</ens:RollupDescription>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.SystemModstamp}</ens:SystemModstamp>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.UserRole.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRole.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.UserRole.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:UserRole>
+                    <ens:UserRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserRoleId}</ens:UserRoleId>
+                    <ens:UserTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.LastModifiedBy.UserTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.LastModifiedBy.UserTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.LastModifiedBy.UserTeams.size}</tns:size>
+                    </ens:UserTeams>
+                    <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.UserType}</ens:UserType>
+                    <ens:Username fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedBy.Username}</ens:Username>
+                </ens:LastModifiedBy>
+                <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedById}</ens:LastModifiedById>
+                <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.LastModifiedDate}</ens:LastModifiedDate>
+                <ens:MasterRecordId fsi:occurs="0..1" fsi:nillable="true">${sObjects.MasterRecordId}</ens:MasterRecordId>
+                <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Name}</ens:Name>
+                <ens:Notes fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Notes.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Notes.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Notes.size}</tns:size>
+                </ens:Notes>
+                <ens:NotesAndAttachments fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.NotesAndAttachments.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.NotesAndAttachments.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.NotesAndAttachments.size}</tns:size>
+                </ens:NotesAndAttachments>
+                <ens:NumberOfEmployees fsi:occurs="0..1" fsi:nillable="true">${sObjects.NumberOfEmployees}</ens:NumberOfEmployees>
+                <ens:NumberofLocations__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.NumberofLocations__c}</ens:NumberofLocations__c>
+                <ens:OpenActivities fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.OpenActivities.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.OpenActivities.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.OpenActivities.size}</tns:size>
+                </ens:OpenActivities>
+                <ens:Opportunities fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Opportunities.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Opportunities.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Opportunities.size}</tns:size>
+                </ens:Opportunities>
+                <ens:OpportunityPartnersTo fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.OpportunityPartnersTo.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.OpportunityPartnersTo.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.OpportunityPartnersTo.size}</tns:size>
+                </ens:OpportunityPartnersTo>
+                <ens:Owner fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.Owner.fieldsToNull)
+                    <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                    <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Id}</ens:Id>
+                    <ens:AboutMe fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.AboutMe}</ens:AboutMe>
+                    <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.AccountId}</ens:AccountId>
+                    <ens:Alias fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Alias}</ens:Alias>
+                    <ens:BussinesBackupPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.BussinesBackupPerson__r.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.BussinesBackupPerson__r.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.BussinesBackupPerson__r.size}</tns:size>
+                    </ens:BussinesBackupPerson__r>
+                    <ens:CallCenterId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CallCenterId}</ens:CallCenterId>
+                    <ens:City fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.City}</ens:City>
+                    <ens:CommunityNickname fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CommunityNickname}</ens:CommunityNickname>
+                    <ens:CompanyName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CompanyName}</ens:CompanyName>
+                    <ens:Contact fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.Owner.Contact.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Id}</ens:Id>
+                        <ens:AccountContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.AccountContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.AccountContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.AccountContactRoles.size}</tns:size>
+                        </ens:AccountContactRoles>
+                        <ens:AccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.AccountId}</ens:AccountId>
+                        <ens:ActivityHistories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.ActivityHistories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.ActivityHistories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.ActivityHistories.size}</tns:size>
+                        </ens:ActivityHistories>
+                        <ens:Assets fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Assets.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Assets.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Assets.size}</tns:size>
+                        </ens:Assets>
+                        <ens:AssistantName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.AssistantName}</ens:AssistantName>
+                        <ens:AssistantPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.AssistantPhone}</ens:AssistantPhone>
+                        <ens:Attachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Attachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Attachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Attachments.size}</tns:size>
+                        </ens:Attachments>
+                        <ens:Birthdate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Birthdate}</ens:Birthdate>
+                        <ens:CampaignMembers fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.CampaignMembers.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.CampaignMembers.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.CampaignMembers.size}</tns:size>
+                        </ens:CampaignMembers>
+                        <ens:CaseContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.CaseContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.CaseContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.CaseContactRoles.size}</tns:size>
+                        </ens:CaseContactRoles>
+                        <ens:Cases fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Cases.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Cases.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Cases.size}</tns:size>
+                        </ens:Cases>
+                        <ens:ContractContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.ContractContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.ContractContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.ContractContactRoles.size}</tns:size>
+                        </ens:ContractContactRoles>
+                        <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.ContractsSigned.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.ContractsSigned.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.ContractsSigned.size}</tns:size>
+                        </ens:ContractsSigned>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.CreatedDate}</ens:CreatedDate>
+                        <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Department}</ens:Department>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Description}</ens:Description>
+                        <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Email}</ens:Email>
+                        <ens:EmailBouncedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.EmailBouncedDate}</ens:EmailBouncedDate>
+                        <ens:EmailBouncedReason fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.EmailBouncedReason}</ens:EmailBouncedReason>
+                        <ens:EmailStatuses fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.EmailStatuses.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.EmailStatuses.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.EmailStatuses.size}</tns:size>
+                        </ens:EmailStatuses>
+                        <ens:Events fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Events.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Events.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Events.size}</tns:size>
+                        </ens:Events>
+                        <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Fax}</ens:Fax>
+                        <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.FeedSubscriptionsForEntity.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.FeedSubscriptionsForEntity.size}</tns:size>
+                        </ens:FeedSubscriptionsForEntity>
+                        <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Feeds.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Feeds.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Feeds.size}</tns:size>
+                        </ens:Feeds>
+                        <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.FirstName}</ens:FirstName>
+                        <ens:Histories fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Histories.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Histories.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Histories.size}</tns:size>
+                        </ens:Histories>
+                        <ens:HomePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.HomePhone}</ens:HomePhone>
+                        <ens:IsDeleted fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.IsDeleted}</ens:IsDeleted>
+                        <ens:Jigsaw fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Jigsaw}</ens:Jigsaw>
+                        <ens:JigsawContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.JigsawContactId}</ens:JigsawContactId>
+                        <ens:Languages__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Languages__c}</ens:Languages__c>
+                        <ens:LastActivityDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastActivityDate}</ens:LastActivityDate>
+                        <ens:LastCURequestDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastCURequestDate}</ens:LastCURequestDate>
+                        <ens:LastCUUpdateDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastCUUpdateDate}</ens:LastCUUpdateDate>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LastName}</ens:LastName>
+                        <ens:LeadSource fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.LeadSource}</ens:LeadSource>
+                        <ens:Level__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Level__c}</ens:Level__c>
+                        <ens:MailingCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MailingCity}</ens:MailingCity>
+                        <ens:MailingCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MailingCountry}</ens:MailingCountry>
+                        <ens:MailingPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MailingPostalCode}</ens:MailingPostalCode>
+                        <ens:MailingState fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MailingState}</ens:MailingState>
+                        <ens:MailingStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MailingStreet}</ens:MailingStreet>
+                        <ens:MasterRecordId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MasterRecordId}</ens:MasterRecordId>
+                        <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.MobilePhone}</ens:MobilePhone>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Name}</ens:Name>
+                        <ens:Notes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Notes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Notes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Notes.size}</tns:size>
+                        </ens:Notes>
+                        <ens:NotesAndAttachments fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.NotesAndAttachments.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.NotesAndAttachments.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.NotesAndAttachments.size}</tns:size>
+                        </ens:NotesAndAttachments>
+                        <ens:OpenActivities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.OpenActivities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.OpenActivities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.OpenActivities.size}</tns:size>
+                        </ens:OpenActivities>
+                        <ens:Opportunities fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Opportunities.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Opportunities.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Opportunities.size}</tns:size>
+                        </ens:Opportunities>
+                        <ens:OpportunityContactRoles fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.OpportunityContactRoles.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.OpportunityContactRoles.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.OpportunityContactRoles.size}</tns:size>
+                        </ens:OpportunityContactRoles>
+                        <ens:OtherCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherCity}</ens:OtherCity>
+                        <ens:OtherCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherCountry}</ens:OtherCountry>
+                        <ens:OtherPhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherPhone}</ens:OtherPhone>
+                        <ens:OtherPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherPostalCode}</ens:OtherPostalCode>
+                        <ens:OtherState fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherState}</ens:OtherState>
+                        <ens:OtherStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OtherStreet}</ens:OtherStreet>
+                        <ens:OwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.OwnerId}</ens:OwnerId>
+                        <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Phone}</ens:Phone>
+                        <ens:ProcessInstances fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.ProcessInstances.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.ProcessInstances.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.ProcessInstances.size}</tns:size>
+                        </ens:ProcessInstances>
+                        <ens:ProcessSteps fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.ProcessSteps.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.ProcessSteps.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.ProcessSteps.size}</tns:size>
+                        </ens:ProcessSteps>
+                        <ens:Quotes fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Quotes.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Quotes.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Quotes.size}</tns:size>
+                        </ens:Quotes>
+                        <ens:ReportsToId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.ReportsToId}</ens:ReportsToId>
+                        <ens:Salutation fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Salutation}</ens:Salutation>
+                        <ens:Shares fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Shares.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Shares.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Shares.size}</tns:size>
+                        </ens:Shares>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.SystemModstamp}</ens:SystemModstamp>
+                        <ens:TargetPerson__r fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.TargetPerson__r.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.TargetPerson__r.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.TargetPerson__r.size}</tns:size>
+                        </ens:TargetPerson__r>
+                        <ens:Tasks fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Contact.Tasks.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Contact.Tasks.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Contact.Tasks.size}</tns:size>
+                        </ens:Tasks>
+                        <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Contact.Title}</ens:Title>
+                    </ens:Contact>
+                    <ens:ContactId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ContactId}</ens:ContactId>
+                    <ens:ContractsSigned fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.ContractsSigned.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.ContractsSigned.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.ContractsSigned.size}</tns:size>
+                    </ens:ContractsSigned>
+                    <ens:Country fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Country}</ens:Country>
+                    <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CreatedById}</ens:CreatedById>
+                    <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CreatedDate}</ens:CreatedDate>
+                    <ens:CurrentStatus fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.CurrentStatus}</ens:CurrentStatus>
+                    <ens:DefaultGroupNotificationFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.DefaultGroupNotificationFrequency}</ens:DefaultGroupNotificationFrequency>
+                    <ens:DelegatedApproverId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.DelegatedApproverId}</ens:DelegatedApproverId>
+                    <ens:DelegatedUsers fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.DelegatedUsers.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.DelegatedUsers.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.DelegatedUsers.size}</tns:size>
+                    </ens:DelegatedUsers>
+                    <ens:Department fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Department}</ens:Department>
+                    <ens:DigestFrequency fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.DigestFrequency}</ens:DigestFrequency>
+                    <ens:Division fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Division}</ens:Division>
+                    <ens:Email fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Email}</ens:Email>
+                    <ens:EmailEncodingKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.EmailEncodingKey}</ens:EmailEncodingKey>
+                    <ens:EmployeeNumber fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.EmployeeNumber}</ens:EmployeeNumber>
+                    <ens:Extension fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Extension}</ens:Extension>
+                    <ens:Fax fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Fax}</ens:Fax>
+                    <ens:FederationIdentifier fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.FederationIdentifier}</ens:FederationIdentifier>
+                    <ens:FeedSubscriptions fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.FeedSubscriptions.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.FeedSubscriptions.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.FeedSubscriptions.size}</tns:size>
+                    </ens:FeedSubscriptions>
+                    <ens:FeedSubscriptionsForEntity fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.FeedSubscriptionsForEntity.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.FeedSubscriptionsForEntity.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.FeedSubscriptionsForEntity.size}</tns:size>
+                    </ens:FeedSubscriptionsForEntity>
+                    <ens:Feeds fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.Feeds.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Feeds.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.Feeds.size}</tns:size>
+                    </ens:Feeds>
+                    <ens:FirstName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.FirstName}</ens:FirstName>
+                    <ens:ForecastEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ForecastEnabled}</ens:ForecastEnabled>
+                    <ens:FullPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.FullPhotoUrl}</ens:FullPhotoUrl>
+                    <ens:IsActive fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.IsActive}</ens:IsActive>
+                    <ens:LanguageLocaleKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LanguageLocaleKey}</ens:LanguageLocaleKey>
+                    <ens:LastLoginDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LastLoginDate}</ens:LastLoginDate>
+                    <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LastModifiedById}</ens:LastModifiedById>
+                    <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LastModifiedDate}</ens:LastModifiedDate>
+                    <ens:LastName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LastName}</ens:LastName>
+                    <ens:LastPasswordChangeDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LastPasswordChangeDate}</ens:LastPasswordChangeDate>
+                    <ens:LocaleSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.LocaleSidKey}</ens:LocaleSidKey>
+                    <ens:ManagerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ManagerId}</ens:ManagerId>
+                    <ens:MobilePhone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.MobilePhone}</ens:MobilePhone>
+                    <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Name}</ens:Name>
+                    <ens:OfflinePdaTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.OfflinePdaTrialExpirationDate}</ens:OfflinePdaTrialExpirationDate>
+                    <ens:OfflineTrialExpirationDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.OfflineTrialExpirationDate}</ens:OfflineTrialExpirationDate>
+                    <ens:OpportunityTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.OpportunityTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.OpportunityTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.OpportunityTeams.size}</tns:size>
+                    </ens:OpportunityTeams>
+                    <ens:PermissionSetAssignments fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.PermissionSetAssignments.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.PermissionSetAssignments.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.PermissionSetAssignments.size}</tns:size>
+                    </ens:PermissionSetAssignments>
+                    <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Phone}</ens:Phone>
+                    <ens:PostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.PostalCode}</ens:PostalCode>
+                    <ens:Profile fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.Owner.Profile.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Profile.Id}</ens:Id>
+                        <ens:CreatedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.CreatedById}</ens:CreatedById>
+                        <ens:CreatedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.CreatedDate}</ens:CreatedDate>
+                        <ens:Description fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.Description}</ens:Description>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.Name}</ens:Name>
+                        <ens:PermissionsApiEnabled fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsApiEnabled}</ens:PermissionsApiEnabled>
+                        <ens:PermissionsAuthorApex fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsAuthorApex}</ens:PermissionsAuthorApex>
+                        <ens:PermissionsBulkApiHardDelete fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsBulkApiHardDelete}</ens:PermissionsBulkApiHardDelete>
+                        <ens:PermissionsCanInsertFeedSystemFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsCanInsertFeedSystemFields}</ens:PermissionsCanInsertFeedSystemFields>
+                        <ens:PermissionsCanUseNewDashboardBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsCanUseNewDashboardBuilder}</ens:PermissionsCanUseNewDashboardBuilder>
+                        <ens:PermissionsChatterFileLink fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsChatterFileLink}</ens:PermissionsChatterFileLink>
+                        <ens:PermissionsConvertLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsConvertLeads}</ens:PermissionsConvertLeads>
+                        <ens:PermissionsCreateMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsCreateMultiforce}</ens:PermissionsCreateMultiforce>
+                        <ens:PermissionsCustomSidebarOnAllPages fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsCustomSidebarOnAllPages}</ens:PermissionsCustomSidebarOnAllPages>
+                        <ens:PermissionsCustomizeApplication fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsCustomizeApplication}</ens:PermissionsCustomizeApplication>
+                        <ens:PermissionsDistributeFromPersWksp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsDistributeFromPersWksp}</ens:PermissionsDistributeFromPersWksp>
+                        <ens:PermissionsEditCaseComments fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditCaseComments}</ens:PermissionsEditCaseComments>
+                        <ens:PermissionsEditEvent fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditEvent}</ens:PermissionsEditEvent>
+                        <ens:PermissionsEditKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditKnowledge}</ens:PermissionsEditKnowledge>
+                        <ens:PermissionsEditOppLineItemUnitPrice fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditOppLineItemUnitPrice}</ens:PermissionsEditOppLineItemUnitPrice>
+                        <ens:PermissionsEditPublicDocuments fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditPublicDocuments}</ens:PermissionsEditPublicDocuments>
+                        <ens:PermissionsEditReadonlyFields fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditReadonlyFields}</ens:PermissionsEditReadonlyFields>
+                        <ens:PermissionsEditReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditReports}</ens:PermissionsEditReports>
+                        <ens:PermissionsEditTask fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEditTask}</ens:PermissionsEditTask>
+                        <ens:PermissionsEmailAdministration fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEmailAdministration}</ens:PermissionsEmailAdministration>
+                        <ens:PermissionsEmailTemplateManagement fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEmailTemplateManagement}</ens:PermissionsEmailTemplateManagement>
+                        <ens:PermissionsEnableNotifications fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsEnableNotifications}</ens:PermissionsEnableNotifications>
+                        <ens:PermissionsFlowUFLRequired fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsFlowUFLRequired}</ens:PermissionsFlowUFLRequired>
+                        <ens:PermissionsImportLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsImportLeads}</ens:PermissionsImportLeads>
+                        <ens:PermissionsInstallMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsInstallMultiforce}</ens:PermissionsInstallMultiforce>
+                        <ens:PermissionsManageAnalyticSnapshots fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageAnalyticSnapshots}</ens:PermissionsManageAnalyticSnapshots>
+                        <ens:PermissionsManageAuthProviders fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageAuthProviders}</ens:PermissionsManageAuthProviders>
+                        <ens:PermissionsManageBusinessHourHolidays fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageBusinessHourHolidays}</ens:PermissionsManageBusinessHourHolidays>
+                        <ens:PermissionsManageCallCenters fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageCallCenters}</ens:PermissionsManageCallCenters>
+                        <ens:PermissionsManageCases fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageCases}</ens:PermissionsManageCases>
+                        <ens:PermissionsManageCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageCategories}</ens:PermissionsManageCategories>
+                        <ens:PermissionsManageChatterMessages fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageChatterMessages}</ens:PermissionsManageChatterMessages>
+                        <ens:PermissionsManageCssUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageCssUsers}</ens:PermissionsManageCssUsers>
+                        <ens:PermissionsManageCustomReportTypes fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageCustomReportTypes}</ens:PermissionsManageCustomReportTypes>
+                        <ens:PermissionsManageDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageDashboards}</ens:PermissionsManageDashboards>
+                        <ens:PermissionsManageDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageDataCategories}</ens:PermissionsManageDataCategories>
+                        <ens:PermissionsManageDataIntegrations fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageDataIntegrations}</ens:PermissionsManageDataIntegrations>
+                        <ens:PermissionsManageDynamicDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageDynamicDashboards}</ens:PermissionsManageDynamicDashboards>
+                        <ens:PermissionsManageEmailClientConfig fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageEmailClientConfig}</ens:PermissionsManageEmailClientConfig>
+                        <ens:PermissionsManageInteraction fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageInteraction}</ens:PermissionsManageInteraction>
+                        <ens:PermissionsManageKnowledge fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageKnowledge}</ens:PermissionsManageKnowledge>
+                        <ens:PermissionsManageKnowledgeImportExport fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageKnowledgeImportExport}</ens:PermissionsManageKnowledgeImportExport>
+                        <ens:PermissionsManageLeads fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageLeads}</ens:PermissionsManageLeads>
+                        <ens:PermissionsManageMobile fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageMobile}</ens:PermissionsManageMobile>
+                        <ens:PermissionsManageRemoteAccess fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageRemoteAccess}</ens:PermissionsManageRemoteAccess>
+                        <ens:PermissionsManageSelfService fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageSelfService}</ens:PermissionsManageSelfService>
+                        <ens:PermissionsManageSolutions fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageSolutions}</ens:PermissionsManageSolutions>
+                        <ens:PermissionsManageSynonyms fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageSynonyms}</ens:PermissionsManageSynonyms>
+                        <ens:PermissionsManageUsers fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsManageUsers}</ens:PermissionsManageUsers>
+                        <ens:PermissionsMassInlineEdit fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsMassInlineEdit}</ens:PermissionsMassInlineEdit>
+                        <ens:PermissionsModifyAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsModifyAllData}</ens:PermissionsModifyAllData>
+                        <ens:PermissionsNewReportBuilder fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsNewReportBuilder}</ens:PermissionsNewReportBuilder>
+                        <ens:PermissionsPasswordNeverExpires fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsPasswordNeverExpires}</ens:PermissionsPasswordNeverExpires>
+                        <ens:PermissionsPublishMultiforce fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsPublishMultiforce}</ens:PermissionsPublishMultiforce>
+                        <ens:PermissionsResetPasswords fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsResetPasswords}</ens:PermissionsResetPasswords>
+                        <ens:PermissionsRunReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsRunReports}</ens:PermissionsRunReports>
+                        <ens:PermissionsScheduleReports fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsScheduleReports}</ens:PermissionsScheduleReports>
+                        <ens:PermissionsSendSitRequests fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsSendSitRequests}</ens:PermissionsSendSitRequests>
+                        <ens:PermissionsSolutionImport fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsSolutionImport}</ens:PermissionsSolutionImport>
+                        <ens:PermissionsTransferAnyCase fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsTransferAnyCase}</ens:PermissionsTransferAnyCase>
+                        <ens:PermissionsTransferAnyEntity fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsTransferAnyEntity}</ens:PermissionsTransferAnyEntity>
+                        <ens:PermissionsTransferAnyLead fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsTransferAnyLead}</ens:PermissionsTransferAnyLead>
+                        <ens:PermissionsUseTeamReassignWizards fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsUseTeamReassignWizards}</ens:PermissionsUseTeamReassignWizards>
+                        <ens:PermissionsViewAllData fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsViewAllData}</ens:PermissionsViewAllData>
+                        <ens:PermissionsViewDataCategories fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsViewDataCategories}</ens:PermissionsViewDataCategories>
+                        <ens:PermissionsViewMyTeamsDashboards fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsViewMyTeamsDashboards}</ens:PermissionsViewMyTeamsDashboards>
+                        <ens:PermissionsViewSetup fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.PermissionsViewSetup}</ens:PermissionsViewSetup>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.SystemModstamp}</ens:SystemModstamp>
+                        <ens:UserLicense fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.Owner.Profile.UserLicense.fieldsToNull)
+                            <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                            <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.Id}</ens:Id>
+                            <ens:LicenseDefinitionKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.LicenseDefinitionKey}</ens:LicenseDefinitionKey>
+                            <ens:MonthlyLoginsEntitlement fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.MonthlyLoginsEntitlement}</ens:MonthlyLoginsEntitlement>
+                            <ens:MonthlyLoginsUsed fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.MonthlyLoginsUsed}</ens:MonthlyLoginsUsed>
+                            <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.Name}</ens:Name>
+                            <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicense.SystemModstamp}</ens:SystemModstamp>
+                        </ens:UserLicense>
+                        <ens:UserLicenseId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserLicenseId}</ens:UserLicenseId>
+                        <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Profile.UserType}</ens:UserType>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.Profile.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.Profile.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.Profile.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:Profile>
+                    <ens:ProfileId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ProfileId}</ens:ProfileId>
+                    <ens:ReceivesAdminInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ReceivesAdminInfoEmails}</ens:ReceivesAdminInfoEmails>
+                    <ens:ReceivesInfoEmails fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.ReceivesInfoEmails}</ens:ReceivesInfoEmails>
+                    <ens:SmallPhotoUrl fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.SmallPhotoUrl}</ens:SmallPhotoUrl>
+                    <ens:State fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.State}</ens:State>
+                    <ens:Street fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Street}</ens:Street>
+                    <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.SystemModstamp}</ens:SystemModstamp>
+                    <ens:TimeZoneSidKey fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.TimeZoneSidKey}</ens:TimeZoneSidKey>
+                    <ens:Title fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Title}</ens:Title>
+                    <ens:UserPermissionsCallCenterAutoLogin fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsCallCenterAutoLogin}</ens:UserPermissionsCallCenterAutoLogin>
+                    <ens:UserPermissionsInteractionUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsInteractionUser}</ens:UserPermissionsInteractionUser>
+                    <ens:UserPermissionsKnowledgeUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsKnowledgeUser}</ens:UserPermissionsKnowledgeUser>
+                    <ens:UserPermissionsMarketingUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsMarketingUser}</ens:UserPermissionsMarketingUser>
+                    <ens:UserPermissionsMobileUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsMobileUser}</ens:UserPermissionsMobileUser>
+                    <ens:UserPermissionsOfflineUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsOfflineUser}</ens:UserPermissionsOfflineUser>
+                    <ens:UserPermissionsSFContentUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsSFContentUser}</ens:UserPermissionsSFContentUser>
+                    <ens:UserPermissionsSiteforceContributorUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsSiteforceContributorUser}</ens:UserPermissionsSiteforceContributorUser>
+                    <ens:UserPermissionsSiteforcePublisherUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsSiteforcePublisherUser}</ens:UserPermissionsSiteforcePublisherUser>
+                    <ens:UserPermissionsSupportUser fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPermissionsSupportUser}</ens:UserPermissionsSupportUser>
+                    <ens:UserPreferences fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.UserPreferences.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.UserPreferences.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.UserPreferences.size}</tns:size>
+                    </ens:UserPreferences>
+                    <ens:UserPreferencesActivityRemindersPopup fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesActivityRemindersPopup}</ens:UserPreferencesActivityRemindersPopup>
+                    <ens:UserPreferencesApexPagesDeveloperMode fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesApexPagesDeveloperMode}</ens:UserPreferencesApexPagesDeveloperMode>
+                    <ens:UserPreferencesDisCommentAfterLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisCommentAfterLikeEmail}</ens:UserPreferencesDisCommentAfterLikeEmail>
+                    <ens:UserPreferencesDisMentionsCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisMentionsCommentEmail}</ens:UserPreferencesDisMentionsCommentEmail>
+                    <ens:UserPreferencesDisProfPostCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisProfPostCommentEmail}</ens:UserPreferencesDisProfPostCommentEmail>
+                    <ens:UserPreferencesDisableAllFeedsEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableAllFeedsEmail}</ens:UserPreferencesDisableAllFeedsEmail>
+                    <ens:UserPreferencesDisableAutoSubForFeeds fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableAutoSubForFeeds}</ens:UserPreferencesDisableAutoSubForFeeds>
+                    <ens:UserPreferencesDisableBookmarkEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableBookmarkEmail}</ens:UserPreferencesDisableBookmarkEmail>
+                    <ens:UserPreferencesDisableChangeCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableChangeCommentEmail}</ens:UserPreferencesDisableChangeCommentEmail>
+                    <ens:UserPreferencesDisableFollowersEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableFollowersEmail}</ens:UserPreferencesDisableFollowersEmail>
+                    <ens:UserPreferencesDisableLaterCommentEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableLaterCommentEmail}</ens:UserPreferencesDisableLaterCommentEmail>
+                    <ens:UserPreferencesDisableLikeEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableLikeEmail}</ens:UserPreferencesDisableLikeEmail>
+                    <ens:UserPreferencesDisableMentionsPostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableMentionsPostEmail}</ens:UserPreferencesDisableMentionsPostEmail>
+                    <ens:UserPreferencesDisableMessageEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableMessageEmail}</ens:UserPreferencesDisableMessageEmail>
+                    <ens:UserPreferencesDisableProfilePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableProfilePostEmail}</ens:UserPreferencesDisableProfilePostEmail>
+                    <ens:UserPreferencesDisableSharePostEmail fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesDisableSharePostEmail}</ens:UserPreferencesDisableSharePostEmail>
+                    <ens:UserPreferencesEventRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesEventRemindersCheckboxDefault}</ens:UserPreferencesEventRemindersCheckboxDefault>
+                    <ens:UserPreferencesReminderSoundOff fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesReminderSoundOff}</ens:UserPreferencesReminderSoundOff>
+                    <ens:UserPreferencesTaskRemindersCheckboxDefault fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserPreferencesTaskRemindersCheckboxDefault}</ens:UserPreferencesTaskRemindersCheckboxDefault>
+                    <ens:UserRole fsi:occurs="0..1" fsi:nillable="true">
+#foreach($fieldsToNull in $sObjects.Owner.UserRole.fieldsToNull)
+                        <ens:fieldsToNull fsi:occurs="0..n" fsi:nillable="true">${fieldsToNull}</ens:fieldsToNull>
+#end
+                        <ens:Id fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.UserRole.Id}</ens:Id>
+                        <ens:CaseAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.CaseAccessForAccountOwner}</ens:CaseAccessForAccountOwner>
+                        <ens:ContactAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.ContactAccessForAccountOwner}</ens:ContactAccessForAccountOwner>
+                        <ens:DeveloperName fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.DeveloperName}</ens:DeveloperName>
+                        <ens:ForecastUserId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.ForecastUserId}</ens:ForecastUserId>
+                        <ens:LastModifiedById fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.LastModifiedById}</ens:LastModifiedById>
+                        <ens:LastModifiedDate fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.LastModifiedDate}</ens:LastModifiedDate>
+                        <ens:MayForecastManagerShare fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.MayForecastManagerShare}</ens:MayForecastManagerShare>
+                        <ens:Name fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.Name}</ens:Name>
+                        <ens:OpportunityAccessForAccountOwner fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.OpportunityAccessForAccountOwner}</ens:OpportunityAccessForAccountOwner>
+                        <ens:ParentRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.ParentRoleId}</ens:ParentRoleId>
+                        <ens:PortalAccountId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.PortalAccountId}</ens:PortalAccountId>
+                        <ens:PortalAccountOwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.PortalAccountOwnerId}</ens:PortalAccountOwnerId>
+                        <ens:PortalType fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.PortalType}</ens:PortalType>
+                        <ens:RollupDescription fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.RollupDescription}</ens:RollupDescription>
+                        <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRole.SystemModstamp}</ens:SystemModstamp>
+                        <ens:Users fsi:occurs="0..1" fsi:nillable="true">
+                            <tns:done fsi:occurs="1">${sObjects.Owner.UserRole.Users.done}</tns:done>
+                            <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.UserRole.Users.queryLocator}</tns:queryLocator>
+                            <tns:size fsi:occurs="1">${sObjects.Owner.UserRole.Users.size}</tns:size>
+                        </ens:Users>
+                    </ens:UserRole>
+                    <ens:UserRoleId fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserRoleId}</ens:UserRoleId>
+                    <ens:UserTeams fsi:occurs="0..1" fsi:nillable="true">
+                        <tns:done fsi:occurs="1">${sObjects.Owner.UserTeams.done}</tns:done>
+                        <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Owner.UserTeams.queryLocator}</tns:queryLocator>
+                        <tns:size fsi:occurs="1">${sObjects.Owner.UserTeams.size}</tns:size>
+                    </ens:UserTeams>
+                    <ens:UserType fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.UserType}</ens:UserType>
+                    <ens:Username fsi:occurs="0..1" fsi:nillable="true">${sObjects.Owner.Username}</ens:Username>
+                </ens:Owner>
+                <ens:OwnerId fsi:occurs="0..1" fsi:nillable="true">${sObjects.OwnerId}</ens:OwnerId>
+                <ens:Ownership fsi:occurs="0..1" fsi:nillable="true">${sObjects.Ownership}</ens:Ownership>
+                <ens:ParentId fsi:occurs="0..1" fsi:nillable="true">${sObjects.ParentId}</ens:ParentId>
+                <ens:PartnersFrom fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.PartnersFrom.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.PartnersFrom.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.PartnersFrom.size}</tns:size>
+                </ens:PartnersFrom>
+                <ens:PartnersTo fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.PartnersTo.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.PartnersTo.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.PartnersTo.size}</tns:size>
+                </ens:PartnersTo>
+                <ens:Phone fsi:occurs="0..1" fsi:nillable="true">${sObjects.Phone}</ens:Phone>
+                <ens:ProcessInstances fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.ProcessInstances.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.ProcessInstances.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.ProcessInstances.size}</tns:size>
+                </ens:ProcessInstances>
+                <ens:ProcessSteps fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.ProcessSteps.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.ProcessSteps.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.ProcessSteps.size}</tns:size>
+                </ens:ProcessSteps>
+                <ens:Rating fsi:occurs="0..1" fsi:nillable="true">${sObjects.Rating}</ens:Rating>
+                <ens:SLAExpirationDate__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.SLAExpirationDate__c}</ens:SLAExpirationDate__c>
+                <ens:SLASerialNumber__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.SLASerialNumber__c}</ens:SLASerialNumber__c>
+                <ens:SLA__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.SLA__c}</ens:SLA__c>
+                <ens:Shares fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Shares.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Shares.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Shares.size}</tns:size>
+                </ens:Shares>
+                <ens:ShippingCity fsi:occurs="0..1" fsi:nillable="true">${sObjects.ShippingCity}</ens:ShippingCity>
+                <ens:ShippingCountry fsi:occurs="0..1" fsi:nillable="true">${sObjects.ShippingCountry}</ens:ShippingCountry>
+                <ens:ShippingPostalCode fsi:occurs="0..1" fsi:nillable="true">${sObjects.ShippingPostalCode}</ens:ShippingPostalCode>
+                <ens:ShippingState fsi:occurs="0..1" fsi:nillable="true">${sObjects.ShippingState}</ens:ShippingState>
+                <ens:ShippingStreet fsi:occurs="0..1" fsi:nillable="true">${sObjects.ShippingStreet}</ens:ShippingStreet>
+                <ens:Sic fsi:occurs="0..1" fsi:nillable="true">${sObjects.Sic}</ens:Sic>
+                <ens:SicDesc fsi:occurs="0..1" fsi:nillable="true">${sObjects.SicDesc}</ens:SicDesc>
+                <ens:Site fsi:occurs="0..1" fsi:nillable="true">${sObjects.Site}</ens:Site>
+                <ens:SystemModstamp fsi:occurs="0..1" fsi:nillable="true">${sObjects.SystemModstamp}</ens:SystemModstamp>
+                <ens:Tasks fsi:occurs="0..1" fsi:nillable="true">
+                    <tns:done fsi:occurs="1">${sObjects.Tasks.done}</tns:done>
+                    <tns:queryLocator fsi:occurs="1" fsi:nillable="true">${sObjects.Tasks.queryLocator}</tns:queryLocator>
+                    <tns:size fsi:occurs="1">${sObjects.Tasks.size}</tns:size>
+                </ens:Tasks>
+                <ens:TickerSymbol fsi:occurs="0..1" fsi:nillable="true">${sObjects.TickerSymbol}</ens:TickerSymbol>
+                <ens:Type fsi:occurs="0..1" fsi:nillable="true">${sObjects.Type}</ens:Type>
+                <ens:UpsellOpportunity__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.UpsellOpportunity__c}</ens:UpsellOpportunity__c>
+                <ens:Website fsi:occurs="0..1" fsi:nillable="true">${sObjects.Website}</ens:Website>
+                <ens:WonCount__c fsi:occurs="0..1" fsi:nillable="true">${sObjects.WonCount__c}</ens:WonCount__c>
+            </tns:sObjects>
+#end
+        </tns:update>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soap:Header>
+        <tns:SessionHeader xmlns:tns="urn:enterprise.soap.sforce.com">
+            <tns:sessionId>${SessionHeader.sessionId}</tns:sessionId>
+        </tns:SessionHeader>
+        <tns:PackageVersionHeader xmlns:tns="urn:enterprise.soap.sforce.com">
+#foreach($packageVersions in $PackageVersionHeader.packageVersions)
+            <tns:packageVersions>
+                <tns:majorNumber>${packageVersions.majorNumber}</tns:majorNumber>
+                <tns:minorNumber>${packageVersions.minorNumber}</tns:minorNumber>
+                <tns:namespace>${packageVersions.namespace}</tns:namespace>
+            </tns:packageVersions>
+#end
+        </tns:PackageVersionHeader>
+        <tns:LocaleOptions xmlns:tns="urn:enterprise.soap.sforce.com">
+            <tns:language>${LocaleOptions.language}</tns:language>
+        </tns:LocaleOptions>
+    </soap:Header>
+    <soap:Body>
+        <tns:describeSObject xmlns:tns="urn:enterprise.soap.sforce.com">
+            <tns:sObjectType>${describeSObject.sObjectType}</tns:sObjectType>
+        </tns:describeSObject>
+    </soap:Body>
+</soap:Envelope>

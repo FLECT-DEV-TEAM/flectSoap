@@ -1,0 +1,1359 @@
+*************** tns:LoginScopeHeader
+<?xml version="1.0" encoding="utf-8"?>
+<ns2:LoginScopeHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:organizationId>${LoginScopeHeader.organizationId}</ns2:organizationId>
+    <ns2:portalId>${LoginScopeHeader.portalId}</ns2:portalId>
+</ns2:LoginScopeHeader>
+
+*************** tns:SessionHeader
+
+<ns2:SessionHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:sessionId>${SessionHeader.sessionId}</ns2:sessionId>
+</ns2:SessionHeader>
+
+*************** tns:QueryOptions
+
+<ns2:QueryOptions xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:batchSize>${QueryOptions.batchSize}</ns2:batchSize>
+</ns2:QueryOptions>
+
+*************** tns:AssignmentRuleHeader
+
+<ns2:AssignmentRuleHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:assignmentRuleId>${AssignmentRuleHeader.assignmentRuleId}</ns2:assignmentRuleId>
+    <ns2:useDefaultRule>${AssignmentRuleHeader.useDefaultRule}</ns2:useDefaultRule>
+</ns2:AssignmentRuleHeader>
+
+*************** tns:AllowFieldTruncationHeader
+
+<ns2:AllowFieldTruncationHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:allowFieldTruncation>${AllowFieldTruncationHeader.allowFieldTruncation}</ns2:allowFieldTruncation>
+</ns2:AllowFieldTruncationHeader>
+
+*************** tns:AllOrNoneHeader
+
+<ns2:AllOrNoneHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:allOrNone>${AllOrNoneHeader.allOrNone}</ns2:allOrNone>
+</ns2:AllOrNoneHeader>
+
+*************** tns:DisableFeedTrackingHeader
+
+<ns2:DisableFeedTrackingHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:disableFeedTracking>${DisableFeedTrackingHeader.disableFeedTracking}</ns2:disableFeedTracking>
+</ns2:DisableFeedTrackingHeader>
+
+*************** tns:StreamingEnabledHeader
+
+<ns2:StreamingEnabledHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:streamingEnabled>${StreamingEnabledHeader.streamingEnabled}</ns2:streamingEnabled>
+</ns2:StreamingEnabledHeader>
+
+*************** tns:MruHeader
+
+<ns2:MruHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:updateMru>${MruHeader.updateMru}</ns2:updateMru>
+</ns2:MruHeader>
+
+*************** tns:EmailHeader
+
+<ns2:EmailHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:triggerAutoResponseEmail>${EmailHeader.triggerAutoResponseEmail}</ns2:triggerAutoResponseEmail>
+    <ns2:triggerOtherEmail>${EmailHeader.triggerOtherEmail}</ns2:triggerOtherEmail>
+    <ns2:triggerUserEmail>${EmailHeader.triggerUserEmail}</ns2:triggerUserEmail>
+</ns2:EmailHeader>
+
+*************** tns:UserTerritoryDeleteHeader
+
+<ns2:UserTerritoryDeleteHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:transferToUserId>${UserTerritoryDeleteHeader.transferToUserId}</ns2:transferToUserId>
+</ns2:UserTerritoryDeleteHeader>
+
+*************** tns:DebuggingHeader
+
+<ns2:DebuggingHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:debugLevel>${DebuggingHeader.debugLevel}</ns2:debugLevel>
+</ns2:DebuggingHeader>
+
+*************** tns:PackageVersionHeader
+
+<ns2:PackageVersionHeader xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% PackageVersionHeader.packageVersions.each { packageVersions ->%>
+    <ns2:packageVersions>
+        <ns2:majorNumber>${packageVersions.majorNumber}</ns2:majorNumber>
+        <ns2:minorNumber>${packageVersions.minorNumber}</ns2:minorNumber>
+        <ns2:namespace>${packageVersions.namespace}</ns2:namespace>
+    </ns2:packageVersions>
+<%}%>
+</ns2:PackageVersionHeader>
+
+*************** tns:DebuggingInfo
+
+<ns2:DebuggingInfo xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:debugLog>${DebuggingInfo.debugLog}</ns2:debugLog>
+</ns2:DebuggingInfo>
+
+*************** tns:LocaleOptions
+
+<ns2:LocaleOptions xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:language>${LocaleOptions.language}</ns2:language>
+</ns2:LocaleOptions>
+
+*************** fns:fault
+
+<ns1:fault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${fault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${fault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:fault>
+
+*************** fns:LoginFault
+
+<ns1:LoginFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${LoginFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${LoginFault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:LoginFault>
+
+*************** fns:InvalidQueryLocatorFault
+
+<ns1:InvalidQueryLocatorFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${InvalidQueryLocatorFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${InvalidQueryLocatorFault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:InvalidQueryLocatorFault>
+
+*************** fns:InvalidNewPasswordFault
+
+<ns1:InvalidNewPasswordFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${InvalidNewPasswordFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${InvalidNewPasswordFault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:InvalidNewPasswordFault>
+
+*************** fns:InvalidIdFault
+
+<ns1:InvalidIdFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${InvalidIdFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${InvalidIdFault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:InvalidIdFault>
+
+*************** fns:UnexpectedErrorFault
+
+<ns1:UnexpectedErrorFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${UnexpectedErrorFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${UnexpectedErrorFault.exceptionMessage}</ns1:exceptionMessage>
+</ns1:UnexpectedErrorFault>
+
+*************** fns:InvalidFieldFault
+
+<ns1:InvalidFieldFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${InvalidFieldFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${InvalidFieldFault.exceptionMessage}</ns1:exceptionMessage>
+    <ns1:row>${InvalidFieldFault.row}</ns1:row>
+    <ns1:column>${InvalidFieldFault.column}</ns1:column>
+</ns1:InvalidFieldFault>
+
+*************** fns:InvalidSObjectFault
+
+<ns1:InvalidSObjectFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${InvalidSObjectFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${InvalidSObjectFault.exceptionMessage}</ns1:exceptionMessage>
+    <ns1:row>${InvalidSObjectFault.row}</ns1:row>
+    <ns1:column>${InvalidSObjectFault.column}</ns1:column>
+</ns1:InvalidSObjectFault>
+
+*************** fns:MalformedQueryFault
+
+<ns1:MalformedQueryFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${MalformedQueryFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${MalformedQueryFault.exceptionMessage}</ns1:exceptionMessage>
+    <ns1:row>${MalformedQueryFault.row}</ns1:row>
+    <ns1:column>${MalformedQueryFault.column}</ns1:column>
+</ns1:MalformedQueryFault>
+
+*************** fns:MalformedSearchFault
+
+<ns1:MalformedSearchFault xmlns:ns1="urn:fault.enterprise.soap.sforce.com">
+    <ns1:exceptionCode>${MalformedSearchFault.exceptionCode}</ns1:exceptionCode>
+    <ns1:exceptionMessage>${MalformedSearchFault.exceptionMessage}</ns1:exceptionMessage>
+    <ns1:row>${MalformedSearchFault.row}</ns1:row>
+    <ns1:column>${MalformedSearchFault.column}</ns1:column>
+</ns1:MalformedSearchFault>
+
+*************** tns:login
+
+<ns2:login xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:username>${login.username}</ns2:username>
+    <ns2:password>${login.password}</ns2:password>
+</ns2:login>
+
+*************** tns:loginResponse
+
+<ns2:loginResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:metadataServerUrl>${loginResponse.result.metadataServerUrl}</ns2:metadataServerUrl>
+        <ns2:passwordExpired>${loginResponse.result.passwordExpired}</ns2:passwordExpired>
+        <ns2:sandbox>${loginResponse.result.sandbox}</ns2:sandbox>
+        <ns2:serverUrl>${loginResponse.result.serverUrl}</ns2:serverUrl>
+        <ns2:sessionId>${loginResponse.result.sessionId}</ns2:sessionId>
+        <ns2:userId>${loginResponse.result.userId}</ns2:userId>
+        <ns2:userInfo>
+            <ns2:accessibilityMode>${loginResponse.result.userInfo.accessibilityMode}</ns2:accessibilityMode>
+            <ns2:currencySymbol>${loginResponse.result.userInfo.currencySymbol}</ns2:currencySymbol>
+            <ns2:orgAttachmentFileSizeLimit>${loginResponse.result.userInfo.orgAttachmentFileSizeLimit}</ns2:orgAttachmentFileSizeLimit>
+            <ns2:orgDefaultCurrencyIsoCode>${loginResponse.result.userInfo.orgDefaultCurrencyIsoCode}</ns2:orgDefaultCurrencyIsoCode>
+            <ns2:orgDisallowHtmlAttachments>${loginResponse.result.userInfo.orgDisallowHtmlAttachments}</ns2:orgDisallowHtmlAttachments>
+            <ns2:orgHasPersonAccounts>${loginResponse.result.userInfo.orgHasPersonAccounts}</ns2:orgHasPersonAccounts>
+            <ns2:organizationId>${loginResponse.result.userInfo.organizationId}</ns2:organizationId>
+            <ns2:organizationMultiCurrency>${loginResponse.result.userInfo.organizationMultiCurrency}</ns2:organizationMultiCurrency>
+            <ns2:organizationName>${loginResponse.result.userInfo.organizationName}</ns2:organizationName>
+            <ns2:profileId>${loginResponse.result.userInfo.profileId}</ns2:profileId>
+            <ns2:roleId>${loginResponse.result.userInfo.roleId}</ns2:roleId>
+            <ns2:sessionSecondsValid>${loginResponse.result.userInfo.sessionSecondsValid}</ns2:sessionSecondsValid>
+            <ns2:userDefaultCurrencyIsoCode>${loginResponse.result.userInfo.userDefaultCurrencyIsoCode}</ns2:userDefaultCurrencyIsoCode>
+            <ns2:userEmail>${loginResponse.result.userInfo.userEmail}</ns2:userEmail>
+            <ns2:userFullName>${loginResponse.result.userInfo.userFullName}</ns2:userFullName>
+            <ns2:userId>${loginResponse.result.userInfo.userId}</ns2:userId>
+            <ns2:userLanguage>${loginResponse.result.userInfo.userLanguage}</ns2:userLanguage>
+            <ns2:userLocale>${loginResponse.result.userInfo.userLocale}</ns2:userLocale>
+            <ns2:userName>${loginResponse.result.userInfo.userName}</ns2:userName>
+            <ns2:userTimeZone>${loginResponse.result.userInfo.userTimeZone}</ns2:userTimeZone>
+            <ns2:userType>${loginResponse.result.userInfo.userType}</ns2:userType>
+            <ns2:userUiSkin>${loginResponse.result.userInfo.userUiSkin}</ns2:userUiSkin>
+        </ns2:userInfo>
+    </ns2:result>
+</ns2:loginResponse>
+
+*************** tns:describeSObject
+
+<ns2:describeSObject xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:sObjectType>${describeSObject.sObjectType}</ns2:sObjectType>
+</ns2:describeSObject>
+
+*************** tns:describeSObjectResponse
+
+<ns2:describeSObjectResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:activateable>${describeSObjectResponse.result.activateable}</ns2:activateable>
+<% describeSObjectResponse.result.childRelationships.each { childRelationships ->%>
+        <ns2:childRelationships>
+            <ns2:cascadeDelete>${childRelationships.cascadeDelete}</ns2:cascadeDelete>
+            <ns2:childSObject>${childRelationships.childSObject}</ns2:childSObject>
+            <ns2:deprecatedAndHidden>${childRelationships.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+            <ns2:field>${childRelationships.field}</ns2:field>
+            <ns2:relationshipName>${childRelationships.relationshipName}</ns2:relationshipName>
+        </ns2:childRelationships>
+<%}%>
+        <ns2:createable>${describeSObjectResponse.result.createable}</ns2:createable>
+        <ns2:custom>${describeSObjectResponse.result.custom}</ns2:custom>
+        <ns2:customSetting>${describeSObjectResponse.result.customSetting}</ns2:customSetting>
+        <ns2:deletable>${describeSObjectResponse.result.deletable}</ns2:deletable>
+        <ns2:deprecatedAndHidden>${describeSObjectResponse.result.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+        <ns2:feedEnabled>${describeSObjectResponse.result.feedEnabled}</ns2:feedEnabled>
+<% describeSObjectResponse.result.fields.each { fields ->%>
+        <ns2:fields>
+            <ns2:autoNumber>${fields.autoNumber}</ns2:autoNumber>
+            <ns2:byteLength>${fields.byteLength}</ns2:byteLength>
+            <ns2:calculated>${fields.calculated}</ns2:calculated>
+            <ns2:calculatedFormula>${fields.calculatedFormula}</ns2:calculatedFormula>
+            <ns2:caseSensitive>${fields.caseSensitive}</ns2:caseSensitive>
+            <ns2:controllerName>${fields.controllerName}</ns2:controllerName>
+            <ns2:createable>${fields.createable}</ns2:createable>
+            <ns2:custom>${fields.custom}</ns2:custom>
+            <ns2:defaultValueFormula>${fields.defaultValueFormula}</ns2:defaultValueFormula>
+            <ns2:defaultedOnCreate>${fields.defaultedOnCreate}</ns2:defaultedOnCreate>
+            <ns2:dependentPicklist>${fields.dependentPicklist}</ns2:dependentPicklist>
+            <ns2:deprecatedAndHidden>${fields.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+            <ns2:digits>${fields.digits}</ns2:digits>
+            <ns2:externalId>${fields.externalId}</ns2:externalId>
+            <ns2:filterable>${fields.filterable}</ns2:filterable>
+            <ns2:groupable>${fields.groupable}</ns2:groupable>
+            <ns2:htmlFormatted>${fields.htmlFormatted}</ns2:htmlFormatted>
+            <ns2:idLookup>${fields.idLookup}</ns2:idLookup>
+            <ns2:inlineHelpText>${fields.inlineHelpText}</ns2:inlineHelpText>
+            <ns2:label>${fields.label}</ns2:label>
+            <ns2:length>${fields.length}</ns2:length>
+            <ns2:name>${fields.name}</ns2:name>
+            <ns2:nameField>${fields.nameField}</ns2:nameField>
+            <ns2:namePointing>${fields.namePointing}</ns2:namePointing>
+            <ns2:nillable>${fields.nillable}</ns2:nillable>
+            <ns2:permissionable>${fields.permissionable}</ns2:permissionable>
+<% fields.picklistValues.each { picklistValues ->%>
+            <ns2:picklistValues>
+                <ns2:active>${picklistValues.active}</ns2:active>
+                <ns2:defaultValue>${picklistValues.defaultValue}</ns2:defaultValue>
+                <ns2:label>${picklistValues.label}</ns2:label>
+                <ns2:validFor>${picklistValues.validFor}</ns2:validFor>
+                <ns2:value>${picklistValues.value}</ns2:value>
+            </ns2:picklistValues>
+<%}%>
+            <ns2:precision>${fields.precision}</ns2:precision>
+<% fields.referenceTo.each { referenceTo ->%>
+            <ns2:referenceTo>${referenceTo}</ns2:referenceTo>
+<%}%>
+            <ns2:relationshipName>${fields.relationshipName}</ns2:relationshipName>
+            <ns2:relationshipOrder>${fields.relationshipOrder}</ns2:relationshipOrder>
+            <ns2:restrictedPicklist>${fields.restrictedPicklist}</ns2:restrictedPicklist>
+            <ns2:scale>${fields.scale}</ns2:scale>
+            <ns2:soapType>${fields.soapType}</ns2:soapType>
+            <ns2:sortable>${fields.sortable}</ns2:sortable>
+            <ns2:type>${fields.type}</ns2:type>
+            <ns2:unique>${fields.unique}</ns2:unique>
+            <ns2:updateable>${fields.updateable}</ns2:updateable>
+            <ns2:writeRequiresMasterRead>${fields.writeRequiresMasterRead}</ns2:writeRequiresMasterRead>
+        </ns2:fields>
+<%}%>
+        <ns2:keyPrefix>${describeSObjectResponse.result.keyPrefix}</ns2:keyPrefix>
+        <ns2:label>${describeSObjectResponse.result.label}</ns2:label>
+        <ns2:labelPlural>${describeSObjectResponse.result.labelPlural}</ns2:labelPlural>
+        <ns2:layoutable>${describeSObjectResponse.result.layoutable}</ns2:layoutable>
+        <ns2:mergeable>${describeSObjectResponse.result.mergeable}</ns2:mergeable>
+        <ns2:name>${describeSObjectResponse.result.name}</ns2:name>
+        <ns2:queryable>${describeSObjectResponse.result.queryable}</ns2:queryable>
+<% describeSObjectResponse.result.recordTypeInfos.each { recordTypeInfos ->%>
+        <ns2:recordTypeInfos>
+            <ns2:available>${recordTypeInfos.available}</ns2:available>
+            <ns2:defaultRecordTypeMapping>${recordTypeInfos.defaultRecordTypeMapping}</ns2:defaultRecordTypeMapping>
+            <ns2:name>${recordTypeInfos.name}</ns2:name>
+            <ns2:recordTypeId>${recordTypeInfos.recordTypeId}</ns2:recordTypeId>
+        </ns2:recordTypeInfos>
+<%}%>
+        <ns2:replicateable>${describeSObjectResponse.result.replicateable}</ns2:replicateable>
+        <ns2:retrieveable>${describeSObjectResponse.result.retrieveable}</ns2:retrieveable>
+        <ns2:searchable>${describeSObjectResponse.result.searchable}</ns2:searchable>
+        <ns2:triggerable>${describeSObjectResponse.result.triggerable}</ns2:triggerable>
+        <ns2:undeletable>${describeSObjectResponse.result.undeletable}</ns2:undeletable>
+        <ns2:updateable>${describeSObjectResponse.result.updateable}</ns2:updateable>
+        <ns2:urlDetail>${describeSObjectResponse.result.urlDetail}</ns2:urlDetail>
+        <ns2:urlEdit>${describeSObjectResponse.result.urlEdit}</ns2:urlEdit>
+        <ns2:urlNew>${describeSObjectResponse.result.urlNew}</ns2:urlNew>
+    </ns2:result>
+</ns2:describeSObjectResponse>
+
+*************** tns:describeSObjects
+
+<ns2:describeSObjects xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeSObjects.sObjectType.each { sObjectType ->%>
+    <ns2:sObjectType>${sObjectType}</ns2:sObjectType>
+<%}%>
+</ns2:describeSObjects>
+
+*************** tns:describeSObjectsResponse
+
+<ns2:describeSObjectsResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeSObjectsResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:activateable>${result.activateable}</ns2:activateable>
+<% result.childRelationships.each { childRelationships ->%>
+        <ns2:childRelationships>
+            <ns2:cascadeDelete>${childRelationships.cascadeDelete}</ns2:cascadeDelete>
+            <ns2:childSObject>${childRelationships.childSObject}</ns2:childSObject>
+            <ns2:deprecatedAndHidden>${childRelationships.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+            <ns2:field>${childRelationships.field}</ns2:field>
+            <ns2:relationshipName>${childRelationships.relationshipName}</ns2:relationshipName>
+        </ns2:childRelationships>
+<%}%>
+        <ns2:createable>${result.createable}</ns2:createable>
+        <ns2:custom>${result.custom}</ns2:custom>
+        <ns2:customSetting>${result.customSetting}</ns2:customSetting>
+        <ns2:deletable>${result.deletable}</ns2:deletable>
+        <ns2:deprecatedAndHidden>${result.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+        <ns2:feedEnabled>${result.feedEnabled}</ns2:feedEnabled>
+<% result.fields.each { fields ->%>
+        <ns2:fields>
+            <ns2:autoNumber>${fields.autoNumber}</ns2:autoNumber>
+            <ns2:byteLength>${fields.byteLength}</ns2:byteLength>
+            <ns2:calculated>${fields.calculated}</ns2:calculated>
+            <ns2:calculatedFormula>${fields.calculatedFormula}</ns2:calculatedFormula>
+            <ns2:caseSensitive>${fields.caseSensitive}</ns2:caseSensitive>
+            <ns2:controllerName>${fields.controllerName}</ns2:controllerName>
+            <ns2:createable>${fields.createable}</ns2:createable>
+            <ns2:custom>${fields.custom}</ns2:custom>
+            <ns2:defaultValueFormula>${fields.defaultValueFormula}</ns2:defaultValueFormula>
+            <ns2:defaultedOnCreate>${fields.defaultedOnCreate}</ns2:defaultedOnCreate>
+            <ns2:dependentPicklist>${fields.dependentPicklist}</ns2:dependentPicklist>
+            <ns2:deprecatedAndHidden>${fields.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+            <ns2:digits>${fields.digits}</ns2:digits>
+            <ns2:externalId>${fields.externalId}</ns2:externalId>
+            <ns2:filterable>${fields.filterable}</ns2:filterable>
+            <ns2:groupable>${fields.groupable}</ns2:groupable>
+            <ns2:htmlFormatted>${fields.htmlFormatted}</ns2:htmlFormatted>
+            <ns2:idLookup>${fields.idLookup}</ns2:idLookup>
+            <ns2:inlineHelpText>${fields.inlineHelpText}</ns2:inlineHelpText>
+            <ns2:label>${fields.label}</ns2:label>
+            <ns2:length>${fields.length}</ns2:length>
+            <ns2:name>${fields.name}</ns2:name>
+            <ns2:nameField>${fields.nameField}</ns2:nameField>
+            <ns2:namePointing>${fields.namePointing}</ns2:namePointing>
+            <ns2:nillable>${fields.nillable}</ns2:nillable>
+            <ns2:permissionable>${fields.permissionable}</ns2:permissionable>
+<% fields.picklistValues.each { picklistValues ->%>
+            <ns2:picklistValues>
+                <ns2:active>${picklistValues.active}</ns2:active>
+                <ns2:defaultValue>${picklistValues.defaultValue}</ns2:defaultValue>
+                <ns2:label>${picklistValues.label}</ns2:label>
+                <ns2:validFor>${picklistValues.validFor}</ns2:validFor>
+                <ns2:value>${picklistValues.value}</ns2:value>
+            </ns2:picklistValues>
+<%}%>
+            <ns2:precision>${fields.precision}</ns2:precision>
+<% fields.referenceTo.each { referenceTo ->%>
+            <ns2:referenceTo>${referenceTo}</ns2:referenceTo>
+<%}%>
+            <ns2:relationshipName>${fields.relationshipName}</ns2:relationshipName>
+            <ns2:relationshipOrder>${fields.relationshipOrder}</ns2:relationshipOrder>
+            <ns2:restrictedPicklist>${fields.restrictedPicklist}</ns2:restrictedPicklist>
+            <ns2:scale>${fields.scale}</ns2:scale>
+            <ns2:soapType>${fields.soapType}</ns2:soapType>
+            <ns2:sortable>${fields.sortable}</ns2:sortable>
+            <ns2:type>${fields.type}</ns2:type>
+            <ns2:unique>${fields.unique}</ns2:unique>
+            <ns2:updateable>${fields.updateable}</ns2:updateable>
+            <ns2:writeRequiresMasterRead>${fields.writeRequiresMasterRead}</ns2:writeRequiresMasterRead>
+        </ns2:fields>
+<%}%>
+        <ns2:keyPrefix>${result.keyPrefix}</ns2:keyPrefix>
+        <ns2:label>${result.label}</ns2:label>
+        <ns2:labelPlural>${result.labelPlural}</ns2:labelPlural>
+        <ns2:layoutable>${result.layoutable}</ns2:layoutable>
+        <ns2:mergeable>${result.mergeable}</ns2:mergeable>
+        <ns2:name>${result.name}</ns2:name>
+        <ns2:queryable>${result.queryable}</ns2:queryable>
+<% result.recordTypeInfos.each { recordTypeInfos ->%>
+        <ns2:recordTypeInfos>
+            <ns2:available>${recordTypeInfos.available}</ns2:available>
+            <ns2:defaultRecordTypeMapping>${recordTypeInfos.defaultRecordTypeMapping}</ns2:defaultRecordTypeMapping>
+            <ns2:name>${recordTypeInfos.name}</ns2:name>
+            <ns2:recordTypeId>${recordTypeInfos.recordTypeId}</ns2:recordTypeId>
+        </ns2:recordTypeInfos>
+<%}%>
+        <ns2:replicateable>${result.replicateable}</ns2:replicateable>
+        <ns2:retrieveable>${result.retrieveable}</ns2:retrieveable>
+        <ns2:searchable>${result.searchable}</ns2:searchable>
+        <ns2:triggerable>${result.triggerable}</ns2:triggerable>
+        <ns2:undeletable>${result.undeletable}</ns2:undeletable>
+        <ns2:updateable>${result.updateable}</ns2:updateable>
+        <ns2:urlDetail>${result.urlDetail}</ns2:urlDetail>
+        <ns2:urlEdit>${result.urlEdit}</ns2:urlEdit>
+        <ns2:urlNew>${result.urlNew}</ns2:urlNew>
+    </ns2:result>
+<%}%>
+</ns2:describeSObjectsResponse>
+
+*************** tns:describeGlobal
+
+<ns2:describeGlobal xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:describeGlobal>
+
+*************** tns:describeGlobalResponse
+
+<ns2:describeGlobalResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:encoding>${describeGlobalResponse.result.encoding}</ns2:encoding>
+        <ns2:maxBatchSize>${describeGlobalResponse.result.maxBatchSize}</ns2:maxBatchSize>
+<% describeGlobalResponse.result.sobjects.each { sobjects ->%>
+        <ns2:sobjects>
+            <ns2:activateable>${sobjects.activateable}</ns2:activateable>
+            <ns2:createable>${sobjects.createable}</ns2:createable>
+            <ns2:custom>${sobjects.custom}</ns2:custom>
+            <ns2:customSetting>${sobjects.customSetting}</ns2:customSetting>
+            <ns2:deletable>${sobjects.deletable}</ns2:deletable>
+            <ns2:deprecatedAndHidden>${sobjects.deprecatedAndHidden}</ns2:deprecatedAndHidden>
+            <ns2:feedEnabled>${sobjects.feedEnabled}</ns2:feedEnabled>
+            <ns2:keyPrefix>${sobjects.keyPrefix}</ns2:keyPrefix>
+            <ns2:label>${sobjects.label}</ns2:label>
+            <ns2:labelPlural>${sobjects.labelPlural}</ns2:labelPlural>
+            <ns2:layoutable>${sobjects.layoutable}</ns2:layoutable>
+            <ns2:mergeable>${sobjects.mergeable}</ns2:mergeable>
+            <ns2:name>${sobjects.name}</ns2:name>
+            <ns2:queryable>${sobjects.queryable}</ns2:queryable>
+            <ns2:replicateable>${sobjects.replicateable}</ns2:replicateable>
+            <ns2:retrieveable>${sobjects.retrieveable}</ns2:retrieveable>
+            <ns2:searchable>${sobjects.searchable}</ns2:searchable>
+            <ns2:triggerable>${sobjects.triggerable}</ns2:triggerable>
+            <ns2:undeletable>${sobjects.undeletable}</ns2:undeletable>
+            <ns2:updateable>${sobjects.updateable}</ns2:updateable>
+        </ns2:sobjects>
+<%}%>
+    </ns2:result>
+</ns2:describeGlobalResponse>
+
+*************** tns:describeDataCategoryGroups
+
+<ns2:describeDataCategoryGroups xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeDataCategoryGroups.sObjectType.each { sObjectType ->%>
+    <ns2:sObjectType>${sObjectType}</ns2:sObjectType>
+<%}%>
+</ns2:describeDataCategoryGroups>
+
+*************** tns:describeDataCategoryGroupsResponse
+
+<ns2:describeDataCategoryGroupsResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeDataCategoryGroupsResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:categoryCount>${result.categoryCount}</ns2:categoryCount>
+        <ns2:description>${result.description}</ns2:description>
+        <ns2:label>${result.label}</ns2:label>
+        <ns2:name>${result.name}</ns2:name>
+        <ns2:sobject>${result.sobject}</ns2:sobject>
+    </ns2:result>
+<%}%>
+</ns2:describeDataCategoryGroupsResponse>
+
+*************** tns:describeDataCategoryGroupStructures
+
+<ns2:describeDataCategoryGroupStructures xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeDataCategoryGroupStructures.pairs.each { pairs ->%>
+    <ns2:pairs>
+        <ns2:dataCategoryGroupName>${pairs.dataCategoryGroupName}</ns2:dataCategoryGroupName>
+        <ns2:sobject>${pairs.sobject}</ns2:sobject>
+    </ns2:pairs>
+<%}%>
+    <ns2:topCategoriesOnly>${describeDataCategoryGroupStructures.topCategoriesOnly}</ns2:topCategoriesOnly>
+</ns2:describeDataCategoryGroupStructures>
+
+*************** tns:describeDataCategoryGroupStructuresResponse
+
+<ns2:describeDataCategoryGroupStructuresResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeDataCategoryGroupStructuresResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:description>${result.description}</ns2:description>
+        <ns2:label>${result.label}</ns2:label>
+        <ns2:name>${result.name}</ns2:name>
+        <ns2:sobject>${result.sobject}</ns2:sobject>
+<% result.topCategories.each { topCategories ->%>
+        <ns2:topCategories>
+            <ns2:label>${topCategories.label}</ns2:label>
+            <ns2:name>${topCategories.name}</ns2:name>
+        </ns2:topCategories>
+<%}%>
+    </ns2:result>
+<%}%>
+</ns2:describeDataCategoryGroupStructuresResponse>
+
+*************** tns:describeLayout
+
+<ns2:describeLayout xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:sObjectType>${describeLayout.sObjectType}</ns2:sObjectType>
+<% describeLayout.recordTypeIds.each { recordTypeIds ->%>
+    <ns2:recordTypeIds>${recordTypeIds}</ns2:recordTypeIds>
+<%}%>
+</ns2:describeLayout>
+
+*************** tns:describeLayoutResponse
+
+<ns2:describeLayoutResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+<% describeLayoutResponse.result.layouts.each { layouts ->%>
+        <ns2:layouts>
+            <ns2:buttonLayoutSection>
+<% layouts.buttonLayoutSection.detailButtons.each { detailButtons ->%>
+                <ns2:detailButtons>
+                    <ns2:custom>${detailButtons.custom}</ns2:custom>
+                    <ns2:label>${detailButtons.label}</ns2:label>
+                    <ns2:name>${detailButtons.name}</ns2:name>
+                </ns2:detailButtons>
+<%}%>
+            </ns2:buttonLayoutSection>
+<% layouts.detailLayoutSections.each { detailLayoutSections ->%>
+            <ns2:detailLayoutSections>
+                <ns2:columns>${detailLayoutSections.columns}</ns2:columns>
+                <ns2:heading>${detailLayoutSections.heading}</ns2:heading>
+<% detailLayoutSections.layoutRows.each { layoutRows ->%>
+                <ns2:layoutRows>
+<% layoutRows.layoutItems.each { layoutItems ->%>
+                    <ns2:layoutItems>
+                        <ns2:editable>${layoutItems.editable}</ns2:editable>
+                        <ns2:label>${layoutItems.label}</ns2:label>
+<% layoutItems.layoutComponents.each { layoutComponents ->%>
+                        <ns2:layoutComponents>
+                            <ns2:displayLines>${layoutComponents.displayLines}</ns2:displayLines>
+                            <ns2:tabOrder>${layoutComponents.tabOrder}</ns2:tabOrder>
+                            <ns2:type>${layoutComponents.type}</ns2:type>
+                            <ns2:value>${layoutComponents.value}</ns2:value>
+                        </ns2:layoutComponents>
+<%}%>
+                        <ns2:placeholder>${layoutItems.placeholder}</ns2:placeholder>
+                        <ns2:required>${layoutItems.required}</ns2:required>
+                    </ns2:layoutItems>
+<%}%>
+                    <ns2:numItems>${layoutRows.numItems}</ns2:numItems>
+                </ns2:layoutRows>
+<%}%>
+                <ns2:rows>${detailLayoutSections.rows}</ns2:rows>
+                <ns2:useCollapsibleSection>${detailLayoutSections.useCollapsibleSection}</ns2:useCollapsibleSection>
+                <ns2:useHeading>${detailLayoutSections.useHeading}</ns2:useHeading>
+            </ns2:detailLayoutSections>
+<%}%>
+<% layouts.editLayoutSections.each { editLayoutSections ->%>
+            <ns2:editLayoutSections>
+                <ns2:columns>${editLayoutSections.columns}</ns2:columns>
+                <ns2:heading>${editLayoutSections.heading}</ns2:heading>
+<% editLayoutSections.layoutRows.each { layoutRows ->%>
+                <ns2:layoutRows>
+<% layoutRows.layoutItems.each { layoutItems ->%>
+                    <ns2:layoutItems>
+                        <ns2:editable>${layoutItems.editable}</ns2:editable>
+                        <ns2:label>${layoutItems.label}</ns2:label>
+<% layoutItems.layoutComponents.each { layoutComponents ->%>
+                        <ns2:layoutComponents>
+                            <ns2:displayLines>${layoutComponents.displayLines}</ns2:displayLines>
+                            <ns2:tabOrder>${layoutComponents.tabOrder}</ns2:tabOrder>
+                            <ns2:type>${layoutComponents.type}</ns2:type>
+                            <ns2:value>${layoutComponents.value}</ns2:value>
+                        </ns2:layoutComponents>
+<%}%>
+                        <ns2:placeholder>${layoutItems.placeholder}</ns2:placeholder>
+                        <ns2:required>${layoutItems.required}</ns2:required>
+                    </ns2:layoutItems>
+<%}%>
+                    <ns2:numItems>${layoutRows.numItems}</ns2:numItems>
+                </ns2:layoutRows>
+<%}%>
+                <ns2:rows>${editLayoutSections.rows}</ns2:rows>
+                <ns2:useCollapsibleSection>${editLayoutSections.useCollapsibleSection}</ns2:useCollapsibleSection>
+                <ns2:useHeading>${editLayoutSections.useHeading}</ns2:useHeading>
+            </ns2:editLayoutSections>
+<%}%>
+            <ns2:id>${layouts.id}</ns2:id>
+<% layouts.relatedLists.each { relatedLists ->%>
+            <ns2:relatedLists>
+<% relatedLists.columns.each { columns ->%>
+                <ns2:columns>
+                    <ns2:field>${columns.field}</ns2:field>
+                    <ns2:format>${columns.format}</ns2:format>
+                    <ns2:label>${columns.label}</ns2:label>
+                    <ns2:name>${columns.name}</ns2:name>
+                </ns2:columns>
+<%}%>
+                <ns2:custom>${relatedLists.custom}</ns2:custom>
+                <ns2:field>${relatedLists.field}</ns2:field>
+                <ns2:label>${relatedLists.label}</ns2:label>
+                <ns2:limitRows>${relatedLists.limitRows}</ns2:limitRows>
+                <ns2:name>${relatedLists.name}</ns2:name>
+                <ns2:sobject>${relatedLists.sobject}</ns2:sobject>
+<% relatedLists.sort.each { sort ->%>
+                <ns2:sort>
+                    <ns2:ascending>${sort.ascending}</ns2:ascending>
+                    <ns2:column>${sort.column}</ns2:column>
+                </ns2:sort>
+<%}%>
+            </ns2:relatedLists>
+<%}%>
+        </ns2:layouts>
+<%}%>
+<% describeLayoutResponse.result.recordTypeMappings.each { recordTypeMappings ->%>
+        <ns2:recordTypeMappings>
+            <ns2:available>${recordTypeMappings.available}</ns2:available>
+            <ns2:defaultRecordTypeMapping>${recordTypeMappings.defaultRecordTypeMapping}</ns2:defaultRecordTypeMapping>
+            <ns2:layoutId>${recordTypeMappings.layoutId}</ns2:layoutId>
+            <ns2:name>${recordTypeMappings.name}</ns2:name>
+<% recordTypeMappings.picklistsForRecordType.each { picklistsForRecordType ->%>
+            <ns2:picklistsForRecordType>
+                <ns2:picklistName>${picklistsForRecordType.picklistName}</ns2:picklistName>
+<% picklistsForRecordType.picklistValues.each { picklistValues ->%>
+                <ns2:picklistValues>
+                    <ns2:active>${picklistValues.active}</ns2:active>
+                    <ns2:defaultValue>${picklistValues.defaultValue}</ns2:defaultValue>
+                    <ns2:label>${picklistValues.label}</ns2:label>
+                    <ns2:validFor>${picklistValues.validFor}</ns2:validFor>
+                    <ns2:value>${picklistValues.value}</ns2:value>
+                </ns2:picklistValues>
+<%}%>
+            </ns2:picklistsForRecordType>
+<%}%>
+            <ns2:recordTypeId>${recordTypeMappings.recordTypeId}</ns2:recordTypeId>
+        </ns2:recordTypeMappings>
+<%}%>
+        <ns2:recordTypeSelectorRequired>${describeLayoutResponse.result.recordTypeSelectorRequired}</ns2:recordTypeSelectorRequired>
+    </ns2:result>
+</ns2:describeLayoutResponse>
+
+*************** tns:describeSoftphoneLayout
+
+<ns2:describeSoftphoneLayout xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:describeSoftphoneLayout>
+
+*************** tns:describeSoftphoneLayoutResponse
+
+<ns2:describeSoftphoneLayoutResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+<% describeSoftphoneLayoutResponse.result.callTypes.each { callTypes ->%>
+        <ns2:callTypes>
+<% callTypes.infoFields.each { infoFields ->%>
+            <ns2:infoFields>
+                <ns2:name>${infoFields.name}</ns2:name>
+            </ns2:infoFields>
+<%}%>
+            <ns2:name>${callTypes.name}</ns2:name>
+<% callTypes.screenPopOptions.each { screenPopOptions ->%>
+            <ns2:screenPopOptions>
+                <ns2:matchType>${screenPopOptions.matchType}</ns2:matchType>
+                <ns2:screenPopData>${screenPopOptions.screenPopData}</ns2:screenPopData>
+                <ns2:screenPopType>${screenPopOptions.screenPopType}</ns2:screenPopType>
+            </ns2:screenPopOptions>
+<%}%>
+            <ns2:screenPopsOpenWithin>${callTypes.screenPopsOpenWithin}</ns2:screenPopsOpenWithin>
+<% callTypes.sections.each { sections ->%>
+            <ns2:sections>
+                <ns2:entityApiName>${sections.entityApiName}</ns2:entityApiName>
+<% sections.items.each { items ->%>
+                <ns2:items>
+                    <ns2:itemApiName>${items.itemApiName}</ns2:itemApiName>
+                </ns2:items>
+<%}%>
+            </ns2:sections>
+<%}%>
+        </ns2:callTypes>
+<%}%>
+        <ns2:id>${describeSoftphoneLayoutResponse.result.id}</ns2:id>
+        <ns2:name>${describeSoftphoneLayoutResponse.result.name}</ns2:name>
+    </ns2:result>
+</ns2:describeSoftphoneLayoutResponse>
+
+*************** tns:describeTabs
+
+<ns2:describeTabs xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:describeTabs>
+
+*************** tns:describeTabsResponse
+
+<ns2:describeTabsResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% describeTabsResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:label>${result.label}</ns2:label>
+        <ns2:logoUrl>${result.logoUrl}</ns2:logoUrl>
+        <ns2:namespace>${result.namespace}</ns2:namespace>
+        <ns2:selected>${result.selected}</ns2:selected>
+<% result.tabs.each { tabs ->%>
+        <ns2:tabs>
+            <ns2:custom>${tabs.custom}</ns2:custom>
+            <ns2:iconUrl>${tabs.iconUrl}</ns2:iconUrl>
+            <ns2:label>${tabs.label}</ns2:label>
+            <ns2:miniIconUrl>${tabs.miniIconUrl}</ns2:miniIconUrl>
+            <ns2:sobjectName>${tabs.sobjectName}</ns2:sobjectName>
+            <ns2:url>${tabs.url}</ns2:url>
+        </ns2:tabs>
+<%}%>
+    </ns2:result>
+<%}%>
+</ns2:describeTabsResponse>
+
+*************** tns:create
+
+<ns2:create xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% create.sObjects.each { sObjects ->%>
+    <ns2:sObjects xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% sObjects.fieldsToNull.each { fieldsToNull ->%>
+        <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+        <ns3:Id>${sObjects.Id}</ns3:Id>
+    </ns2:sObjects>
+<%}%>
+</ns2:create>
+
+*************** tns:createResponse
+
+<ns2:createResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% createResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:createResponse>
+
+*************** tns:update
+
+<ns2:update xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% update.sObjects.each { sObjects ->%>
+    <ns2:sObjects xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% sObjects.fieldsToNull.each { fieldsToNull ->%>
+        <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+        <ns3:Id>${sObjects.Id}</ns3:Id>
+    </ns2:sObjects>
+<%}%>
+</ns2:update>
+
+*************** tns:updateResponse
+
+<ns2:updateResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% updateResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:updateResponse>
+
+*************** tns:upsert
+
+<ns2:upsert xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:externalIDFieldName>${upsert.externalIDFieldName}</ns2:externalIDFieldName>
+<% upsert.sObjects.each { sObjects ->%>
+    <ns2:sObjects xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% sObjects.fieldsToNull.each { fieldsToNull ->%>
+        <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+        <ns3:Id>${sObjects.Id}</ns3:Id>
+    </ns2:sObjects>
+<%}%>
+</ns2:upsert>
+
+*************** tns:upsertResponse
+
+<ns2:upsertResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% upsertResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:created>${result.created}</ns2:created>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:upsertResponse>
+
+*************** tns:merge
+
+<ns2:merge xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% merge.request.each { request ->%>
+    <ns2:request>
+        <ns2:masterRecord xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% request.masterRecord.fieldsToNull.each { fieldsToNull ->%>
+            <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+            <ns3:Id>${request.masterRecord.Id}</ns3:Id>
+        </ns2:masterRecord>
+<% request.recordToMergeIds.each { recordToMergeIds ->%>
+        <ns2:recordToMergeIds>${recordToMergeIds}</ns2:recordToMergeIds>
+<%}%>
+    </ns2:request>
+<%}%>
+</ns2:merge>
+
+*************** tns:mergeResponse
+
+<ns2:mergeResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% mergeResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+<% result.mergedRecordIds.each { mergedRecordIds ->%>
+        <ns2:mergedRecordIds>${mergedRecordIds}</ns2:mergedRecordIds>
+<%}%>
+        <ns2:success>${result.success}</ns2:success>
+<% result.updatedRelatedIds.each { updatedRelatedIds ->%>
+        <ns2:updatedRelatedIds>${updatedRelatedIds}</ns2:updatedRelatedIds>
+<%}%>
+    </ns2:result>
+<%}%>
+</ns2:mergeResponse>
+
+*************** tns:delete
+
+<ns2:delete xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% delete.ids.each { ids ->%>
+    <ns2:ids>${ids}</ns2:ids>
+<%}%>
+</ns2:delete>
+
+*************** tns:deleteResponse
+
+<ns2:deleteResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% deleteResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:deleteResponse>
+
+*************** tns:undelete
+
+<ns2:undelete xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% undelete.ids.each { ids ->%>
+    <ns2:ids>${ids}</ns2:ids>
+<%}%>
+</ns2:undelete>
+
+*************** tns:undeleteResponse
+
+<ns2:undeleteResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% undeleteResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:undeleteResponse>
+
+*************** tns:emptyRecycleBin
+
+<ns2:emptyRecycleBin xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% emptyRecycleBin.ids.each { ids ->%>
+    <ns2:ids>${ids}</ns2:ids>
+<%}%>
+</ns2:emptyRecycleBin>
+
+*************** tns:emptyRecycleBinResponse
+
+<ns2:emptyRecycleBinResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% emptyRecycleBinResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:id>${result.id}</ns2:id>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:emptyRecycleBinResponse>
+
+*************** tns:retrieve
+
+<ns2:retrieve xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:fieldList>${retrieve.fieldList}</ns2:fieldList>
+    <ns2:sObjectType>${retrieve.sObjectType}</ns2:sObjectType>
+<% retrieve.ids.each { ids ->%>
+    <ns2:ids>${ids}</ns2:ids>
+<%}%>
+</ns2:retrieve>
+
+*************** tns:retrieveResponse
+
+<ns2:retrieveResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% retrieveResponse.result.each { result ->%>
+    <ns2:result xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% result.fieldsToNull.each { fieldsToNull ->%>
+        <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+        <ns3:Id>${result.Id}</ns3:Id>
+    </ns2:result>
+<%}%>
+</ns2:retrieveResponse>
+
+*************** tns:process
+
+<ns2:process xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% process.actions.each { actions ->%>
+    <ns2:actions>
+        <ns2:comments>${actions.comments}</ns2:comments>
+<% actions.nextApproverIds.each { nextApproverIds ->%>
+        <ns2:nextApproverIds>${nextApproverIds}</ns2:nextApproverIds>
+<%}%>
+    </ns2:actions>
+<%}%>
+</ns2:process>
+
+*************** tns:processResponse
+
+<ns2:processResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% processResponse.result.each { result ->%>
+    <ns2:result>
+<% result.actorIds.each { actorIds ->%>
+        <ns2:actorIds>${actorIds}</ns2:actorIds>
+<%}%>
+        <ns2:entityId>${result.entityId}</ns2:entityId>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:instanceId>${result.instanceId}</ns2:instanceId>
+        <ns2:instanceStatus>${result.instanceStatus}</ns2:instanceStatus>
+<% result.newWorkitemIds.each { newWorkitemIds ->%>
+        <ns2:newWorkitemIds>${newWorkitemIds}</ns2:newWorkitemIds>
+<%}%>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:processResponse>
+
+*************** tns:convertLead
+
+<ns2:convertLead xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% convertLead.leadConverts.each { leadConverts ->%>
+    <ns2:leadConverts>
+        <ns2:accountId>${leadConverts.accountId}</ns2:accountId>
+        <ns2:contactId>${leadConverts.contactId}</ns2:contactId>
+        <ns2:convertedStatus>${leadConverts.convertedStatus}</ns2:convertedStatus>
+        <ns2:doNotCreateOpportunity>${leadConverts.doNotCreateOpportunity}</ns2:doNotCreateOpportunity>
+        <ns2:leadId>${leadConverts.leadId}</ns2:leadId>
+        <ns2:opportunityName>${leadConverts.opportunityName}</ns2:opportunityName>
+        <ns2:overwriteLeadSource>${leadConverts.overwriteLeadSource}</ns2:overwriteLeadSource>
+        <ns2:ownerId>${leadConverts.ownerId}</ns2:ownerId>
+        <ns2:sendNotificationEmail>${leadConverts.sendNotificationEmail}</ns2:sendNotificationEmail>
+    </ns2:leadConverts>
+<%}%>
+</ns2:convertLead>
+
+*************** tns:convertLeadResponse
+
+<ns2:convertLeadResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% convertLeadResponse.result.each { result ->%>
+    <ns2:result>
+        <ns2:accountId>${result.accountId}</ns2:accountId>
+        <ns2:contactId>${result.contactId}</ns2:contactId>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:leadId>${result.leadId}</ns2:leadId>
+        <ns2:opportunityId>${result.opportunityId}</ns2:opportunityId>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:convertLeadResponse>
+
+*************** tns:logout
+
+<ns2:logout xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:logout>
+
+*************** tns:logoutResponse
+
+<ns2:logoutResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:logoutResponse>
+
+*************** tns:invalidateSessions
+
+<ns2:invalidateSessions xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% invalidateSessions.sessionIds.each { sessionIds ->%>
+    <ns2:sessionIds>${sessionIds}</ns2:sessionIds>
+<%}%>
+</ns2:invalidateSessions>
+
+*************** tns:invalidateSessionsResponse
+
+<ns2:invalidateSessionsResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% invalidateSessionsResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+        </ns2:errors>
+<%}%>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:invalidateSessionsResponse>
+
+*************** tns:getDeleted
+
+<ns2:getDeleted xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:sObjectType>${getDeleted.sObjectType}</ns2:sObjectType>
+    <ns2:startDate>${getDeleted.startDate}</ns2:startDate>
+    <ns2:endDate>${getDeleted.endDate}</ns2:endDate>
+</ns2:getDeleted>
+
+*************** tns:getDeletedResponse
+
+<ns2:getDeletedResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+<% getDeletedResponse.result.deletedRecords.each { deletedRecords ->%>
+        <ns2:deletedRecords>
+            <ns2:deletedDate>${deletedRecords.deletedDate}</ns2:deletedDate>
+            <ns2:id>${deletedRecords.id}</ns2:id>
+        </ns2:deletedRecords>
+<%}%>
+        <ns2:earliestDateAvailable>${getDeletedResponse.result.earliestDateAvailable}</ns2:earliestDateAvailable>
+        <ns2:latestDateCovered>${getDeletedResponse.result.latestDateCovered}</ns2:latestDateCovered>
+        <ns2:sforceReserved>${getDeletedResponse.result.sforceReserved}</ns2:sforceReserved>
+    </ns2:result>
+</ns2:getDeletedResponse>
+
+*************** tns:getUpdated
+
+<ns2:getUpdated xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:sObjectType>${getUpdated.sObjectType}</ns2:sObjectType>
+    <ns2:startDate>${getUpdated.startDate}</ns2:startDate>
+    <ns2:endDate>${getUpdated.endDate}</ns2:endDate>
+</ns2:getUpdated>
+
+*************** tns:getUpdatedResponse
+
+<ns2:getUpdatedResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+<% getUpdatedResponse.result.ids.each { ids ->%>
+        <ns2:ids>${ids}</ns2:ids>
+<%}%>
+        <ns2:latestDateCovered>${getUpdatedResponse.result.latestDateCovered}</ns2:latestDateCovered>
+        <ns2:sforceReserved>${getUpdatedResponse.result.sforceReserved}</ns2:sforceReserved>
+    </ns2:result>
+</ns2:getUpdatedResponse>
+
+*************** tns:query
+
+<ns2:query xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:queryString>${query.queryString}</ns2:queryString>
+</ns2:query>
+
+*************** tns:queryResponse
+
+<ns2:queryResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:done>${queryResponse.result.done}</ns2:done>
+        <ns2:queryLocator>${queryResponse.result.queryLocator}</ns2:queryLocator>
+<% queryResponse.result.records.each { records ->%>
+        <ns2:records xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% records.fieldsToNull.each { fieldsToNull ->%>
+            <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+            <ns3:Id>${records.Id}</ns3:Id>
+        </ns2:records>
+<%}%>
+        <ns2:size>${queryResponse.result.size}</ns2:size>
+    </ns2:result>
+</ns2:queryResponse>
+
+*************** tns:queryAll
+
+<ns2:queryAll xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:queryString>${queryAll.queryString}</ns2:queryString>
+</ns2:queryAll>
+
+*************** tns:queryAllResponse
+
+<ns2:queryAllResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:done>${queryAllResponse.result.done}</ns2:done>
+        <ns2:queryLocator>${queryAllResponse.result.queryLocator}</ns2:queryLocator>
+<% queryAllResponse.result.records.each { records ->%>
+        <ns2:records xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% records.fieldsToNull.each { fieldsToNull ->%>
+            <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+            <ns3:Id>${records.Id}</ns3:Id>
+        </ns2:records>
+<%}%>
+        <ns2:size>${queryAllResponse.result.size}</ns2:size>
+    </ns2:result>
+</ns2:queryAllResponse>
+
+*************** tns:queryMore
+
+<ns2:queryMore xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:queryLocator>${queryMore.queryLocator}</ns2:queryLocator>
+</ns2:queryMore>
+
+*************** tns:queryMoreResponse
+
+<ns2:queryMoreResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:done>${queryMoreResponse.result.done}</ns2:done>
+        <ns2:queryLocator>${queryMoreResponse.result.queryLocator}</ns2:queryLocator>
+<% queryMoreResponse.result.records.each { records ->%>
+        <ns2:records xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% records.fieldsToNull.each { fieldsToNull ->%>
+            <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+            <ns3:Id>${records.Id}</ns3:Id>
+        </ns2:records>
+<%}%>
+        <ns2:size>${queryMoreResponse.result.size}</ns2:size>
+    </ns2:result>
+</ns2:queryMoreResponse>
+
+*************** tns:search
+
+<ns2:search xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:searchString>${search.searchString}</ns2:searchString>
+</ns2:search>
+
+*************** tns:searchResponse
+
+<ns2:searchResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+<% searchResponse.result.searchRecords.each { searchRecords ->%>
+        <ns2:searchRecords>
+            <ns2:record xmlns:ns3="urn:sobject.enterprise.soap.sforce.com">
+<% searchRecords.record.fieldsToNull.each { fieldsToNull ->%>
+                <ns3:fieldsToNull>${fieldsToNull}</ns3:fieldsToNull>
+<%}%>
+                <ns3:Id>${searchRecords.record.Id}</ns3:Id>
+            </ns2:record>
+        </ns2:searchRecords>
+<%}%>
+        <ns2:sforceReserved>${searchResponse.result.sforceReserved}</ns2:sforceReserved>
+    </ns2:result>
+</ns2:searchResponse>
+
+*************** tns:getServerTimestamp
+
+<ns2:getServerTimestamp xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:getServerTimestamp>
+
+*************** tns:getServerTimestampResponse
+
+<ns2:getServerTimestampResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:timestamp>${getServerTimestampResponse.result.timestamp}</ns2:timestamp>
+    </ns2:result>
+</ns2:getServerTimestampResponse>
+
+*************** tns:setPassword
+
+<ns2:setPassword xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:userId>${setPassword.userId}</ns2:userId>
+    <ns2:password>${setPassword.password}</ns2:password>
+</ns2:setPassword>
+
+*************** tns:setPasswordResponse
+
+<ns2:setPasswordResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+    </ns2:result>
+</ns2:setPasswordResponse>
+
+*************** tns:resetPassword
+
+<ns2:resetPassword xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:userId>${resetPassword.userId}</ns2:userId>
+</ns2:resetPassword>
+
+*************** tns:resetPasswordResponse
+
+<ns2:resetPasswordResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:password>${resetPasswordResponse.result.password}</ns2:password>
+    </ns2:result>
+</ns2:resetPasswordResponse>
+
+*************** tns:getUserInfo
+
+<ns2:getUserInfo xmlns:ns2="urn:enterprise.soap.sforce.com">
+</ns2:getUserInfo>
+
+*************** tns:getUserInfoResponse
+
+<ns2:getUserInfoResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+    <ns2:result>
+        <ns2:accessibilityMode>${getUserInfoResponse.result.accessibilityMode}</ns2:accessibilityMode>
+        <ns2:currencySymbol>${getUserInfoResponse.result.currencySymbol}</ns2:currencySymbol>
+        <ns2:orgAttachmentFileSizeLimit>${getUserInfoResponse.result.orgAttachmentFileSizeLimit}</ns2:orgAttachmentFileSizeLimit>
+        <ns2:orgDefaultCurrencyIsoCode>${getUserInfoResponse.result.orgDefaultCurrencyIsoCode}</ns2:orgDefaultCurrencyIsoCode>
+        <ns2:orgDisallowHtmlAttachments>${getUserInfoResponse.result.orgDisallowHtmlAttachments}</ns2:orgDisallowHtmlAttachments>
+        <ns2:orgHasPersonAccounts>${getUserInfoResponse.result.orgHasPersonAccounts}</ns2:orgHasPersonAccounts>
+        <ns2:organizationId>${getUserInfoResponse.result.organizationId}</ns2:organizationId>
+        <ns2:organizationMultiCurrency>${getUserInfoResponse.result.organizationMultiCurrency}</ns2:organizationMultiCurrency>
+        <ns2:organizationName>${getUserInfoResponse.result.organizationName}</ns2:organizationName>
+        <ns2:profileId>${getUserInfoResponse.result.profileId}</ns2:profileId>
+        <ns2:roleId>${getUserInfoResponse.result.roleId}</ns2:roleId>
+        <ns2:sessionSecondsValid>${getUserInfoResponse.result.sessionSecondsValid}</ns2:sessionSecondsValid>
+        <ns2:userDefaultCurrencyIsoCode>${getUserInfoResponse.result.userDefaultCurrencyIsoCode}</ns2:userDefaultCurrencyIsoCode>
+        <ns2:userEmail>${getUserInfoResponse.result.userEmail}</ns2:userEmail>
+        <ns2:userFullName>${getUserInfoResponse.result.userFullName}</ns2:userFullName>
+        <ns2:userId>${getUserInfoResponse.result.userId}</ns2:userId>
+        <ns2:userLanguage>${getUserInfoResponse.result.userLanguage}</ns2:userLanguage>
+        <ns2:userLocale>${getUserInfoResponse.result.userLocale}</ns2:userLocale>
+        <ns2:userName>${getUserInfoResponse.result.userName}</ns2:userName>
+        <ns2:userTimeZone>${getUserInfoResponse.result.userTimeZone}</ns2:userTimeZone>
+        <ns2:userType>${getUserInfoResponse.result.userType}</ns2:userType>
+        <ns2:userUiSkin>${getUserInfoResponse.result.userUiSkin}</ns2:userUiSkin>
+    </ns2:result>
+</ns2:getUserInfoResponse>
+
+*************** tns:sendEmail
+
+<ns2:sendEmail xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% sendEmail.messages.each { messages ->%>
+    <ns2:messages>
+        <ns2:bccSender>${messages.bccSender}</ns2:bccSender>
+        <ns2:emailPriority>${messages.emailPriority}</ns2:emailPriority>
+        <ns2:replyTo>${messages.replyTo}</ns2:replyTo>
+        <ns2:saveAsActivity>${messages.saveAsActivity}</ns2:saveAsActivity>
+        <ns2:senderDisplayName>${messages.senderDisplayName}</ns2:senderDisplayName>
+        <ns2:subject>${messages.subject}</ns2:subject>
+        <ns2:useSignature>${messages.useSignature}</ns2:useSignature>
+    </ns2:messages>
+<%}%>
+</ns2:sendEmail>
+
+*************** tns:sendEmailResponse
+
+<ns2:sendEmailResponse xmlns:ns2="urn:enterprise.soap.sforce.com">
+<% sendEmailResponse.result.each { result ->%>
+    <ns2:result>
+<% result.errors.each { errors ->%>
+        <ns2:errors>
+<% errors.fields.each { fields ->%>
+            <ns2:fields>${fields}</ns2:fields>
+<%}%>
+            <ns2:message>${errors.message}</ns2:message>
+            <ns2:statusCode>${errors.statusCode}</ns2:statusCode>
+            <ns2:targetObjectId>${errors.targetObjectId}</ns2:targetObjectId>
+        </ns2:errors>
+<%}%>
+        <ns2:success>${result.success}</ns2:success>
+    </ns2:result>
+<%}%>
+</ns2:sendEmailResponse>
+

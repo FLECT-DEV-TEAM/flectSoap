@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soap:Header>
+        <tns:LoginScopeHeader xmlns:tns="urn:enterprise.soap.sforce.com">
+            <tns:organizationId>${LoginScopeHeader.organizationId}</tns:organizationId>
+            <tns:portalId>${LoginScopeHeader.portalId}</tns:portalId>
+        </tns:LoginScopeHeader>
+    </soap:Header>
+    <soap:Body>
+        <tns:login xmlns:tns="urn:enterprise.soap.sforce.com">
+            <tns:username>${login.username}</tns:username>
+            <tns:password>${login.password}</tns:password>
+        </tns:login>
+    </soap:Body>
+</soap:Envelope>
