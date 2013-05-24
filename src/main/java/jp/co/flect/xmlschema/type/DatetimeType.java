@@ -73,6 +73,7 @@ public class DatetimeType extends SimpleType {
 			}
 			return DateUtils.parseDate(s, parseFormats);
 		} catch (ParseException e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException(s);
 		}
 	}

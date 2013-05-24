@@ -29,6 +29,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 
 import jp.co.flect.log.Logger;
 import jp.co.flect.log.LoggerFactory;
@@ -76,6 +78,9 @@ public class SoapClient implements Serializable {
 	
 	private transient HttpClient client;
 	private ProxyInfo proxyInfo = null;
+	
+	private int soTimeout = 0;
+	private int connectionTimeout = 0;
 	
 	protected transient Logger log;
 	
@@ -152,6 +157,16 @@ public class SoapClient implements Serializable {
 			this.nsMap.put(prefix, schema.getTargetNamespace());
 		}
 	}
+	
+	/** SO_TIMEOUTを返します。(ミリ秒単位) */
+	public int getSoTimeout() { return this.soTimeout;}
+	/** SO_TIMEOUTを設定します。(ミリ秒単位) */
+	public void setSoTimeout(int n) { this.soTimeout = n;}
+	
+	/** コネクションTIMEOUTを返します。(ミリ秒単位) */
+	public int getConnectionTimeout() { return this.connectionTimeout;}
+	/** コネクションTIMEOUTを設定します。(ミリ秒単位) */
+	public void setConnectionTimeout(int n) { this.connectionTimeout = n;}
 	
 	public Logger getLogger() { return this.log;}
 	
@@ -411,7 +426,11 @@ public class SoapClient implements Serializable {
 	
 	private HttpClient createHttpClient() {
 		if (this.client == null) {
-			this.client = new DefaultHttpClient();
+			BasicHttpParams params = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(params, this.connectionTimeout);
+			HttpConnectionParams.setSoTimeout(params, this.soTimeout);
+			
+			this.client = new DefaultHttpClient(params);
 			if (this.proxyInfo != null) {
 				HttpHost proxy = new HttpHost(proxyInfo.getHost(), proxyInfo.getPort());
 				this.client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
