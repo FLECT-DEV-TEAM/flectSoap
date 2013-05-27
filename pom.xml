@@ -6,7 +6,7 @@
 	
 	<groupId>jp.co.flect</groupId>
 	<artifactId>flectSoap</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>flectSoap</name>
@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>jp.co.flect</groupId>
 			<artifactId>flectCommon</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 		<!-- commons-lang
 		     Required 2.6 or later. Because DateUtils#parseDate method doesn't work correctly.
