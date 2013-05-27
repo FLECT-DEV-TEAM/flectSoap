@@ -84,7 +84,7 @@
 						<include>**/*</include>
 					</includes>
 					<repositoryName>maven-repo</repositoryName>
-					<repositoryOwner>shunjikonishi</repositoryOwner>
+					<repositoryOwner>flect</repositoryOwner>
 				</configuration>
 				<executions>
 					<execution>
