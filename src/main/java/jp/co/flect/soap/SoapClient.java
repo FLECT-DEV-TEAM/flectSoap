@@ -158,18 +158,6 @@ public class SoapClient implements Serializable {
 		}
 	}
 	
-	/** SO_TIMEOUTを返します。(ミリ秒単位) */
-	public int getSoTimeout() { return this.soTimeout;}
-	/** SO_TIMEOUTを設定します。(ミリ秒単位) */
-	public void setSoTimeout(int n) { this.soTimeout = n;}
-	
-	/** コネクションTIMEOUTを返します。(ミリ秒単位) */
-	public int getConnectionTimeout() { return this.connectionTimeout;}
-	/** コネクションTIMEOUTを設定します。(ミリ秒単位) */
-	public void setConnectionTimeout(int n) { this.connectionTimeout = n;}
-	
-	public Logger getLogger() { return this.log;}
-	
 	/**
 	 * コピーコンストラクタ<br>
 	 * イベントリスナはコピーされません。
@@ -180,8 +168,32 @@ public class SoapClient implements Serializable {
 		this.endpoint = client.endpoint;
 		this.nsMap.putAll(client.nsMap);
 		this.log = client.log;
+		this.soTimeout = client.soTimeout;
+		this.connectionTimeout = client.connectionTimeout;
 		this.client = null;
 	}
+	
+	/** SO_TIMEOUTを返します。(ミリ秒単位) */
+	public int getSoTimeout() { return this.soTimeout;}
+	/** SO_TIMEOUTを設定します。(ミリ秒単位) */
+	public void setSoTimeout(int n) { 
+		if (n != this.soTimeout) {
+			this.soTimeout = n;
+			this.client = null;
+		}
+	}
+	
+	/** コネクションTIMEOUTを返します。(ミリ秒単位) */
+	public int getConnectionTimeout() { return this.connectionTimeout;}
+	/** コネクションTIMEOUTを設定します。(ミリ秒単位) */
+	public void setConnectionTimeout(int n) { 
+		if (n != this.connectionTimeout) {
+			this.connectionTimeout = n;
+			this.client = null;
+		}
+	}
+	
+	public Logger getLogger() { return this.log;}
 	
 	/**
 	 * WSDLを返します
