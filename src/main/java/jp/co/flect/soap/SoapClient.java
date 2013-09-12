@@ -76,7 +76,6 @@ public class SoapClient implements Serializable {
 	private int maxResponseSize;
 	private Map<QName, Object> defaultMap;
 	
-	private transient HttpClient client;
 	private ProxyInfo proxyInfo = null;
 	
 	private int soTimeout = 0;
@@ -170,27 +169,20 @@ public class SoapClient implements Serializable {
 		this.log = client.log;
 		this.soTimeout = client.soTimeout;
 		this.connectionTimeout = client.connectionTimeout;
-		this.client = null;
 	}
 	
 	/** SO_TIMEOUTを返します。(ミリ秒単位) */
 	public int getSoTimeout() { return this.soTimeout;}
 	/** SO_TIMEOUTを設定します。(ミリ秒単位) */
 	public void setSoTimeout(int n) { 
-		if (n != this.soTimeout) {
-			this.soTimeout = n;
-			this.client = null;
-		}
+		this.soTimeout = n;
 	}
 	
 	/** コネクションTIMEOUTを返します。(ミリ秒単位) */
 	public int getConnectionTimeout() { return this.connectionTimeout;}
 	/** コネクションTIMEOUTを設定します。(ミリ秒単位) */
 	public void setConnectionTimeout(int n) { 
-		if (n != this.connectionTimeout) {
-			this.connectionTimeout = n;
-			this.client = null;
-		}
+		this.connectionTimeout = n;
 	}
 	
 	public Logger getLogger() { return this.log;}
@@ -437,23 +429,21 @@ public class SoapClient implements Serializable {
 	}
 	
 	private HttpClient createHttpClient() {
-		if (this.client == null) {
-			BasicHttpParams params = new BasicHttpParams();
-			HttpConnectionParams.setConnectionTimeout(params, this.connectionTimeout);
-			HttpConnectionParams.setSoTimeout(params, this.soTimeout);
-			
-			this.client = new DefaultHttpClient(params);
-			if (this.proxyInfo != null) {
-				HttpHost proxy = new HttpHost(proxyInfo.getHost(), proxyInfo.getPort());
-				this.client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
-				if (proxyInfo.getUserName() != null && proxyInfo.getPassword() != null) {
-					((DefaultHttpClient)this.client).getCredentialsProvider().setCredentials(
-						new AuthScope(proxyInfo.getHost(), proxyInfo.getPort()),
-						new UsernamePasswordCredentials(proxyInfo.getUserName(), proxyInfo.getPassword()));
-				}
+		BasicHttpParams params = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(params, this.connectionTimeout);
+		HttpConnectionParams.setSoTimeout(params, this.soTimeout);
+		
+		DefaultHttpClient client = new DefaultHttpClient(params);
+		if (this.proxyInfo != null) {
+			HttpHost proxy = new HttpHost(proxyInfo.getHost(), proxyInfo.getPort());
+			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+			if (proxyInfo.getUserName() != null && proxyInfo.getPassword() != null) {
+				client.getCredentialsProvider().setCredentials(
+					new AuthScope(proxyInfo.getHost(), proxyInfo.getPort()),
+					new UsernamePasswordCredentials(proxyInfo.getUserName(), proxyInfo.getPassword()));
 			}
 		}
-		return this.client;
+		return client;
 	}
 	
 	public SoapResponse send(String soapAction, String op, String msg, HttpResponseHandler handler) throws IOException, SoapException {
@@ -749,7 +739,6 @@ public class SoapClient implements Serializable {
 	
 	public void setProxyInfo(String host, int port, String username, String password) {
 		this.proxyInfo = new ProxyInfo(host, port, username, password);
-		this.client = null;
 	}
 	
 	public ProxyInfo getProxyInfo() { return this.proxyInfo;}
