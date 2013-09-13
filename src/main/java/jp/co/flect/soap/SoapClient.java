@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.swing.event.EventListenerList;
 import javax.xml.namespace.QName;
 import org.w3c.dom.Document;
@@ -80,6 +81,7 @@ public class SoapClient implements Serializable {
 	
 	private int soTimeout = 0;
 	private int connectionTimeout = 0;
+	private boolean alwaysCloseConnection = false;
 	
 	protected transient Logger log;
 	
@@ -169,6 +171,7 @@ public class SoapClient implements Serializable {
 		this.log = client.log;
 		this.soTimeout = client.soTimeout;
 		this.connectionTimeout = client.connectionTimeout;
+		this.alwaysCloseConnection = client.alwaysCloseConnection;
 	}
 	
 	/** SO_TIMEOUTを返します。(ミリ秒単位) */
@@ -184,6 +187,12 @@ public class SoapClient implements Serializable {
 	public void setConnectionTimeout(int n) { 
 		this.connectionTimeout = n;
 	}
+	
+	/** メソッド実行時にHttpヘッダに「Connection: close」を付加するかどうかを返します。 */
+	public boolean isAlwaysCloseConnection() { return this.alwaysCloseConnection;}
+	/** コネクションTIMEOUTを設定します。(ミリ秒単位) */
+	/** メソッド実行時にHttpヘッダに「Connection: close」を付加するかどうかを設定します。 */
+	public void setAlwaysCloseConnection(boolean b) { this.alwaysCloseConnection = b;}
 	
 	public Logger getLogger() { return this.log;}
 	
@@ -462,6 +471,9 @@ public class SoapClient implements Serializable {
 		post.addHeader("SOAPAction", "\"" + soapAction + "\"");
 		if (this.userAgent != null) {
 			post.addHeader("User-Agent", this.userAgent);
+		}
+		if (this.alwaysCloseConnection) {
+			post.addHeader("Connection", "close");
 		}
 		log.trace("send request:\n{0}", msg);
 		String contentType = this.wsdl.isSoap12() ? "application/soap+xml" : "text/xml";
