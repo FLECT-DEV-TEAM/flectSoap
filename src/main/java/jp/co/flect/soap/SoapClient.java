@@ -46,6 +46,8 @@ import jp.co.flect.util.ExtendedMap;
 import jp.co.flect.net.HttpUtils;
 import jp.co.flect.xml.XMLUtils;
 import jp.co.flect.xml.XMLWriter;
+import jp.co.flect.xmlschema.SimpleType;
+import jp.co.flect.xmlschema.ComplexType;
 import jp.co.flect.xmlschema.ElementDef;
 import jp.co.flect.xmlschema.XMLSchema;
 import jp.co.flect.xmlschema.XMLSchemaException;
@@ -607,8 +609,20 @@ public class SoapClient implements Serializable {
 					Map.Entry entry = (Map.Entry)it.next();
 					Object key = entry.getKey();
 					Object value = entry.getValue();
+					if (value instanceof TypedObject) {
+						String contextName = getContextName(key);
+						ElementDef el = this.helper.getElementByPath(contextName);
+						if (el == null || el.getType().isSimpleType()) {
+							throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
+						}
+						TypedObjectConverter converter = ((ComplexType)el.getType()).getTypedObjectConverter();
+						if (converter == null) {
+							throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
+						}
+						value = converter.toMap((TypedObject)value);
+					}
 					if (value instanceof Map) {
-						put(key, new SoapParams(helper, getContextName(key), (Map)value, this, false));
+						value = new SoapParams(helper, getContextName(key), (Map)value, this, false);
 					} else if (value instanceof List) {
 						List oldList = (List)value;
 						List newList = new ArrayList(oldList.size());
@@ -618,10 +632,15 @@ public class SoapClient implements Serializable {
 							}
 							newList.add(listValue);
 						}
-						put(key, newList);
-					} else {
-						put(key, value);
+						value = newList;
+					} else if (!(value instanceof String)) {
+						String contextName = getContextName(key);
+						ElementDef el = this.helper.getElementByPath(contextName);
+						if (el != null && el.getType().isSimpleType()) {
+							value = ((SimpleType)el.getType()).format(value);
+						}
 					}
+					put(key, value);
 				}
 			}
 		}
@@ -713,7 +732,8 @@ public class SoapClient implements Serializable {
 				throw e.setUrlOrOperation(this.op);
 			}
 			int code = httpResponse.getStatusLine().getStatusCode();
-			SoapResponse ret = new SoapResponse(code, responseBody);
+			OperationDef opDef = getOperation(this.op);
+			SoapResponse ret = new SoapResponse(code, getWSDL(), opDef == null ? null : opDef.getResponseMessage(), responseBody);
 			
 			log.debug("send end: soapAction={0}, statusLine={1}, time={2}ms", this.soapAction, httpResponse.getStatusLine(), System.currentTimeMillis() - ct);
 			if (log.isTraceEnabled()) {

@@ -7,13 +7,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Iterator;
 import org.xml.sax.SAXException;
 import org.xml.sax.InputSource;
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import jp.co.flect.xml.XMLUtils;
+import jp.co.flect.xmlschema.ComplexType;
+import jp.co.flect.xmlschema.ElementDef;
+import jp.co.flect.xmlschema.SimpleType;
+import jp.co.flect.xmlschema.TypeDef;
 import jp.co.flect.util.ExtendedMap;
 
 public class SoapResponse implements Serializable {
@@ -21,13 +27,18 @@ public class SoapResponse implements Serializable {
 	private static final long serialVersionUID = 3160385644758030538L;
 	
 	private int responseCode;
+	private WSDL wsdl;
+	private MessageDef msgDef;
 	private String body;
 	private transient ExtendedMap map;
 	private transient Document doc;
-	private boolean bSoap12 = false;
+	private transient ExtendedMap objectMap;
+	private Boolean bSoap12 = null;
 	
-	public SoapResponse(int responseCode, String body) {
+	public SoapResponse(int responseCode, WSDL wsdl, MessageDef msgDef, String body) {
 		this.responseCode = responseCode;
+		this.wsdl = wsdl;
+		this.msgDef = msgDef;
 		this.body = body;
 	}
 	
@@ -37,8 +48,7 @@ public class SoapResponse implements Serializable {
 	
 	public ExtendedMap getAsMap() throws SoapException { 
 		if (this.map == null) {
-			this.map = new ExtendedMap(false);
-			buildMap();
+			this.map = buildMap();
 		}
 		return this.map;
 	}
@@ -59,23 +69,25 @@ public class SoapResponse implements Serializable {
 	}
 	
 	public boolean isSoap12() { 
-		if (this.map == null) {
+		if (bSoap12 == null) {
 			try {
 				getAsMap();
 			} catch (SoapException e) {
 				e.printStackTrace();
 			}
 		}
-		return bSoap12;
+		return bSoap12.booleanValue();
 	}
 	
 	public boolean isSoap11() { return !isSoap12();}
 	
-	private void buildMap() throws SoapException {
+	private ExtendedMap buildMap() throws SoapException {
+		ExtendedMap map = new ExtendedMap(false);
+		
 		boolean startData = false;
 		boolean hasAttr = false;
 		String soapUri = null;
-		ParseContext context = new ParseContext(this.map);
+		ParseContext context = new ParseContext(map);
 		
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		factory.setProperty(XMLInputFactory. IS_COALESCING, Boolean.TRUE);
@@ -88,8 +100,9 @@ public class SoapResponse implements Serializable {
 						if (soapUri == null) {
 							soapUri = reader.getNamespaceURI();
 							if (XMLUtils.XMLNS_SOAP12_ENVELOPE.equals(soapUri)) {
-								this.bSoap12 = true;
+								this.bSoap12 = Boolean.TRUE;
 							} else if (!XMLUtils.XMLNS_SOAP_ENVELOPE.equals(soapUri)) {
+								this.bSoap12 = Boolean.FALSE;
 								throw new SoapException("Invalid soap namespace: " + soapUri);
 							}
 						}
@@ -140,6 +153,7 @@ public class SoapResponse implements Serializable {
 						break;
 				}
 			}
+			return map;
 		} catch (XMLStreamException e) {
 			throw new SoapException(e);
 		}
@@ -228,4 +242,176 @@ public class SoapResponse implements Serializable {
 		}
 	}
 	
+	//TypedObject
+	public <T extends TypedObject> T getAsObject(Class<T> clazz) throws SoapException {
+		return getAsObjectMap().searchClass(clazz);
+	}
+	
+	public ExtendedMap getAsObjectMap() throws SoapException {
+		if (this.objectMap == null) {
+			this.objectMap = buildObjectMap();
+		}
+		return this.objectMap;
+	}
+	
+	private ExtendedMap buildObjectMap() throws SoapException {
+		ExtendedMap map = new ExtendedMap(false);
+		if (this.msgDef == null) {
+			throw new IllegalArgumentException("Message doesn't defined.");
+		}
+		
+		String soapUri = null;
+		boolean startData = false;
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		factory.setProperty(XMLInputFactory. IS_COALESCING, Boolean.TRUE);
+		try {
+			XMLStreamReader reader = factory.createXMLStreamReader(new StringReader(this.body));
+			while (reader.hasNext()) {
+				int event = reader.next();
+				switch (event) {
+					case XMLStreamReader.START_ELEMENT:
+					{
+						String nsuri = reader.getNamespaceURI();
+						String name = reader.getLocalName();
+						if (soapUri == null) {
+							if (XMLUtils.XMLNS_SOAP12_ENVELOPE.equals(nsuri)) {
+								this.bSoap12 = Boolean.TRUE;
+							} else if (!XMLUtils.XMLNS_SOAP_ENVELOPE.equals(nsuri)) {
+								this.bSoap12 = Boolean.FALSE;
+								throw new SoapException("Invalid soap namespace: " + nsuri);
+							}
+							soapUri = nsuri;
+						}
+						if (startData) {
+							ElementDef el = null;
+							Iterator<QName> it = this.msgDef.getBodies();
+							while (it.hasNext()) {
+								QName qname = it.next();
+								if (nsuri.equals(qname.getNamespaceURI()) && name.equals(qname.getLocalPart())) {
+									el = this.wsdl.getElement(nsuri, name);
+									break;
+								}
+							}
+							processElement(map, nsuri, name, el, reader);
+						} else if (soapUri.equals(nsuri) && ("Body".equals(name) || "Header".equals(name))) {
+							startData = true;
+						}
+						break;
+					}
+					case XMLStreamReader.CHARACTERS:
+					case XMLStreamReader.CDATA:
+						if (startData && !reader.isWhiteSpace()) {
+							throw new IllegalStateException();
+						}
+						break;
+					case XMLStreamReader.END_DOCUMENT:
+						reader.close();
+						break;
+					case XMLStreamReader.END_ELEMENT:
+					{
+						String nsuri = reader.getNamespaceURI();
+						String name = reader.getLocalName();
+						if (startData &&  nsuri.equals(soapUri) && ("Body".equals(name) || "Header".equals(name))) {
+							startData = false;
+						}
+					}
+					case XMLStreamReader.START_DOCUMENT:
+					case XMLStreamReader.ATTRIBUTE:
+					case XMLStreamReader.NAMESPACE:
+					case XMLStreamReader.SPACE:
+					case XMLStreamReader.COMMENT:
+					case XMLStreamReader.PROCESSING_INSTRUCTION:
+					case XMLStreamReader.ENTITY_REFERENCE:
+					case XMLStreamReader.DTD:
+						break;
+				}
+			}
+			return map;
+		} catch (XMLStreamException e) {
+			throw new SoapException(e);
+		}
+	}
+	
+	private Object parseSimple(SimpleType type, XMLStreamReader reader) throws XMLStreamException {
+		StringBuilder buf = new StringBuilder();
+		while (reader.hasNext()) {
+			int event = reader.next();
+			switch (event) {
+				case XMLStreamReader.CHARACTERS:
+				case XMLStreamReader.CDATA:
+					buf.append(reader.getText());
+					break;
+				case XMLStreamReader.END_ELEMENT:
+					return buf.length() > 0 ? type.parse(buf.toString()) : null;
+				case XMLStreamReader.START_DOCUMENT:
+				case XMLStreamReader.END_DOCUMENT:
+				case XMLStreamReader.START_ELEMENT:
+				case XMLStreamReader.ATTRIBUTE:
+				case XMLStreamReader.NAMESPACE:
+				case XMLStreamReader.SPACE:
+				case XMLStreamReader.COMMENT:
+				case XMLStreamReader.PROCESSING_INSTRUCTION:
+				case XMLStreamReader.ENTITY_REFERENCE:
+				case XMLStreamReader.DTD:
+					throw new IllegalStateException();
+			}
+		}
+		throw new IllegalStateException();
+	}
+	
+	private ExtendedMap parseComplex(ComplexType type, XMLStreamReader reader) throws XMLStreamException {
+		ExtendedMap map = new ExtendedMap(false);
+		while (reader.hasNext()) {
+			int event = reader.next();
+			switch (event) {
+				case XMLStreamReader.START_ELEMENT:
+					String nsuri = reader.getNamespaceURI();
+					String name = reader.getLocalName();
+					ElementDef el = type.getModel(nsuri, name);
+					processElement(map, nsuri, name, el, reader);
+					break;
+				case XMLStreamReader.CHARACTERS:
+				case XMLStreamReader.CDATA:
+					if (!reader.isWhiteSpace()) {
+						throw new IllegalStateException();
+					}
+					break;
+				case XMLStreamReader.END_ELEMENT:
+					return map.size() == 0 ? null : map;
+				case XMLStreamReader.START_DOCUMENT:
+				case XMLStreamReader.END_DOCUMENT:
+				case XMLStreamReader.ATTRIBUTE:
+				case XMLStreamReader.NAMESPACE:
+				case XMLStreamReader.SPACE:
+				case XMLStreamReader.COMMENT:
+				case XMLStreamReader.PROCESSING_INSTRUCTION:
+				case XMLStreamReader.ENTITY_REFERENCE:
+				case XMLStreamReader.DTD:
+					throw new IllegalStateException();
+			}
+		}
+		throw new IllegalStateException();
+	}
+	
+	private void processElement(ExtendedMap map, String nsuri, String name, ElementDef el, XMLStreamReader reader) throws XMLStreamException {
+		if (el == null) {
+			throw new IllegalStateException("Unknown element: " + nsuri + ", " + name);
+		}
+		Object value = null;
+		TypeDef type = el.getType();
+		if (type.isSimpleType()) {
+			value = parseSimple((SimpleType)type, reader);
+		} else {
+			ComplexType ct = (ComplexType)type;
+			TypedObjectConverter converter = ct.getTypedObjectConverter();
+			if (ct.getName() != null && converter != null) {
+				value = converter.toObject(reader);
+			} else {
+				value = parseComplex(ct, reader);
+			}
+		}
+		if (value != null) {
+			map.put(name, value);
+		}
+	}
 }

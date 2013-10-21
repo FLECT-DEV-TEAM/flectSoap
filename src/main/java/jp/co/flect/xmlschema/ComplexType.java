@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import jp.co.flect.xmlschema.template.TemplateHint;
+import jp.co.flect.soap.TypedObjectConverter;
 
 public class ComplexType extends TypeDef {
 	
@@ -72,4 +73,7 @@ public class ComplexType extends TypeDef {
 		return null;
 	}
 	
+	public TypedObjectConverter getTypedObjectConverter() {
+		return getSchema().getTypedObjectConverter(getName());
+	}
 }

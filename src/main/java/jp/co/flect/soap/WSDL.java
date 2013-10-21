@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import jp.co.flect.xml.XMLUtils;
+import jp.co.flect.xmlschema.ComplexType;
 import jp.co.flect.xmlschema.ElementDef;
 import jp.co.flect.xmlschema.TypeDef;
 import jp.co.flect.xmlschema.XMLSchema;
@@ -92,4 +93,37 @@ public class WSDL implements Serializable {
 	
 	public String getEndpoint() { return this.endpoint;}
 	
+	public <T extends TypedObject> void registerTypedObject(String nsuri, String name, Class<T> clazz) {
+		XMLSchema schema = null;
+		if (nsuri == null) {
+			for (XMLSchema s : this.schemaMap.values()) {
+				if (s.getType(name) != null) {
+					schema = s;
+					break;
+				}
+			}
+		} else {
+			schema = getSchema(nsuri);
+		}
+		if (schema == null) {
+			throw new IllegalArgumentException("Unknown schema: " + nsuri);
+		}
+		TypeDef type = schema.getType(name);
+		if (type == null || type.isSimpleType()) {
+			throw new IllegalArgumentException("Unknown object: {" + nsuri + "} " + name);
+		}
+		TypedObjectConverter converter = new TypedObjectConverter((ComplexType)type, clazz);
+		schema.addTypedObjectConverter(converter);
+	}
+	
+	public <T extends TypedObject> void registerTypedObject(Class<T> clazz) {
+		try {
+			TypedObject obj = (TypedObject)clazz.newInstance();
+			registerTypedObject(obj.getObjectNamespaceURI(), obj.getObjectName(), clazz);
+		} catch (IllegalAccessException e) {
+			throw new IllegalStateException(e);
+		} catch (InstantiationException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 }
