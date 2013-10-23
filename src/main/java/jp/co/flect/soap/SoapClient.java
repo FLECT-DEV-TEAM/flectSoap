@@ -610,6 +610,7 @@ public class SoapClient implements Serializable {
 					Object key = entry.getKey();
 					Object value = entry.getValue();
 					if (value instanceof TypedObject) {
+						TypedObject obj = (TypedObject)value;
 						String contextName = getContextName(key);
 						ElementDef el = this.helper.getElementByPath(contextName);
 						if (el == null || el.getType().isSimpleType()) {
@@ -617,9 +618,19 @@ public class SoapClient implements Serializable {
 						}
 						TypedObjectConverter converter = ((ComplexType)el.getType()).getTypedObjectConverter();
 						if (converter == null) {
-							throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
+							ComplexType ct = (ComplexType)el.getType();
+							if (ct.getName().equals(obj.getObjectName()) && 
+							    (obj.getObjectNamespaceURI() == null || obj.getObjectNamespaceURI().equals(ct.getNamespace()))
+							   ) {
+								//Auto register
+								getWSDL().registerTypedObject(obj.getClass());
+								converter = ct.getTypedObjectConverter();
+							}
+							if (converter == null) {
+								throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
+							}
 						}
-						value = converter.toMap((TypedObject)value);
+						value = converter.toMap(obj);
 					}
 					if (value instanceof Map) {
 						value = new SoapParams(helper, getContextName(key), (Map)value, this, false);
