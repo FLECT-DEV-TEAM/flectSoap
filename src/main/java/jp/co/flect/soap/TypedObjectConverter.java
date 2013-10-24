@@ -239,6 +239,24 @@ public class  TypedObjectConverter {
 			if (c == BigDecimal.class) return new BigDecimal(n.toString());
 			if (c == BigInteger.class) return new BigInteger(n.toString());
 		}
+		if (c.isEnum()) {
+			String str = value.toString();
+			try {
+				Method m = c.getDeclaredMethod("values");
+				Object[] enums = (Object[])m.invoke(null);
+				for (Object o : enums) {
+					if (str.equals(o.toString())) {
+						return o;
+					}
+				}
+			} catch (IllegalAccessException e) {
+				throw new IllegalStateException(e);
+			} catch (NoSuchMethodException e) {
+				throw new IllegalStateException(e);
+			} catch (InvocationTargetException e) {
+				throw new IllegalStateException(e);
+			}
+		}
 		return value;
 	}
 	
