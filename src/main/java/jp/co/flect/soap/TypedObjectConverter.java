@@ -78,7 +78,7 @@ public class  TypedObjectConverter {
 			
 			ElementDef el = type.getModel(type.getNamespace(), name);
 			if (el == null) {
-				throw new IllegalArgumentException("Unknown fieldName: " + getTargetName() + "." + name);
+				continue;
 			}
 			try {
 				Object value = f.get(obj);
@@ -98,7 +98,7 @@ public class  TypedObjectConverter {
 			Method m = info.getter;
 			ElementDef el = type.getModel(type.getNamespace(), name);
 			if (el == null) {
-				throw new IllegalArgumentException("Unknown fieldName: " + getTargetName() + "." + name);
+				continue;
 			}
 			try {
 				Object value = m.invoke(obj);
