@@ -76,4 +76,8 @@ public class ComplexType extends TypeDef {
 	public TypedObjectConverter getTypedObjectConverter() {
 		return getSchema().getTypedObjectConverter(getName());
 	}
+	
+	public TypedObjectConverter getTypedObjectConverter(Class clazz) {
+		return getSchema().getTypedObjectConverter(getName(), clazz);
+	}
 }

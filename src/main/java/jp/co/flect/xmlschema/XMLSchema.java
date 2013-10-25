@@ -22,7 +22,7 @@ public class XMLSchema implements Serializable {
 	private Map<String, TypeDef> typeMap = new HashMap<String, TypeDef>();
 	private Map<String, ElementDef> elMap = new HashMap<String, ElementDef>();
 	
-	private Map<String, TypedObjectConverter> objectMap = null;
+	private Map<String, List<TypedObjectConverter>> objectMap = null;
 	
 	public XMLSchema(String targetNamespace, boolean elementFormDefault, boolean attributeFormDefault) {
 		this.targetNamespace = targetNamespace;
@@ -83,15 +83,36 @@ public class XMLSchema implements Serializable {
 	
 	public void addTypedObjectConverter(TypedObjectConverter converter) {
 		if (this.objectMap == null) {
-			this.objectMap = new HashMap<String, TypedObjectConverter>();
+			this.objectMap = new HashMap<String, List<TypedObjectConverter>>();
 		}
-		this.objectMap.put(converter.getTargetName(), converter);
+		List<TypedObjectConverter> list = this.objectMap.get(converter.getTargetName());
+		if (list == null) {
+			list = new ArrayList<TypedObjectConverter>();
+			this.objectMap.put(converter.getTargetName(), list);
+		}
+		list.add(converter);
 	}
 	
 	public TypedObjectConverter getTypedObjectConverter(String name) {
+		return getTypedObjectConverter(name, null);
+	}
+	
+	public TypedObjectConverter getTypedObjectConverter(String name, Class clazz) {
 		if (this.objectMap == null) {
 			return null;
 		}
-		return this.objectMap.get(name);
+		List<TypedObjectConverter> list = this.objectMap.get(name);
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		if (clazz == null) {
+			return list.get(0);
+		}
+		for (TypedObjectConverter c : list) {
+			if (c.getTargetClass().equals(clazz)) {
+				return c;
+			}
+		}
+		return null;
 	}
 }

@@ -616,15 +616,15 @@ public class SoapClient implements Serializable {
 						if (el == null || el.getType().isSimpleType()) {
 							throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
 						}
-						TypedObjectConverter converter = ((ComplexType)el.getType()).getTypedObjectConverter();
+						ComplexType ct = (ComplexType)el.getType();
+						TypedObjectConverter converter = ct.getTypedObjectConverter(obj.getClass());
 						if (converter == null) {
-							ComplexType ct = (ComplexType)el.getType();
 							if (ct.getName().equals(obj.getObjectName()) && 
 							    (obj.getObjectNamespaceURI() == null || obj.getObjectNamespaceURI().equals(ct.getNamespace()))
 							   ) {
 								//Auto register
 								getWSDL().registerTypedObject(obj.getClass());
-								converter = ct.getTypedObjectConverter();
+								converter = ct.getTypedObjectConverter(obj.getClass());
 							}
 							if (converter == null) {
 								throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
