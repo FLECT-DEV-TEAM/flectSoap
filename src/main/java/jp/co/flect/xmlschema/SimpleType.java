@@ -18,19 +18,32 @@ public class SimpleType extends TypeDef {
 	private static final long serialVersionUID = 1505016885823600078L;
 	private static final XMLSchema XSD = new XMLSchema(XMLSchemaConstants.XSD_NSURI, false, false);
 	
+	public static final SimpleType STRING       = new StringType(XSD, "string");
+	public static final SimpleType DOUBLE       = new DoubleType(XSD, "double");
+	public static final SimpleType DECIMAL      = new DecimalType(XSD, "decimal");
+	public static final SimpleType INT          = new IntType(XSD, "int");
+	public static final SimpleType BOOLEAN      = new BooleanType(XSD, "boolean");
+	public static final SimpleType DATETIME     = new DatetimeType(XSD, "dateTime");
+	public static final SimpleType TIME         = new TimeType(XSD, "time");
+	public static final SimpleType DATE         = new DateType(XSD, "date");
+	public static final SimpleType BASE64BINARY = new Base64BinaryType(XSD, "base64Binary");
+	public static final SimpleType QNAME        = new QNameType(XSD, "QName");
+	public static final SimpleType ANYTYPE      = new AnyType(XSD, "anyType");
+	
 	static {
-		XSD.addType(new StringType(XSD, "string"));
-		XSD.addType(new DoubleType(XSD, "double"));
-		XSD.addType(new DecimalType(XSD, "decimal"));
-		XSD.addType(new IntType(XSD, "int"));
-		XSD.addType(new BooleanType(XSD, "boolean"));
-		XSD.addType(new DatetimeType(XSD, "dateTime"));
-		XSD.addType(new TimeType(XSD, "time"));
-		XSD.addType(new DateType(XSD, "date"));
-		XSD.addType(new Base64BinaryType(XSD, "base64Binary"));
-		XSD.addType(new QNameType(XSD, "QName"));
-		XSD.addType(new AnyType(XSD, "anyType"));
+		XSD.addType(STRING);
+		XSD.addType(DOUBLE);
+		XSD.addType(DECIMAL);
+		XSD.addType(INT);
+		XSD.addType(BOOLEAN);
+		XSD.addType(DATETIME);
+		XSD.addType(TIME);
+		XSD.addType(DATE);
+		XSD.addType(BASE64BINARY);
+		XSD.addType(QNAME);
+		XSD.addType(ANYTYPE);
 	}
+	
 	
 	public static SimpleType getBuiltinType(String name) {
 		SimpleType type = (SimpleType)XSD.getType(name);
