@@ -17,6 +17,7 @@ public class DebugListener implements SoapInvokeListener {
 	private static final Logger log = LoggerFactory.getLogger(DebugListener.class);
 	
 	private List<String> ignoreList = new ArrayList();
+	private long startTime;
 	
 	public void addIgnoreOperation(String op) { this.ignoreList.add(op);}
 	public void removeIgnoreOperation(String op) { this.ignoreList.remove(op);}
@@ -24,6 +25,8 @@ public class DebugListener implements SoapInvokeListener {
 	public List<String> getIgnoreOperations() { return this.ignoreList;}
 	
 	public void beforeInvoke(SoapInvokeEvent e) {
+		this.startTime = System.currentTimeMillis();
+		
 		String op = e.getOperation();
 		if (this.ignoreList.contains(op)) {
 			return;
@@ -33,8 +36,11 @@ public class DebugListener implements SoapInvokeListener {
 	}
 	
 	public void afterInvoke(SoapInvokeEvent e) {
+		long time = System.currentTimeMillis() - this.startTime;
+		
 		String op = e.getOperation();
 		if (this.ignoreList.contains(op)) {
+			log.info("SoapOperation: " + op + "\ttime:" + time + "ms");
 			return;
 		}
 		Exception ex = e.getException();
@@ -42,14 +48,14 @@ public class DebugListener implements SoapInvokeListener {
 			if (ex instanceof SoapFaultException) {
 				SoapFaultException fault = (SoapFaultException)ex;
 				String msg = indent(fault.getSoapResponse().getAsString());
-				log.error("SoapFault:" + op + "\tresponse:" + msg);
+				log.error("SoapFault:" + op + "\ttime:" + time + "ms\tresponse:" + msg);
 			} else {
-				log.error("SoapError:" + ex.toString());
+				log.error("SoapError:" + op + "\ttime:" + time + "ms\terror:" + ex.toString());
 			}
 			log.error(ex.getMessage(), ex);
 		} else {
 			String msg = indent(e.getResponse().getAsString());
-			log.info("SoapResponse:" + op + "\tresponse:" + msg);
+			log.info("SoapResponse:" + op + "\ttime:" + time + "ms\tresponse:" + msg);
 		}
 	}
 
