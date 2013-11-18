@@ -7,66 +7,66 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * XMLSchema‚©‚çƒeƒ“ƒvƒŒ[ƒg‚ğì¬‚·‚éInterface‚Å‚·B
+ * XMLSchemaã‹ã‚‰ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹Interfaceã§ã™ã€‚
  */
 public interface TemplateBuilder extends Cloneable {
 	
-	/** ƒXƒL[ƒ}î•ño—Í‚ÌNamespacePrefix */
+	/** ã‚¹ã‚­ãƒ¼ãƒæƒ…å ±å‡ºåŠ›ã®NamespacePrefix */
 	public static final String FSI_PREFIX    = "fsi";
-	/** ƒXƒL[ƒ}î•ño—Í‚ÌNamespace */
+	/** ã‚¹ã‚­ãƒ¼ãƒæƒ…å ±å‡ºåŠ›ã®Namespace */
 	public static final String FSI_NAMESPACE = "http://www.flect.co.jp/application/xmlschema";
 	
-	/** ƒCƒ“ƒfƒ“ƒg•‚ğ•Ô‚µ‚Ü‚·B0‚Ìê‡‚ÍƒCƒ“ƒfƒ“ƒg‚µ‚Ü‚¹‚ñB */
+	/** ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆå¹…ã‚’è¿”ã—ã¾ã™ã€‚0ã®å ´åˆã¯ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã—ã¾ã›ã‚“ã€‚ */
 	public int getIndent();
-	/** ƒCƒ“ƒfƒ“ƒg•‚ğİ’è‚µ‚Ü‚·B */
+	/** ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆå¹…ã‚’è¨­å®šã—ã¾ã™ã€‚ */
 	public void setIndent(int n);
 	
-	/** XMLéŒ¾‚ğo—Í‚·‚é‚©‚Ç‚¤‚©‚ğ•Ô‚µ‚Ü‚·B */
+	/** XMLå®£è¨€ã‚’å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚ */
 	public boolean isOutputXMLDecl();
-	/** XMLéŒ¾‚ğo—Í‚·‚é‚©‚Ç‚¤‚©‚ğİ’è‚µ‚Ü‚·B */
+	/** XMLå®£è¨€ã‚’å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¨­å®šã—ã¾ã™ã€‚ */
 	public void setOutputXMLDecl(boolean b);
 	
-	/** ‰ŠúƒCƒ“ƒfƒ“ƒgƒŒƒxƒ‹‚ğ•Ô‚µ‚Ü‚·B */
+	/** åˆæœŸã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆãƒ¬ãƒ™ãƒ«ã‚’è¿”ã—ã¾ã™ã€‚ */
 	public int getInitialIndent();
-	/** ‰ŠúƒCƒ“ƒfƒ“ƒgƒŒƒxƒ‹‚ğİ’è‚µ‚Ü‚·B */
+	/** åˆæœŸã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆãƒ¬ãƒ™ãƒ«ã‚’è¨­å®šã—ã¾ã™ã€‚ */
 	public void setInitialIndent(int n);
 	
 	/** 
-	 * XMLSchema‚ğ’Ç‰Á‚µ‚Ü‚·B 
-	 * @return schema‚Ì–¼‘O‹óŠÔ‚É‘Î‰‚·‚éprefix
+	 * XMLSchemaã‚’è¿½åŠ ã—ã¾ã™ã€‚ 
+	 * @return schemaã®åå‰ç©ºé–“ã«å¯¾å¿œã™ã‚‹prefix
 	 */
 	public String addSchema(XMLSchema schema);
 
 	/** 
-	 * NamespacePrefix‚ğw’è‚µ‚ÄXMLSchema‚ğ’Ç‰Á‚µ‚Ü‚·B 
-	 * @return ˆø”‚Ìprefix
+	 * NamespacePrefixã‚’æŒ‡å®šã—ã¦XMLSchemaã‚’è¿½åŠ ã—ã¾ã™ã€‚ 
+	 * @return å¼•æ•°ã®prefix
 	 */
 	public String addSchema(String prefix, XMLSchema schema);
 	
-	/** ’Ç‰Á‚³‚ê‚½XMLSchema‚ÌList‚ğ•Ô‚µ‚Ü‚·B */
+	/** è¿½åŠ ã•ã‚ŒãŸXMLSchemaã®Listã‚’è¿”ã—ã¾ã™ã€‚ */
 	public List<XMLSchema> getSchemaList();
 	
-	/** ƒeƒ“ƒvƒŒ[ƒg“à‚ÉƒXƒL[ƒ}î•ñ‚ğo—Í‚·‚é‚©‚Ç‚¤‚©‚ğ•Ô‚µ‚Ü‚·B */
+	/** ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå†…ã«ã‚¹ã‚­ãƒ¼ãƒæƒ…å ±ã‚’å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã—ã¾ã™ã€‚ */
 	public boolean isOutputSchemaInfo();
-	/** ƒeƒ“ƒvƒŒ[ƒg“à‚ÉƒXƒL[ƒ}î•ñ‚ğo—Í‚·‚é‚©‚Ç‚¤‚©‚ğİ’è‚µ‚Ü‚·B */
+	/** ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå†…ã«ã‚¹ã‚­ãƒ¼ãƒæƒ…å ±ã‚’å‡ºåŠ›ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¨­å®šã—ã¾ã™ã€‚ */
 	public void setOutputSchemaInfo(boolean b);
 	
-	/** ƒeƒ“ƒvƒŒ[ƒgo—Í‚É—LŒø‚ÈNamespacePrefix‚ÆURL‚ğ’Ç‰Á‚µ‚Ü‚·B */
+	/** ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ›æ™‚ã«æœ‰åŠ¹ãªNamespacePrefixã¨URLã‚’è¿½åŠ ã—ã¾ã™ã€‚ */
 	public void addContextNamespace(String prefix, String namespace);
 	
-	/** ƒeƒ“ƒvƒŒ[ƒgo—Í‚É—LŒø‚ÈNamespacePrefix‚ğíœ‚µ‚Ü‚·B */
+	/** ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ›æ™‚ã«æœ‰åŠ¹ãªNamespacePrefixã‚’å‰Šé™¤ã—ã¾ã™ã€‚ */
 	public void removeContextNamespace(String prefix);
 	
 	/** 
-	 * ƒeƒ“ƒvƒŒ[ƒg‚ğOutputStream‚Éo—Í‚µ‚Ü‚·B 
-	 * @param namespace o—Í‘ÎÛ—v‘f‚ÌNamespaceURI
-	 * @param name o—Í‘ÎÛ—v‘f‚ÌLocalName
-	 * @param hints ƒXƒL[ƒ}‰ğß‚Ég—p‚·‚éƒqƒ“ƒg‚ÌListBnull‚Å‚à—Ç‚¢
-	 * @param os o—ÍƒXƒgƒŠ[ƒ€
+	 * ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’OutputStreamã«å‡ºåŠ›ã—ã¾ã™ã€‚ 
+	 * @param namespace å‡ºåŠ›å¯¾è±¡è¦ç´ ã®NamespaceURI
+	 * @param name å‡ºåŠ›å¯¾è±¡è¦ç´ ã®LocalName
+	 * @param hints ã‚¹ã‚­ãƒ¼ãƒè§£é‡ˆã«ä½¿ç”¨ã™ã‚‹ãƒ’ãƒ³ãƒˆã®Listã€‚nullã§ã‚‚è‰¯ã„
+	 * @param os å‡ºåŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ 
 	 */
 	public void writeTo(String namespace, String name, List<TemplateHint> hints, OutputStream os) throws IOException;
 	
-	/** TemplateEngine‚ğ•Ô‚µ‚Ü‚·B */
+	/** TemplateEngineã‚’è¿”ã—ã¾ã™ã€‚ */
 	public TemplateEngine getTemplateEngine();
 	
 	public Object clone();
