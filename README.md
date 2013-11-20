@@ -12,6 +12,10 @@ Its features consist of
 - Embed parameters to SOAP template
 - Invoke SOAP request by http(s)
 
+JavaDoc
+-------
+http://oss.flect.co.jp/apidocs/flectSoap/index.html
+
 Dependencies
 ------------
 If you want to build this library, you must build and install following maven projects.
