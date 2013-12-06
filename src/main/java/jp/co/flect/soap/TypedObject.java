@@ -1,7 +1,7 @@
 package jp.co.flect.soap;
 
 /**
- * ApexのWebServiceを介してやり取りするオブジェクトのインターフェース
+ * ComplexTypeを介してやり取りするオブジェクトのインターフェース
  */
 public interface TypedObject {
 	

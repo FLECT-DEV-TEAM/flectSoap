@@ -20,6 +20,36 @@ import jp.co.flect.util.ExtendedMap;
 
 public class  TypedObjectConverter {
 	
+	public interface FieldResolver {
+		
+		public Object resolve(Class clazz, Object value);
+		
+	}
+	
+	private static Map<Class, FieldResolver> fieldResolverMap = new HashMap<Class, FieldResolver>();
+	
+	public static void addFieldResolver(Class c, FieldResolver resolver) {
+		fieldResolverMap.put(c, resolver);
+	}
+	
+	public static void removeFieldResolver(Class c) {
+		fieldResolverMap.remove(c);
+	}
+	
+	private static FieldResolver getFieldResolver(Class c) {
+		FieldResolver ret = fieldResolverMap.get(c);
+		if (ret != null) {
+			return ret;
+		}
+		for (Map.Entry<Class, FieldResolver> entry : fieldResolverMap.entrySet()) {
+			Class ec = entry.getKey();
+			if (ec.isAssignableFrom(c)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
 	private ComplexType type;
 	private Class clazz;
 	
@@ -227,6 +257,10 @@ public class  TypedObjectConverter {
 	}
 	
 	private Object convertType(Class c, Object value) {
+		FieldResolver resolver = getFieldResolver(c);
+		if (resolver != null) {
+			return resolver.resolve(c, value);
+		}
 		if (c == String.class) return value.toString();
 		if (value instanceof Number) {
 			Number n = (Number)value;
@@ -249,6 +283,7 @@ public class  TypedObjectConverter {
 						return o;
 					}
 				}
+				throw new IllegalArgumentException(c.getName() + ": " + str);
 			} catch (IllegalAccessException e) {
 				throw new IllegalStateException(e);
 			} catch (NoSuchMethodException e) {
