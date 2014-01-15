@@ -610,27 +610,7 @@ public class SoapClient implements Serializable {
 					Object key = entry.getKey();
 					Object value = entry.getValue();
 					if (value instanceof TypedObject) {
-						TypedObject obj = (TypedObject)value;
-						String contextName = getContextName(key);
-						ElementDef el = this.helper.getElementByPath(contextName);
-						if (el == null || el.getType().isSimpleType()) {
-							throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
-						}
-						ComplexType ct = (ComplexType)el.getType();
-						TypedObjectConverter converter = ct.getTypedObjectConverter(obj.getClass());
-						if (converter == null) {
-							if (ct.getName().equals(obj.getObjectName()) && 
-							    (obj.getObjectNamespaceURI() == null || obj.getObjectNamespaceURI().equals(ct.getNamespace()))
-							   ) {
-								//Auto register
-								getWSDL().registerTypedObject(obj.getClass());
-								converter = ct.getTypedObjectConverter(obj.getClass());
-							}
-							if (converter == null) {
-								throw new IllegalArgumentException("Unknown object: " + value.getClass().getName());
-							}
-						}
-						value = converter.toMap(obj);
+						value = convertTypedObject((TypedObject)value, key);
 					}
 					if (value instanceof Map) {
 						value = new SoapParams(helper, getContextName(key), (Map)value, this, false);
@@ -638,6 +618,9 @@ public class SoapClient implements Serializable {
 						List oldList = (List)value;
 						List newList = new ArrayList(oldList.size());
 						for (Object listValue : oldList) {
+							if (listValue instanceof TypedObject) {
+								listValue = convertTypedObject((TypedObject)listValue, key);
+							}
 							if (listValue instanceof Map) {
 								listValue = new SoapParams(helper, getContextName(key), (Map)listValue, this, false);
 							}
@@ -654,6 +637,29 @@ public class SoapClient implements Serializable {
 					put(key, value);
 				}
 			}
+		}
+		
+		private ExtendedMap convertTypedObject(TypedObject obj, Object key) {
+			String contextName = getContextName(key);
+			ElementDef el = this.helper.getElementByPath(contextName);
+			if (el == null || el.getType().isSimpleType()) {
+				throw new IllegalArgumentException("Unknown object: " + obj.getClass().getName());
+			}
+			ComplexType ct = (ComplexType)el.getType();
+			TypedObjectConverter converter = ct.getTypedObjectConverter(obj.getClass());
+			if (converter == null) {
+				if (ct.getName().equals(obj.getObjectName()) && 
+				    (obj.getObjectNamespaceURI() == null || obj.getObjectNamespaceURI().equals(ct.getNamespace()))
+				   ) {
+					//Auto register
+					getWSDL().registerTypedObject(obj.getClass());
+					converter = ct.getTypedObjectConverter(obj.getClass());
+				}
+				if (converter == null) {
+					throw new IllegalArgumentException("Unknown object: " + obj.getClass().getName());
+				}
+			}
+			return converter.toMap(obj);
 		}
 		
 		private String getContextName(Object name) {

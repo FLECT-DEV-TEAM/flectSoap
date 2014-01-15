@@ -3,6 +3,8 @@ package jp.co.flect.soap;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -168,7 +170,15 @@ public class  TypedObjectConverter {
 								setValue(ret, name, value);
 							}
 						} else {
-							throw new IllegalStateException("Complex type is not implemented.: " + nsuri + ", " + name);
+							ComplexType ct = (ComplexType)elType;
+							TypedObjectConverter cc = ct.getTypedObjectConverter();
+							if (cc == null) {
+								throw new IllegalStateException("Unknown type.: " + nsuri + ", " + name);
+							}
+							TypedObject value = cc.toObject(reader);
+							if (value != null) {
+								setValue(ret, name, value);
+							}
 						}
 						break;
 					case XMLStreamReader.CHARACTERS:
@@ -230,15 +240,44 @@ public class  TypedObjectConverter {
 		throw new IllegalStateException();
 	}
 	private void putValue(ExtendedMap map, String name, Object value, ElementDef el) {
-		//ToDo complexType
-		SimpleType type = (SimpleType)el.getType();
-		map.put(name, type.format(value));
+		if (el.hasOccurs() && value instanceof List) {
+			List list = new ArrayList();
+			for (Object obj : (List)value) {
+				list.add(convertObject(el, obj));
+			}
+			map.put(name, list);
+		} else {
+			map.put(name, convertObject(el, value));
+		}
+	}
+	
+	private Object convertObject(ElementDef el, Object value) {
+		if (el.getType().isSimpleType()) {
+			SimpleType type = (SimpleType)el.getType();
+			return type.format(value);
+		} else if (value instanceof TypedObject) {
+			ComplexType type = (ComplexType)el.getType();
+			TypedObjectConverter cc = type.getTypedObjectConverter();
+			if (cc != null) {
+				return cc.toMap((TypedObject)value);
+			}
+		}
+		throw new IllegalStateException("Unknown type.: " + el.getNamespace() + ", " + el.getName());
 	}
 	
 	private void setValue(TypedObject obj, String name, Object value) {
 		try {
 			Field f = fieldMap.get(name);
 			if (f != null) {
+				if (List.class.isAssignableFrom(f.getType())) {
+					List list = (List)f.get(obj);
+					if (list == null) {
+						list = new ArrayList();
+						f.set(obj, list);
+					}
+					list.add(value);
+					return;
+				}
 				value = convertType(f.getType(), value);
 				f.set(obj, value);
 				return;
@@ -321,7 +360,7 @@ public class  TypedObjectConverter {
 		
 		private boolean isSetter(Method m) {
 			Class[] params = m.getParameterTypes();
-			return params != null || params.length == 1;
+			return params != null && params.length == 1;
 		}
 	}
 }

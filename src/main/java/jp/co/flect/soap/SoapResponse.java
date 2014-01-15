@@ -247,6 +247,10 @@ public class SoapResponse implements Serializable {
 		return getAsObjectMap().searchClass(clazz);
 	}
 	
+	public <T extends TypedObject> List<T> getAsList(Class<T> clazz) throws SoapException {
+		return getAsObjectMap().searchListOfClass(clazz);
+	}
+	
 	public ExtendedMap getAsObjectMap() throws SoapException {
 		if (this.objectMap == null) {
 			this.objectMap = buildObjectMap();
@@ -411,7 +415,16 @@ public class SoapResponse implements Serializable {
 			}
 		}
 		if (value != null) {
-			map.put(name, value);
+			if (el.hasOccurs()) {
+				List<Object> list = (List<Object>)map.get(name);
+				if (list == null) {
+					list = new ArrayList<Object>();
+					map.put(name, list);
+				}
+				list.add(value);
+			} else {
+				map.put(name, value);
+			}
 		}
 	}
 }
