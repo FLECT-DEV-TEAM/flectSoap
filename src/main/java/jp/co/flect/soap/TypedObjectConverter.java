@@ -103,7 +103,7 @@ public class  TypedObjectConverter {
 		if (obj.getClass() != this.clazz) {
 			throw new IllegalArgumentException(obj.getClass().getName());
 		}
-		ExtendedMap map = new ExtendedMap();
+		ExtendedMap map = new ExtendedMap(true);
 		for (Map.Entry<String, Field> entry : this.fieldMap.entrySet()) {
 			String name = entry.getKey();
 			Field f = entry.getValue();
